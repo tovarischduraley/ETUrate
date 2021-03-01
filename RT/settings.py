@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'accounts',
+    'reviews',
 
 ]
 
@@ -128,4 +129,4 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 
-LOGIN_REDIRECT_URL = 'index_url'
+LOGIN_REDIRECT_URL = 'home'
