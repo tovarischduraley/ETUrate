@@ -3,7 +3,7 @@ from django.db import models
 
 from accounts.models import Profile
 
-from navigation.models import Teacher
+from navigation.models import Teacher, Cathedra
 
 # Create your models here.
 
@@ -57,3 +57,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.profile.user.username}'
+
+
+class CathedraReview(models.Model):
+    """Оценка кафедры"""
+
+    cathedra = models.ForeignKey(Cathedra, on_delete=models.CASCADE, verbose_name='Кафедра')
+    attitude_to_student_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Отношение к студентам')
+    relevance_of_material_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Современность материала')
+    availability_of_cathedra_internship_mark = models.IntegerField(choices=MARK_CHOICES,
+                                                                   verbose_name='Возможность стажировки на кафедре')
+    find_job_opportunity_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Возможность найти работу')
+
