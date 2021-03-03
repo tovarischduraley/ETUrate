@@ -37,7 +37,7 @@ class Teacher(models.Model):
     """Преподаватель"""
 
     cathedra = models.ManyToManyField(Cathedra, related_name='teachers', verbose_name='Кафедры преподавателей')
-    firstName = models.CharField(max_length=50, db_index=True, verbose_name='Имя')
+    first_name = models.CharField(max_length=50, db_index=True, verbose_name='Имя')
     last_name = models.CharField(max_length=50, db_index=True, verbose_name='Фамилия')
     patronymic = models.CharField(max_length=50, db_index=True, verbose_name='Отчество')
     speciality = models.CharField(max_length=50, db_index=True, verbose_name='Специальность')
@@ -57,15 +57,13 @@ class Teacher(models.Model):
                                                        verbose_name='Связь с аудиторией (Лектор)')
     communicability_practice_mark = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2,
                                                         verbose_name='Связь с аудиторией (Практик)')
-    communicability_mark = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2,
-                                               verbose_name='Связь с аудиторией (Лектор)')
     teacher_talent_mark = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2,
                                               verbose_name='Умение дать материал')
     load_mark = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2,
                                     verbose_name='Требовательность')
 
     def __str__(self):
-        return f'{self.firstName} {self.last_name} {self.patronymic}'
+        return f'{self.first_name} {self.last_name} {self.patronymic}'
 
 
 class Course(models.Model):

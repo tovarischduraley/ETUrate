@@ -69,3 +69,5 @@ class CathedraReview(models.Model):
                                                                    verbose_name='Возможность стажировки на кафедре')
     find_job_opportunity_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Возможность найти работу')
 
+    def __str__(self):
+        return f'Оценка кафедры {self.cathedra.title}'

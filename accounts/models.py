@@ -1,24 +1,34 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin
+
+from .managers import ProfileManager
 
 
-class Profile(models.Model):
-    """Профиль пользователя"""
-    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name='Пользователь')
-
-    first_name = models.CharField(max_length=50, db_index=True, verbose_name='Имя')
-    last_name = models.CharField(max_length=50, db_index=True, verbose_name='Фамилия')
-    patronymic = models.CharField(max_length=50, db_index=True, verbose_name='Отчество')
+class Profile(AbstractBaseUser, PermissionsMixin):
+    last_name = models.CharField(max_length=50,  null=True, blank=True, verbose_name='Фамилия')
+    first_name = models.CharField(max_length=50, null=True,  blank=True, verbose_name='Имя')
+    patronymic = models.CharField(max_length=50,  null=True, blank=True, verbose_name='Отчество')
     group_number = models.IntegerField(blank=True, null=True, verbose_name='Номер группы')
-    email = models.EmailField(unique=True, max_length=60, verbose_name='email')
-    birth_date = models.DateField(default=None, blank=True, verbose_name='Дата рождения')
+    email = models.EmailField(max_length=50, unique=True, verbose_name='Email')
+    is_staff = models.BooleanField(default=False, verbose_name='is_staff')
+    is_active = models.BooleanField(default=True, verbose_name='is_active')
+    is_student = models.BooleanField(default=True, verbose_name='is_student')
+    is_admin = models.BooleanField(default=False, verbose_name='is_admin')
+    is_cathedra_head = models.BooleanField(default=False, verbose_name='is_cathedra_head')
 
-    is_student = models.BooleanField(default=False)
-    is_cathedra_head = models.BooleanField(default=False)
-    is_admin = models.BooleanField(default=False)
+    objects = ProfileManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.user.username
+        if self.is_superuser:
+            return 'Superuser'
+        return f'{self.last_name} {self.first_name} {self.patronymic}'
+
+
+
 
 
 
