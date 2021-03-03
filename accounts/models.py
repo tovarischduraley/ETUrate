@@ -9,9 +9,9 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=50, db_index=True, verbose_name='Имя')
     last_name = models.CharField(max_length=50, db_index=True, verbose_name='Фамилия')
     patronymic = models.CharField(max_length=50, db_index=True, verbose_name='Отчество')
-    group_number = models.IntegerField(blank=True, null=True, verbose_name='Номер группы')
+    group_number = models.IntegerField(verbose_name='Номер группы')
     email = models.EmailField(unique=True, max_length=60, verbose_name='email')
-    birth_date = models.DateField(default=None, blank=True, verbose_name='Дата рождения')
+    birth_date = models.DateField( verbose_name='Дата рождения')
 
     is_student = models.BooleanField(default=False)
     is_cathedra_head = models.BooleanField(default=False)
