@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from accounts.models import Profile
+
 from navigation.models import Teacher, Cathedra
 
 # Create your models here.
@@ -70,4 +71,3 @@ class CathedraReview(models.Model):
 
     def __str__(self):
         return f'Оценка кафедры {self.cathedra.title}'
-

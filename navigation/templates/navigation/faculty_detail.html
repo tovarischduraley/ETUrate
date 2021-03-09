@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ faculty.title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ faculty.title }}</h1>
+    <h2>{{ faculty.info }}</h2>
+
+    {% for cathedra in faculty.cathedras.all %}
+        <h3><a href="{{ cathedra.get_absolute_url }}">{{ cathedra.title }}</a></h3>
+    {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ cathedra.title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ cathedra.title }}</h1>
+    <h2>{{ cathedra.info }}</h2>
+
+    {% for teacher in cathedra.teachers.all %}
+        <h2><a href="{% url 'teacher_detail_url' teacher_id=teacher.id %}">{{ teacher }}</a></h2>
+    {% endfor %}
+
+{% endblock %}
