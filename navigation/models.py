@@ -1,12 +1,13 @@
 from django.db import models
 from django.urls import reverse
+from transliterate import translit, get_available_language_codes, slugify
 
 
 class Faculty(models.Model):
     """Факультет"""
 
     title = models.CharField(max_length=50, db_index=True, verbose_name='Название факультета')
-    slug = models.SlugField(max_length=50, unique=True, verbose_name='Ссылка на факультет')
+    slug = models.SlugField(max_length=50, blank=True, unique=True, verbose_name='Ссылка на факультет')
     info = models.TextField(max_length=500, default=None, verbose_name='Описание факультета')
     image = models.ImageField(default='default_logo.png', blank=True, upload_to='faculty_logos/',
                               verbose_name='Логотип факультета')
@@ -17,13 +18,17 @@ class Faculty(models.Model):
     def get_absolute_url(self):
         return reverse('faculty_detail_url', kwargs={'faculty_slug': self.slug})
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Faculty, self).save(*args, **kwargs)
+
 
 class Cathedra(models.Model):
     """Кафедра"""
-
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, verbose_name='Факультет', related_name='cathedras')
     title = models.CharField(max_length=50, db_index=True, verbose_name='Название кафедры')
-    slug = models.SlugField(max_length=50, unique=True, verbose_name='Ссылка на кафедру')
+    slug = models.SlugField(max_length=50, blank=True, unique=True, verbose_name='Ссылка на кафедру')
     info = models.TextField(max_length=500, default=None, verbose_name='Описание кафедры')
     image = models.ImageField(default='default_logo.png', blank=True, upload_to='cathedra_logos/',
                               verbose_name='Логотип кафедры')
@@ -45,6 +50,11 @@ class Cathedra(models.Model):
 
     def get_absolute_url(self):
         return reverse('cathedra_detail_url', kwargs={'faculty_slug': self.faculty.slug, 'cathedra_slug': self.slug})
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super(Cathedra, self).save(*args, **kwargs)
 
 
 class Teacher(models.Model):
