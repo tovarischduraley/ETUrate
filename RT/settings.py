@@ -110,7 +110,7 @@ AUTH_USER_MODEL = 'accounts.Profile'
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -133,5 +133,12 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn", "static_root")
 MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn", "media_root")
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS =True
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
 
 LOGIN_REDIRECT_URL = 'home'

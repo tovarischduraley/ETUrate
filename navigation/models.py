@@ -23,6 +23,10 @@ class Faculty(models.Model):
             self.slug = slugify(self.title)
         super(Faculty, self).save(*args, **kwargs)
 
+    class Meta:
+        verbose_name = 'Факультет'
+        verbose_name_plural = 'Факультеты'
+
 
 class Cathedra(models.Model):
     """Кафедра"""
@@ -55,6 +59,10 @@ class Cathedra(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Cathedra, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = 'Кафедра'
+        verbose_name_plural = 'Кафедры'
 
 
 class Teacher(models.Model):
@@ -94,6 +102,10 @@ class Teacher(models.Model):
     def get_absolute_url(self):
         return reverse('teacher_detail_url', kwargs={'teacher_id': self.id})
 
+    class Meta:
+        verbose_name = 'Преподаватель'
+        verbose_name_plural = 'Преподаватели'
+
 
 class Course(models.Model):
     """Курс"""
@@ -103,3 +115,7 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = 'Курс'
+        verbose_name_plural = 'Курсы'

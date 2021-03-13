@@ -25,6 +25,10 @@ class Profile(AbstractBaseUser, PermissionsMixin):
             return 'Superuser'
         return f'{self.last_name} {self.first_name} {self.patronymic}'
 
+    class Meta:
+        verbose_name = 'Профиль'
+        verbose_name_plural = 'Профили'
+
 
 
 

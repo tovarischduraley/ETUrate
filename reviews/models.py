@@ -27,6 +27,10 @@ class LectureReview(models.Model):
     communicability_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Связь с аудиторией')
     teacher_talent_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Умение дать материал')
 
+    class Meta:
+        verbose_name = 'Оценка препоадвателя лектора'
+        verbose_name_plural = 'Оценки препоадвателей лекторов'
+
 
 class PracticeReview(models.Model):
     """Оценка преподавателя как практика"""
@@ -38,6 +42,10 @@ class PracticeReview(models.Model):
     knowledge_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Объём знаний по предмету')
     communicability_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Связь с аудиторией')
     load_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Требовательность')
+
+    class Meta:
+        verbose_name = 'Оценка препоадвателя практики'
+        verbose_name_plural = 'Оценки препоадвателей практики'
 
 
 class Comment(models.Model):
@@ -58,6 +66,10 @@ class Comment(models.Model):
     def __str__(self):
         return f'Comment by {self.profile.user.username}'
 
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
 
 class CathedraReview(models.Model):
     """Оценка кафедры"""
@@ -71,3 +83,7 @@ class CathedraReview(models.Model):
 
     def __str__(self):
         return f'Оценка кафедры {self.cathedra.title}'
+
+    class Meta:
+        verbose_name = 'Оценка кафедры'
+        verbose_name_plural = 'Оценки кафедры'

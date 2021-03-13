@@ -18,6 +18,12 @@
                 <button type="submit" class="btn btn-outline-info">Login</button>
             </div>
         </form>
+        <hr>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+            </small>
+        </div>
         <div class="border-top pt-3">
             <small class="text-muted">
                 Need An Account? <a href="{% url 'register' %}">Register</a>

@@ -20,9 +20,10 @@
     </ul>
 
     <hr>
-    <h3>Преподаватели кафедры</h3>
-    {% for teacher in cathedra.teachers.all %}
-        <h4><a href="{{ teacher.get_absolute_url }}">{{ teacher }}</a></h4>
-    {% endfor %}
-
+    {% if cathedra.teachers.all %}
+        <h3>Преподаватели кафедры</h3>
+        {% for teacher in cathedra.teachers.all %}
+            <h4><a href="{{ teacher.get_absolute_url }}">{{ teacher }}</a></h4>
+        {% endfor %}
+    {% endif %}
 {% endblock %}
