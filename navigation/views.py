@@ -22,5 +22,7 @@ def cathedra_detail(request, faculty_slug, cathedra_slug):
     return render(request, 'navigation/cathedra_detail.html', context={'cathedra': cathedra})
 
 
-def teacher_detail(request):
-    pass
+def teacher_detail(request, teacher_id):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    cathedras = teacher.cathedras.all()
+    return render(request, 'navigation/teacher_detail.html', context={'teacher': teacher, 'cathedras': cathedras})

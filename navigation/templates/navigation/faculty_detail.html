@@ -5,11 +5,12 @@
 {% endblock %}
 
 {% block content %}
-    <h1>{{ faculty.title }}</h1>
+    <h1 style="font-size: 60px">{{ faculty.title }}</h1>
     <h2>{{ faculty.info }}</h2>
-
-    {% for cathedra in faculty.cathedras.all %}
-        <h3><a href="{{ cathedra.get_absolute_url }}">{{ cathedra.title }}</a></h3>
-    {% endfor %}
-
+    {% if faculty.cathedras.all %}
+        <h2>Кафедры</h2>
+        {% for cathedra in faculty.cathedras.all %}
+            <h3><a href="{{ cathedra.get_absolute_url }}">{{ cathedra.title }}</a></h3>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

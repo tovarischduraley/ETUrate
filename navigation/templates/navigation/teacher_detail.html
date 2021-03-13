@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ teacher.last_name }}
+    {{ teacher.first_name | first }}.
+    {{ teacher.patronymic | first }}.
+{% endblock %}
+
+{% block content %}
+    <img width="100" height="100" src=" {{ teacher.avatar.url }}" alt="
+    {{ teacher.last_name }}
+    {{ teacher.first_name | first }}.
+    {{ teacher.patronymic | first }}.">
+    <h2>{{ teacher.last_name }}
+        {{ teacher.first_name }}
+        {{ teacher.patronymic }}</h2>
+    <h3>{{ teacher.speciality }}</h3>
+    <h4>Кафедры</h4>
+    {% for cathedra in cathedras %}
+        <h5><a href="{{ cathedra.get_absolute_url }}">{{ cathedra.title }}</a></h5>
+    {% endfor %}
+    {% if teacher.courses.all %}
+        <h4>Преподаваемые курсы</h4>
+        {% for course in teacher.courses.all %}
+            <li>{{ course.title }}</li>
+        {% endfor %}
+    {% endif %}
+
+    {% if teacher.birth_date %}
+        <h4>Дата рождения: {{ teacher.birth_date }}</h4>
+    {% endif %}
+
+    <hr>
+    <h3>Оценки преподавателя:</h3>
+    {% if teacher.is_lecturer %}
+        <h4>Как лектор</h4>
+        <ul class="lecture__marks__list">
+            <li>Контакт с аудиторией: {{ teacher.communicability_lecture_mark }} / 5</li>
+            <li>Объективность оценивания: {{ teacher.objectivity_lecture_mark }} / 5</li>
+            <li>Знание дисциплины: {{ teacher.knowledge_lecture_mark }} / 5</li>
+            <li>Талант преподавания: {{ teacher.teacher_talent_mark }} / 5</li>
+        </ul>
+    {% endif %}
+    {% if teacher.is_practical %}
+        <h4>Как практик</h4>
+        <ul class="practice__marks__list">
+            <li>Контакт с аудиторией: {{ teacher.communicability_practice_mark }} / 5</li>
+            <li>Объективность оценивания: {{ teacher.objectivity_practice_mark }} / 5</li>
+            <li>Знание дисциплины: {{ teacher.knowledge_practice_mark }} / 5</li>
+            <li>Требовательность: {{ teacher.load_mark }} / 5</li>
+        </ul>
+    {% endif %}
+{% endblock %}

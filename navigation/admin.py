@@ -3,7 +3,7 @@ from .models import *
 
 
 class TeacherAdmin(admin.ModelAdmin):
-    fields = ['cathedra',
+    fields = ['cathedras',
               'first_name',
               'last_name',
               'patronymic',

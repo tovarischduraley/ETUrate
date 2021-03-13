@@ -1,15 +1,28 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ cathedra.title }}
+    Кафедра {{ cathedra.title }}
 {% endblock %}
 
 {% block content %}
+    <img width="100" height="100" src="{{ cathedra.image.url }}" alt="Логотип кафедры">
     <h1>{{ cathedra.title }}</h1>
-    <h2>{{ cathedra.info }}</h2>
+    <h3>{{ cathedra.info }}</h3>
+    <hr>
+    <h3>Оценки кафедры</h3>
+    <ul class="cathedra__marks__list">
+        <li>Отношение к студентам: {{ cathedra.attitude_to_student_mark }} / 5</li>
+        <li>Актуальность преподаваемого материала: {{ cathedra.relevance_of_material_mark }} / 5</li>
+        <li>Возможность стажировки на кафедре: {{ cathedra.availability_of_cathedra_internship_mark }} / 5</li>
+        <li>Возможность найти работу: {{ cathedra.find_job_opportunity_mark }} / 5</li>
+        <br>
+        <li>Совокупная оценка преподавателей: {{ cathedra.teachers_mark }} / 5</li>
+    </ul>
 
+    <hr>
+    <h3>Преподаватели кафедры</h3>
     {% for teacher in cathedra.teachers.all %}
-        <h2><a href="{% url 'teacher_detail_url' teacher_id=teacher.id %}">{{ teacher }}</a></h2>
+        <h4><a href="{{ teacher.get_absolute_url }}">{{ teacher }}</a></h4>
     {% endfor %}
 
 {% endblock %}

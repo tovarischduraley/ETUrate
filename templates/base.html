@@ -29,9 +29,9 @@
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-
-
-
+            <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'faculties_list_url' %}">Факультеты</a>
+                </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="#">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
@@ -40,7 +40,7 @@
         <ul class="navbar-nav  mt-2 mt-lg-0">
             {% if user.is_authenticated %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="">My Profile</a>
+                    <a class="nav-link" href="{% url 'my_profile' %}">Мой профиль</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'logout' %}">Logout</a>

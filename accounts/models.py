@@ -13,7 +13,6 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False, verbose_name='is_staff')
     is_active = models.BooleanField(default=True, verbose_name='is_active')
     is_student = models.BooleanField(default=True, verbose_name='is_student')
-    is_admin = models.BooleanField(default=False, verbose_name='is_admin')
     is_cathedra_head = models.BooleanField(default=False, verbose_name='is_cathedra_head')
 
     objects = ProfileManager()

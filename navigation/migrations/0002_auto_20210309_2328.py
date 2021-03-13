@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='cathedra',
             name='image',
-            field=models.ImageField(blank=True, default='default_logo.png', upload_to='cathedra_logos/', verbose_name='Логотип кафедры'),
+            field=models.ImageField(blank=True, default='default.png', upload_to='cathedra_logos/', verbose_name='Логотип кафедры'),
         ),
         migrations.AddField(
             model_name='cathedra',
@@ -23,7 +23,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='faculty',
             name='image',
-            field=models.ImageField(blank=True, default='default_logo.png', upload_to='faculty_logos/', verbose_name='Логотип факультета'),
+            field=models.ImageField(blank=True, default='default.png', upload_to='faculty_logos/', verbose_name='Логотип факультета'),
         ),
         migrations.AddField(
             model_name='faculty',
