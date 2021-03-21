@@ -7,7 +7,9 @@
 {% block content %}
     <h1>{{ user }}</h1>
     <h3>Email: {{ user.email }}</h3>
-    <h3>Группа: {{ user.group_number }}</h3>
+    {% if user.group_number %}
+        <h3>Группа: {{ user.group_number }}</h3>
+    {% endif %}
     {% if user.is_superuser %}
             <h3>Статус: суперпользователь</h3>
     {% elif user.is_staff %}

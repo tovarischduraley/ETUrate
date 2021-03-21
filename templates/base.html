@@ -34,8 +34,8 @@
                 </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="#">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <input class="form-control mr-sm-2" type="search" placeholder="..." aria-label="Search" name="search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
         </form>
         <ul class="navbar-nav  mt-2 mt-lg-0">
             {% if user.is_authenticated %}
@@ -43,14 +43,11 @@
                     <a class="nav-link" href="{% url 'my_profile' %}">Мой профиль</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    <a class="nav-link" href="{% url 'logout' %}">Выйти</a>
                 </li>
             {% else %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'login' %}">Login</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    <a class="nav-link" href="{% url 'login' %}">Войти</a>
                 </li>
             {% endif %}
         </ul>

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.models import PermissionsMixin
 from .managers import ProfileManager
+from datetime import datetime
 
 
 class Profile(AbstractBaseUser, PermissionsMixin):
@@ -14,6 +15,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True, verbose_name='is_active')
     is_student = models.BooleanField(default=True, verbose_name='is_student')
     is_cathedra_head = models.BooleanField(default=False, verbose_name='is_cathedra_head')
+    username = models.CharField(max_length=30, blank=True)
 
     objects = ProfileManager()
 
