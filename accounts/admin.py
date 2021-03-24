@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import ProfileCreationForm, ProfileChangeForm
 from .models import Profile
-from django.contrib.auth.models import User
 
 
 class ProfileAdmin(UserAdmin):
@@ -10,7 +9,7 @@ class ProfileAdmin(UserAdmin):
     form = ProfileChangeForm
     add_form = ProfileCreationForm
 
-    list_display = ('email', 'first_name', 'is_staff')
+    list_display = ('email', 'last_name', 'first_name', 'patronymic', 'is_staff')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('last_name', 'first_name', 'patronymic', 'group_number',)}),

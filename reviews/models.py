@@ -28,8 +28,8 @@ class LectureReview(models.Model):
     teacher_talent_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Умение дать материал')
 
     class Meta:
-        verbose_name = 'Оценка препоадвателя лектора'
-        verbose_name_plural = 'Оценки препоадвателей лекторов'
+        verbose_name = 'Оценка преподавателя лектора'
+        verbose_name_plural = 'Оценки преподавателей лекторов'
 
 
 class PracticeReview(models.Model):
@@ -44,8 +44,8 @@ class PracticeReview(models.Model):
     load_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Требовательность')
 
     class Meta:
-        verbose_name = 'Оценка препоадвателя практики'
-        verbose_name_plural = 'Оценки препоадвателей практики'
+        verbose_name = 'Оценка преподавателя практики'
+        verbose_name_plural = 'Оценки преподавателей практики'
 
 
 class Comment(models.Model):

@@ -1,10 +1,10 @@
 # Editors
 .vscode/
-.idea/
+../../RT/.idea/
 
 # Vagrant
 .vagrant/
-
+.idea
 # Mac/OSX
 .DS_Store
 

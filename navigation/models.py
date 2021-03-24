@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
-from transliterate import translit, get_available_language_codes, slugify
+from django.utils.text import slugify
+from transliterate import translit, get_available_language_codes, slugify as t_slugify
+import string
 
 
 class Faculty(models.Model):
@@ -20,7 +22,18 @@ class Faculty(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            flag = 0
+            alph = list(string.ascii_letters)
+            alph.append(" ")
+            for l in self.title:
+                if l not in alph:
+                    flag = 1
+                    break
+            if flag == 0:
+                self.slug = slugify(self.title)
+            else:
+                self.slug = t_slugify(self.title)
+
         super(Faculty, self).save(*args, **kwargs)
 
     class Meta:
@@ -57,7 +70,17 @@ class Cathedra(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.title)
+            flag = 0
+            alph = list(string.ascii_letters)
+            alph.append(" ")
+            for l in self.title:
+                if l not in alph:
+                    flag = 1
+                    break
+            if flag == 0:
+                self.slug = slugify(self.title)
+            else:
+                self.slug = t_slugify(self.title)
         super(Cathedra, self).save(*args, **kwargs)
 
     class Meta:
