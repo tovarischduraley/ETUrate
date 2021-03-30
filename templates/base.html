@@ -30,8 +30,8 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'faculties_list_url' %}">Факультеты</a>
-                </li>
+                <a class="nav-link" href="{% url 'faculties_list_url' %}">Факультеты</a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="#">
             <input class="form-control mr-sm-2" type="search" placeholder="..." aria-label="Search" name="search">
@@ -39,6 +39,19 @@
         </form>
         <ul class="navbar-nav  mt-2 mt-lg-0">
             {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="admin/">Панель администратора</a>
+                    </li>
+                {% elif user.is_staff %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Панель администратора</a>
+                    </li>
+                {% elif user.is_cathedra_head %}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Управление кафедрой</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'my_profile' %}">Мой профиль</a>
                 </li>
@@ -59,7 +72,7 @@
         <div class="col-6 offset-md-1">
 
             {% block content %}
-                There is no any content
+            There is no any content
             {% endblock %}
         </div>
     </div>

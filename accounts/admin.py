@@ -12,8 +12,8 @@ class ProfileAdmin(UserAdmin):
     list_display = ('email', 'last_name', 'first_name', 'patronymic', 'is_staff')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('last_name', 'first_name', 'patronymic', 'group_number',)}),
-        ('Permissions', {'fields': ('is_staff', 'is_student', 'is_cathedra_head',)}),
+        ('Персональные данные', {'fields': ('last_name', 'first_name', 'patronymic', )}),
+        ('Права доступа', {'fields': ('is_staff', 'is_student', 'is_cathedra_head', 'cathedra')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
@@ -22,7 +22,7 @@ class ProfileAdmin(UserAdmin):
             'classes': ('wide',),
             'fields': (
             'email', 'password1', 'password2', 'last_name', 'first_name', 'patronymic', 'group_number', 'is_staff',
-            'is_student', 'is_cathedra_head',)}
+            'is_student', 'is_cathedra_head', 'cathedra')}
          ),
     )
 
