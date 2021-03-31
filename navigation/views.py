@@ -1,13 +1,33 @@
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Faculty, Cathedra, Teacher
+from django.db.models import Q
 
 
 def index(request):
     return render(request, 'navigation/index.html')
 
 
+def search(request):
+    search_query = request.GET.get('search', '')
+
+    if search_query:
+        teachers = Teacher.objects.filter(
+            Q(first_name__icontains=search_query) | Q(last_name__icontains=search_query) |
+            Q(patronymic__icontains=search_query))
+        cathedras = Cathedra.objects.filter(title__icontains=search_query)
+        faculties = Faculty.objects.filter(title__icontains=search_query)
+        context = {
+            'teachers': teachers,
+            'cathedras': cathedras,
+            'faculties': faculties
+        }
+        return render(request, 'navigation/search.html', context=context)
+    else:
+        return redirect(request.META['HTTP_REFERER'])
+
 def faculties_list(request):
+
     faculties = Faculty.objects.all()
     return render(request, 'navigation/faculties_list.html', context={'faculties': faculties})
 

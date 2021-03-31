@@ -33,7 +33,7 @@
                 <a class="nav-link" href="{% url 'faculties_list_url' %}">Факультеты</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="#">
+        <form class="form-inline my-2 my-lg-0" action="{% url 'search_url' %}">
             <input class="form-control mr-sm-2" type="search" placeholder="..." aria-label="Search" name="search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
         </form>
@@ -41,7 +41,7 @@
             {% if user.is_authenticated %}
                 {% if user.is_superuser %}
                     <li class="nav-item active">
-                        <a class="nav-link" href="admin/">Панель администратора</a>
+                        <a class="nav-link" href="/admin">Панель администратора</a>
                     </li>
                 {% elif user.is_staff %}
                     <li class="nav-item active">

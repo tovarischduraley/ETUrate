@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Search results
+{% endblock %}
+
+{% block content %}
+    {% if not faculties and not teachers and not cathedras %}
+        <h1>По вашему запросу ничего не найдено поиска</h1>
+    {% else %}
+        <h1>Результаты поиска</h1>
+        <div style="margin-left: 20px">
+            {% if faculties %}
+                <h2>Факультеты</h2>
+                {% for faculty in faculties %}
+                    <img src="{{ faculty.image.url }}" width="100" height="100" alt="">
+                    <h3><a href="{{ faculty.get_absolute_url }}">{{ faculty.title }}</a></h3>
+                {% endfor %}
+            {% endif %}
+            {% if cathedras %}
+                <h2>Кафедры</h2>
+                {% for cathedra in cathedras %}
+                    <img src="{{ cathedra.image.url }}" width="100" height="100" alt="">
+                    <h3><a href="{{ cathedra.get_absolute_url }}">{{ cathedra.title }}</a></h3>
+                {% endfor %}
+            {% endif %}
+            {% if teachers %}
+                <h2>Преподаватели</h2>
+                {% for teacher in teachers %}
+                    <h3><a href="{{ teacher.get_absolute_url }}">{{ teacher }}</a></h3>
+                {% endfor %}
+                <hr>
+            {% endif %}
+        </div>
+    {% endif %}
+
+{% endblock %}
