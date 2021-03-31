@@ -5,7 +5,6 @@ from .models import Profile
 
 
 class ProfileAdmin(UserAdmin):
-    # The forms to add and change user instances
     form = ProfileChangeForm
     add_form = ProfileCreationForm
 
@@ -15,8 +14,6 @@ class ProfileAdmin(UserAdmin):
         ('Персональные данные', {'fields': ('last_name', 'first_name', 'patronymic', )}),
         ('Права доступа', {'fields': ('is_staff', 'is_student', 'is_cathedra_head', 'cathedra')}),
     )
-    # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
-    # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),

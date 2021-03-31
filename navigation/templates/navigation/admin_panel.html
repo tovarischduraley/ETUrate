@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Панель администратора
+{% endblock %}
+
+{% block content %}
+<h1>Факультеты</h1>
+<h2><a href="{% url 'faculty_creation_url' %}">Добавить факультет</a></h2>
+{% endblock %}

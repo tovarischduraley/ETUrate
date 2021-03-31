@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+Управление кафедрой
+{% endblock %}
+
+{% block content %}
+<h1>{{ user.cathedra.title }}</h1>
+{% for teacher in teachers%}
+    <h3>{{ teacher }}</h3>
+{% endfor %}
+<h3><a href="{% url 'teacher_create_url' %}">Добавить препадавеля</a></h3>
+{% endblock %}
