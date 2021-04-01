@@ -1,11 +1,7 @@
-from io import StringIO
-
-from PIL import Image
 from django.shortcuts import render, get_object_or_404, redirect
 
-from RT.settings import MEDIA_ROOT
-from .forms import FacultyCreationForm, TeacherCreationForm
-from .models import Faculty, Cathedra, Teacher
+from .forms import FacultyCreationForm, TeacherCreateEditForm
+from .models import *
 
 
 def index(request):
@@ -44,13 +40,41 @@ def teacher_create(request):
         if request.method == 'POST':
             teacher = Teacher.objects.create()
             teacher.cathedras.add(request.user.cathedra)
-            form = TeacherCreationForm(request.POST, instance=teacher)
+            form = TeacherCreateEditForm(request.POST, request.FILES, instance=teacher)
             if form.is_valid():
+                for course in form.cleaned_data['courses'].all():
+                    teacher.courses.add(course)
                 form.save()
                 return redirect('cathedra_control_url')
         else:
-            form = TeacherCreationForm()
+            form = TeacherCreateEditForm()
         return render(request, 'navigation/teacher_creation.html', context={'form': form})
+
+
+def teacher_edit(request, teacher_id=None):
+    if request.user.is_cathedra_head:
+        teacher = get_object_or_404(Teacher, id=teacher_id)
+        if request.method == 'POST':
+            form = TeacherCreateEditForm(request.POST, request.FILES, instance=teacher)
+            if form.is_valid():
+                teacher.courses.through.objects.all().delete()
+                for course in form.cleaned_data['courses'].all():
+                    teacher.courses.add(course)
+                form.save()
+                return redirect('cathedra_control_url')
+        else:
+            form = TeacherCreateEditForm(instance=teacher, initial={'courses': teacher.courses.all()})
+        return render(request, 'navigation/teacher_edit.html', context={'form': form})
+
+
+def teacher_delete(request, teacher_id=None):
+    if request.user.is_cathedra_head:
+        teacher = get_object_or_404(Teacher, id=teacher_id)
+        if request.method == 'POST':
+            teacher.delete()
+            return redirect('cathedra_control_url')
+        else:
+            return redirect('cathedra_control_url')
 
 
 """Дождаться решения по поводу админской панели"""

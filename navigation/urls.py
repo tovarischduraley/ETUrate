@@ -7,7 +7,9 @@ from .views import *
 urlpatterns = [
     path('', index, name='home'),
     path('cathedra-control/', cathedra_control, name='cathedra_control_url'),
-    path('cathedra-control/teacher-create', teacher_create, name='teacher_create_url'),
+    path('cathedra-control/teacher-create/', teacher_create, name='teacher_create_url'),
+    path('cathedra-control/teacher-edit/teacher_id=<int:teacher_id>/', teacher_edit, name='teacher_edit_url'),
+    path('cathedra-control/teacher_id=<int:teacher_id>/delete', teacher_delete, name='teacher_delete_url'),
     path('admin-panel/', admin_panel, name='admin_panel_url'),
     path('admin-panel/faculty-create/', faculty_create, name='faculty_creation_url'),
     path('faculties/', faculties_list, name='faculties_list_url'),
