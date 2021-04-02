@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+Изменить курс
+{% endblock %}
+
+{% block content %}
+<div class="content=section row">
+    <form method="post" enctype="multipart/form-data" class="form-group">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Изменить курс</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-info">Добавить изменения</button>
+        </div>
+    </form>
+    <form method="post" class="form-group" action="{% url 'course_delete_url' course_id=course.id %}">
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info" >Удалить</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -18,7 +18,7 @@ class TeacherCreateEditForm(forms.ModelForm):
                   'birth_date', 'avatar',)
 
 
-class CourseCreationForm(forms.ModelForm):
+class CourseCreateForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ('title',)
