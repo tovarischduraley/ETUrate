@@ -49,7 +49,7 @@ def teacher_create(request):
             return redirect('cathedra_control_url')
     else:
         form = TeacherCreateEditForm()
-    return render(request, 'navigation/teacher_creation.html', context={'form': form})
+    return render(request, 'navigation/teacher_create.html', context={'form': form})
 
 
 @cathedra_head_only
@@ -90,7 +90,7 @@ def course_create(request):
 
 
 @cathedra_head_only
-def course_edit(request, course_id):
+def course_edit(request, course_id=None):
     course = get_object_or_404(Course, id=course_id)
     if request.method == 'POST':
         form = CourseEditForm(request.POST, instance=course)
@@ -106,28 +106,62 @@ def course_edit(request, course_id):
 
 
 @cathedra_head_only
-def course_delete(request, course_id):
+def course_delete(request, course_id=None):
     course = get_object_or_404(Course, id=course_id)
     if request.method == 'POST':
         course.delete()
         return redirect('courses_url')
 
 
-"""Дождаться решения по поводу админской панели"""
-
-
 @staff_only
 def admin_panel(request):
-    return render(request, 'navigation/admin_panel.html')
+    faculties = Faculty.objects.all()
+    return render(request, 'navigation/admin_panel.html', context={'faculties': faculties})
 
 
 @staff_only
 def faculty_create(request):
     if request.method == 'POST':
-        form = FacultyCreateForm(request.POST, request.FILES)
+        form = FacultyCreateEditForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('admin_panel_url')
     else:
-        form = FacultyCreateForm()
-    return render(request, 'navigation/faculty_creation.html', context={'form': form})
+        form = FacultyCreateEditForm()
+    return render(request, 'navigation/faculty_create.html', context={'form': form})
+
+
+@staff_only
+def faculty_edit(request, faculty_id=None):
+    faculty = get_object_or_404(Faculty, id=faculty_id)
+    if request.method == 'POST':
+        form = FacultyCreateEditForm(request.POST, request.FILES, instance=faculty)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_panel_url')
+    else:
+        form = FacultyCreateEditForm(instance=faculty)
+    return render(request, 'navigation/faculty_edit.html', context={'form': form})
+
+
+@staff_only
+def faculty_delete(request, faculty_id=None):
+    faculty = get_object_or_404(Faculty, id=faculty_id)
+    if request.method == 'POST':
+        faculty.delete()
+        return redirect('admin_panel_url')
+
+@staff_only
+def cathedra_create(request, faculty_slug=None):
+    faculty = get_object_or_404(Faculty, slug=faculty_slug)
+    if request.method == 'POST':
+        cathedra = Cathedra.objects.create(faculty=faculty)
+        form = CathedraCreateEditForm(request.POST, request.FILES, instance=cathedra)
+        if form.is_valid():
+            form.save()
+            return redirect('admin_panel_url')
+    else:
+        form = CathedraCreateEditForm()
+    return render(request, 'navigation/cathedra_create.html', context={'form': form})
+
+

@@ -3,7 +3,7 @@ from django import forms
 from .models import *
 
 
-class FacultyCreateForm(forms.ModelForm):
+class FacultyCreateEditForm(forms.ModelForm):
     class Meta:
         model = Faculty
         fields = ('title', 'info', 'image',)
@@ -30,3 +30,9 @@ class CourseEditForm(forms.ModelForm):
     class Meta:
         model = Course
         fields = ('title', 'teachers',)
+
+
+class CathedraCreateEditForm(forms.ModelForm):
+    class Meta:
+        model = Cathedra
+        fields = ('title', 'info', 'image',)
