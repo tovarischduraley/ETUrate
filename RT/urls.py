@@ -19,7 +19,7 @@ from accounts import views as accounts_views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls, name='superuser_admin'),
+    path('admin/', admin.site.urls),
     path('profile/', accounts_views.my_profile, name='my_profile'),
     path('register/', accounts_views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name="login"),

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+Изменить факультет
+{% endblock %}
+
+{% block content %}
+<div class="content=section">
+    <form method="post" enctype="multipart/form-data" class="form-group">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Добавить изменения</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-info">Добавить изменения</button>
+        </div>
+    </form>
+</div>
+
+<!--ВАРИАНТ 2-->
+<h4>Кафедры факультета</h4>
+{% for cathedra in faculty.cathedras.all %}
+<div class="row">
+    <div class="col-sm-2">
+        <h4>{{ cathedra }}</h4>
+    </div>
+    <form method="get" class="form-group" action="{% url 'cathedra_edit_url' cathedra_slug=cathedra.slug %}" >
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info">Изменить</button>
+        </div>
+    </form>
+    <form method="post" class="form-group" action="{% url 'cathedra_delete_url' cathedra_slug=cathedra.slug %}">
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info" >Удалить</button>
+        </div>
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

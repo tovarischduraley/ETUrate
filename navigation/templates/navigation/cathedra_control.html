@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+Управление кафедрой
+{% endblock %}
+
+{% block content %}
+<h1>{{ user.cathedra.title }}</h1>
+{% for teacher in teachers%}
+    <h4>{{ teacher }}</h4>
+    <div class="row">
+        <form method="get" class="form-group" action="{% url 'teacher_edit_url' teacher_id=teacher.id %}" >
+            {% csrf_token %}
+            <div class="form-group col">
+                <button type="submit" class="btn btn-outline-info">Изменить</button>
+            </div>
+        </form>
+        <form method="post" class="form-group" action="{% url 'teacher_delete_url' teacher_id=teacher.id %}">
+            {% csrf_token %}
+            <div class="form-group col">
+                <button type="submit" class="btn btn-outline-info" >Удалить</button>
+            </div>
+        </form>
+    </div>
+{% endfor %}
+<h3><a href="{% url 'teacher_create_url' %}">Добавить преподавателя</a></h3>
+<h3><a href="{% url 'courses_url' %}">Курсы</a></h3>
+{% endblock %}

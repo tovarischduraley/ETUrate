@@ -46,7 +46,7 @@ class Cathedra(models.Model):
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, verbose_name='Факультет', related_name='cathedras')
     title = models.CharField(max_length=50, db_index=True, verbose_name='Название кафедры')
     slug = models.SlugField(max_length=50, blank=True, unique=True, verbose_name='Ссылка на кафедру')
-    info = models.TextField(max_length=500, default=None, verbose_name='Описание кафедры')
+    info = models.TextField(max_length=500, blank=True, verbose_name='Описание кафедры')
     image = models.ImageField(default='default.png', blank=True, upload_to='cathedra_logos/',
                               verbose_name='Логотип кафедры')
 

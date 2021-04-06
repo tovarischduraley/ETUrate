@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Панель администратора
+{% endblock %}
+
+{% block content %}
+<h1>Факультеты</h1>
+{% for faculty in faculties %}
+<h4>{{ faculty }}</h4>
+<div class="row">
+    <form method="get" class="form-group" action="{% url 'faculty_edit_url' faculty_slug=faculty.slug %}" >
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info">Изменить</button>
+        </div>
+    </form>
+    <form method="post" class="form-group" action="{% url 'faculty_delete_url' faculty_slug=faculty.slug %}">
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info" >Удалить</button>
+        </div>
+    </form>
+    <form method="get" class="form-group" action="{% url 'cathedra_create_url' faculty_slug=faculty.slug %}">
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info" >Добавить кафедру</button>
+        </div>
+    </form>
+</div>
+{% endfor %}
+<h2><a href="{% url 'faculty_create_url' %}">Добавить факультет</a></h2>
+
+<!--ВАРИАНТ 1-->
+<h1>Кафедры</h1>
+{% for cathedra in cathedras %}
+<div class="row">
+    <div class="col-sm-2">
+        <h4>{{ cathedra }}</h4>
+    </div>
+    <form method="get" class="form-group" action="{% url 'cathedra_edit_url' cathedra_slug=cathedra.slug %}" >
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info">Изменить</button>
+        </div>
+    </form>
+    <form method="post" class="form-group" action="{% url 'cathedra_delete_url' cathedra_slug=cathedra.slug %}">
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info" >Удалить</button>
+        </div>
+    </form>
+</div>
+{% endfor %}
+{% endblock %}
