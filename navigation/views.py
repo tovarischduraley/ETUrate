@@ -116,7 +116,8 @@ def course_delete(request, course_id=None):
 @staff_only
 def admin_panel(request):
     faculties = Faculty.objects.all()
-    return render(request, 'navigation/admin_panel.html', context={'faculties': faculties})
+    cathedras = Cathedra.objects.all()
+    return render(request, 'navigation/admin_panel.html', context={'faculties': faculties, 'cathedras': cathedras})
 
 
 @staff_only
@@ -132,24 +133,36 @@ def faculty_create(request):
 
 
 @staff_only
-def faculty_edit(request, faculty_id=None):
-    faculty = get_object_or_404(Faculty, id=faculty_id)
+def faculty_edit(request, faculty_slug=None):
+    faculty = get_object_or_404(Faculty, slug=faculty_slug)
     if request.method == 'POST':
         form = FacultyCreateEditForm(request.POST, request.FILES, instance=faculty)
         if form.is_valid():
+            flag = 0
+            alph = list(string.ascii_letters)
+            alph.append(" ")
+            for l in form.cleaned_data['title']:
+                if l not in alph:
+                    flag = 1
+                    break
+            if flag == 0:
+                faculty.slug = slugify(form.cleaned_data['title'])
+            else:
+                faculty.slug = t_slugify(form.cleaned_data['title'])
             form.save()
             return redirect('admin_panel_url')
     else:
         form = FacultyCreateEditForm(instance=faculty)
-    return render(request, 'navigation/faculty_edit.html', context={'form': form})
+    return render(request, 'navigation/faculty_edit.html', context={'form': form, 'faculty': faculty})
 
 
 @staff_only
-def faculty_delete(request, faculty_id=None):
-    faculty = get_object_or_404(Faculty, id=faculty_id)
+def faculty_delete(request, faculty_slug=None):
+    faculty = get_object_or_404(Faculty, slug=faculty_slug)
     if request.method == 'POST':
         faculty.delete()
         return redirect('admin_panel_url')
+
 
 @staff_only
 def cathedra_create(request, faculty_slug=None):
@@ -165,3 +178,33 @@ def cathedra_create(request, faculty_slug=None):
     return render(request, 'navigation/cathedra_create.html', context={'form': form})
 
 
+@staff_only
+def cathedra_edit(request, cathedra_slug=None):
+    cathedra = get_object_or_404(Cathedra, slug=cathedra_slug)
+    if request.method == "POST":
+        form = CathedraCreateEditForm(request.POST, request.FILES, instance=cathedra)
+        if form.is_valid():
+            flag = 0
+            alph = list(string.ascii_letters)
+            alph.append(" ")
+            for l in form.cleaned_data['title']:
+                if l not in alph:
+                    flag = 1
+                    break
+            if flag == 0:
+                cathedra.slug = slugify(form.cleaned_data['title'])
+            else:
+                cathedra.slug = t_slugify(form.cleaned_data['title'])
+            form.save()
+            return redirect('admin_panel_url')
+    else:
+        form = CathedraCreateEditForm(instance=cathedra)
+    return render(request, 'navigation/cathedra_edit.html', context={'form': form})
+
+
+@staff_only
+def cathedra_delete(request,  cathedra_slug=None):
+    cathedra = get_object_or_404(Cathedra, slug=cathedra_slug)
+    if request.method == "POST":
+        cathedra.delete()
+        return redirect('admin_panel_url')

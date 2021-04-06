@@ -18,4 +18,26 @@
         </div>
     </form>
 </div>
+
+<!--ВАРИАНТ 2-->
+<h1>Кафедры факультета</h1>
+{% for cathedra in faculty.cathedras.all %}
+<div class="row">
+    <div class="col">
+        <h4>{{ cathedra }}</h4>
+    </div>
+    <form method="get" class="form-group" action="{% url 'cathedra_edit_url' cathedra_slug=cathedra.slug %}" >
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info">Изменить</button>
+        </div>
+    </form>
+    <form method="post" class="form-group" action="{% url 'cathedra_delete_url' cathedra_slug=cathedra.slug %}">
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info" >Удалить</button>
+        </div>
+    </form>
+</div>
+{% endfor %}
 {% endblock %}
