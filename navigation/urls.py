@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin-panel/<str:faculty_slug>/cathedra-create/', cathedra_create, name='cathedra_create_url'),
     path('admin-panel/cathedra-edit/<str:cathedra_slug>/', cathedra_edit, name='cathedra_edit_url'),
     path('admin-panel/cathedra-delete/<str:cathedra_slug>/', cathedra_delete, name='cathedra_delete_url'),
+    path('search/', search, name='search_url'),
     path('faculties/', faculties_list, name='faculties_list_url'),
     path('teachers/teacher_id=<int:teacher_id>/', teacher_detail, name='teacher_detail_url'),
     path('<str:faculty_slug>/', faculty_detail, name='faculty_detail_url'),
