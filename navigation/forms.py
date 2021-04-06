@@ -1,5 +1,7 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
+from accounts.models import Profile
 from .models import *
 
 
@@ -33,6 +35,8 @@ class CourseEditForm(forms.ModelForm):
 
 
 class CathedraCreateEditForm(forms.ModelForm):
+    info = forms.CharField(widget=forms.Textarea, required=True, label='Описание кафедры')
+
     class Meta:
         model = Cathedra
         fields = ('title', 'info', 'image',)

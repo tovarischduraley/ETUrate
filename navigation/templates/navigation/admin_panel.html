@@ -35,7 +35,7 @@
 <h1>Кафедры</h1>
 {% for cathedra in cathedras %}
 <div class="row">
-    <div class="col">
+    <div class="col-sm-2">
         <h4>{{ cathedra }}</h4>
     </div>
     <form method="get" class="form-group" action="{% url 'cathedra_edit_url' cathedra_slug=cathedra.slug %}" >

@@ -20,10 +20,10 @@
 </div>
 
 <!--ВАРИАНТ 2-->
-<h1>Кафедры факультета</h1>
+<h4>Кафедры факультета</h4>
 {% for cathedra in faculty.cathedras.all %}
 <div class="row">
-    <div class="col">
+    <div class="col-sm-2">
         <h4>{{ cathedra }}</h4>
     </div>
     <form method="get" class="form-group" action="{% url 'cathedra_edit_url' cathedra_slug=cathedra.slug %}" >
