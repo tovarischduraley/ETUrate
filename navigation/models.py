@@ -1,14 +1,11 @@
 from django.db import models
 from django.urls import reverse
-from django.utils.text import slugify
-from transliterate import translit, get_available_language_codes, slugify as t_slugify
-import string
-
+from .utils import add_slug
 
 class Faculty(models.Model):
     """Факультет"""
 
-    title = models.CharField(max_length=50, db_index=True, verbose_name='Название факультета')
+    title = models.CharField(max_length=50, db_index=True, unique=True, verbose_name='Название факультета')
     slug = models.SlugField(max_length=50, blank=True, unique=True, verbose_name='Ссылка на факультет')
     info = models.TextField(max_length=500, default=None, verbose_name='Описание факультета')
     image = models.ImageField(default='default.png', blank=True, upload_to='faculty_logos/',
@@ -21,18 +18,10 @@ class Faculty(models.Model):
         return reverse('faculty_detail_url', kwargs={'faculty_slug': self.slug})
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            flag = 0
-            alph = list(string.ascii_letters)
-            alph.append(" ")
-            for l in self.title:
-                if l not in alph:
-                    flag = 1
-                    break
-            if flag == 0:
-                self.slug = slugify(self.title)
-            else:
-                self.slug = t_slugify(self.title)
+        self.slug = add_slug(self.title)
+
+        if not self.image:
+            self.image = 'default.png'
 
         super(Faculty, self).save(*args, **kwargs)
 
@@ -44,7 +33,7 @@ class Faculty(models.Model):
 class Cathedra(models.Model):
     """Кафедра"""
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE, verbose_name='Факультет', related_name='cathedras')
-    title = models.CharField(max_length=50, db_index=True, verbose_name='Название кафедры')
+    title = models.CharField(max_length=50, db_index=True, unique=True, verbose_name='Название кафедры')
     slug = models.SlugField(max_length=50, blank=True, unique=True, verbose_name='Ссылка на кафедру')
     info = models.TextField(max_length=500, blank=True, verbose_name='Описание кафедры')
     image = models.ImageField(default='default.png', blank=True, upload_to='cathedra_logos/',
@@ -69,18 +58,11 @@ class Cathedra(models.Model):
         return reverse('cathedra_detail_url', kwargs={'faculty_slug': self.faculty.slug, 'cathedra_slug': self.slug})
 
     def save(self, *args, **kwargs):
-        if not self.slug:
-            flag = 0
-            alph = list(string.ascii_letters)
-            alph.append(" ")
-            for l in self.title:
-                if l not in alph:
-                    flag = 1
-                    break
-            if flag == 0:
-                self.slug = slugify(self.title)
-            else:
-                self.slug = t_slugify(self.title)
+        self.slug = add_slug(self.title)
+
+        if not self.image:
+            self.image = 'default.png'
+
         super(Cathedra, self).save(*args, **kwargs)
 
     class Meta:
@@ -91,7 +73,6 @@ class Cathedra(models.Model):
 class Teacher(models.Model):
     """Преподаватель"""
 
-    cathedras = models.ManyToManyField(Cathedra, related_name='teachers', verbose_name='Кафедры преподавателей')
     first_name = models.CharField(max_length=50, db_index=True, verbose_name='Имя')
     last_name = models.CharField(max_length=50, db_index=True, verbose_name='Фамилия')
     patronymic = models.CharField(max_length=50, db_index=True, verbose_name='Отчество')
@@ -101,6 +82,8 @@ class Teacher(models.Model):
     is_lecturer = models.BooleanField(default=True)
     is_practical = models.BooleanField(default=True)
     birth_date = models.DateField(blank=True, null=True, verbose_name='Дата рождения')
+
+    cathedras = models.ManyToManyField(Cathedra, related_name='teachers', verbose_name='Кафедры преподавателей')
 
     objectivity_lecture_mark = models.DecimalField(blank=True, default=0, max_digits=5, decimal_places=2,
                                                    verbose_name='Объективность оценивания (Лектор)')
@@ -129,12 +112,17 @@ class Teacher(models.Model):
         verbose_name = 'Преподаватель'
         verbose_name_plural = 'Преподаватели'
 
+    def save(self, *args, **kwargs):
+        if not self.avatar:
+            self.avatar = 'avatar.png'
+        super(Teacher, self).save(*args, **kwargs)
+
 
 class Course(models.Model):
     """Курс"""
 
     teachers = models.ManyToManyField(Teacher, related_name='courses', verbose_name='Преподаватели курсов')
-    title = models.CharField(max_length=50, db_index=True, verbose_name='Название курса')
+    title = models.CharField(max_length=50, db_index=True, unique=True, verbose_name='Название курса')
 
     def __str__(self):
         return self.title

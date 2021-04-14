@@ -17,7 +17,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     is_cathedra_head = models.BooleanField(default=False, verbose_name='is_cathedra_head')
     username = models.CharField(max_length=30, blank=True)
 
-    cathedra = models.ForeignKey(Cathedra, blank=True, null=True, default=None, on_delete=models.SET_NULL,
+    cathedra = models.ForeignKey(Cathedra, blank=True, null=True, default=None, on_delete=models.CASCADE,
                                  verbose_name='Кафедра', related_name='cathedra_heads')
 
     objects = ProfileManager()

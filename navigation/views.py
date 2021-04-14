@@ -60,13 +60,21 @@ def cathedra_control(request):
 @cathedra_head_only
 def teacher_create(request):
     if request.method == 'POST':
-        teacher = Teacher.objects.create()
-        teacher.cathedras.add(request.user.cathedra)
-        form = TeacherCreateEditForm(request.POST, request.FILES, instance=teacher)
+        form = TeacherCreateEditForm(request.POST, request.FILES)
         if form.is_valid():
+            teacher = Teacher.objects.create(
+                first_name=form.cleaned_data['first_name'],
+                last_name=form.cleaned_data['last_name'],
+                patronymic=form.cleaned_data['patronymic'],
+                speciality=form.cleaned_data['speciality'],
+                is_lecturer=form.cleaned_data['is_lecturer'],
+                is_practical=form.cleaned_data['is_practical'],
+                birth_date=form.cleaned_data['birth_date'],
+                avatar=form.cleaned_data['avatar'],
+            )
+            teacher.cathedras.add(request.user.cathedra)
             for course in form.cleaned_data['courses'].all():
                 teacher.courses.add(course)
-            form.save()
             return redirect('cathedra_control_url')
     else:
         form = TeacherCreateEditForm()
@@ -92,8 +100,9 @@ def teacher_edit(request, teacher_id=None):
 @cathedra_head_only
 def teacher_delete(request, teacher_id=None):
     teacher = get_object_or_404(Teacher, id=teacher_id)
+    cathedra = request.user.cathedra
     if request.method == 'POST':
-        teacher.delete()
+        cathedra.teachers.remove(teacher)
         return redirect('cathedra_control_url')
 
 
@@ -114,7 +123,7 @@ def course_create(request):
 def course_edit(request, course_id=None):
     course = get_object_or_404(Course, id=course_id)
     if request.method == 'POST':
-        form = CourseEditForm(request.POST, instance=course)
+        form = CourseEditForm(request.user, request.POST, instance=course)
         if form.is_valid():
             course.teachers.through.objects.filter(course_id=course_id).delete()
             for teacher in form.cleaned_data['teachers'].all():
@@ -122,7 +131,7 @@ def course_edit(request, course_id=None):
             form.save()
             return redirect('courses_url')
     else:
-        form = CourseEditForm(instance=course, initial={'teachers': course.teachers.all()})
+        form = CourseEditForm(instance=course, user=request.user)
     return render(request, 'navigation/course_edit.html', context={'form': form, 'course': course})
 
 
@@ -159,17 +168,6 @@ def faculty_edit(request, faculty_slug=None):
     if request.method == 'POST':
         form = FacultyCreateEditForm(request.POST, request.FILES, instance=faculty)
         if form.is_valid():
-            flag = 0
-            alph = list(string.ascii_letters)
-            alph.append(" ")
-            for l in form.cleaned_data['title']:
-                if l not in alph:
-                    flag = 1
-                    break
-            if flag == 0:
-                faculty.slug = slugify(form.cleaned_data['title'])
-            else:
-                faculty.slug = t_slugify(form.cleaned_data['title'])
             form.save()
             return redirect('admin_panel_url')
     else:
@@ -189,10 +187,15 @@ def faculty_delete(request, faculty_slug=None):
 def cathedra_create(request, faculty_slug=None):
     faculty = get_object_or_404(Faculty, slug=faculty_slug)
     if request.method == 'POST':
-        cathedra = Cathedra.objects.create(faculty=faculty)
-        form = CathedraCreateEditForm(request.POST, request.FILES, instance=cathedra)
+        form = CathedraCreateEditForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            cathedra = Cathedra.objects.create(
+                title=form.cleaned_data['title'],
+                info=form.cleaned_data['info'],
+                image=form.cleaned_data['image'],
+                faculty=faculty
+            )
+            cathedra.save()
             return redirect('admin_panel_url')
     else:
         form = CathedraCreateEditForm()
@@ -205,17 +208,6 @@ def cathedra_edit(request, cathedra_slug=None):
     if request.method == "POST":
         form = CathedraCreateEditForm(request.POST, request.FILES, instance=cathedra)
         if form.is_valid():
-            flag = 0
-            alph = list(string.ascii_letters)
-            alph.append(" ")
-            for l in form.cleaned_data['title']:
-                if l not in alph:
-                    flag = 1
-                    break
-            if flag == 0:
-                cathedra.slug = slugify(form.cleaned_data['title'])
-            else:
-                cathedra.slug = t_slugify(form.cleaned_data['title'])
             form.save()
             return redirect('admin_panel_url')
     else:
