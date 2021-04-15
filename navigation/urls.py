@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin-panel/cathedra-edit/<str:cathedra_slug>/', cathedra_edit, name='cathedra_edit_url'),
     path('admin-panel/cathedra-delete/<str:cathedra_slug>/', cathedra_delete, name='cathedra_delete_url'),
     path('admin-panel/cathedra-head-register/', cathedra_head_register, name='cathedra_head_register_url'),
+    path('admin-panel/add-teacher/teacher_id=<int:teacher_id>/', add_teacher_to_cathedra, name='add_teacher_url'),
     path('search/', search, name='search_url'),
     path('faculties/', faculties_list, name='faculties_list_url'),
     path('teachers/teacher_id=<int:teacher_id>/', teacher_detail, name='teacher_detail_url'),

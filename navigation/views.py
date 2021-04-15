@@ -56,7 +56,9 @@ def teacher_detail(request, teacher_id):
 @cathedra_head_only
 def cathedra_control(request):
     teachers = request.user.cathedra.teachers.all()
-    return render(request, 'navigation/cathedra_control.html', context={'teachers': teachers})
+    other_teachers = Teacher.objects.exclude(cathedras__id__contains=request.user.cathedra.id)
+    return render(request, 'navigation/cathedra_control.html',
+                  context={'teachers': teachers, 'other_teachers': other_teachers})
 
 
 @cathedra_head_only
@@ -250,3 +252,10 @@ def cathedra_head_register(request):
     else:
         form = CathedraHeadRegisterForm()
     return render(request, 'navigation/cathedra_head_register.html', context={'form': form})
+
+
+def add_teacher_to_cathedra(request, teacher_id=None):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    if request.method == 'POST':
+        request.user.cathedra.teachers.add(teacher)
+        return redirect('cathedra_control_url')
