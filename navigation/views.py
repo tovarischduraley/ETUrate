@@ -116,6 +116,8 @@ def course_create(request):
     if request.method == 'POST':
         form = CourseCreateForm(request.POST)
         if form.is_valid():
+            # course = Course(title=form.cleaned_data['title'].capitalize())
+            # course.save()
             form.save()
             return redirect('courses_url')
     else:

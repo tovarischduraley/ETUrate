@@ -37,6 +37,10 @@ class CourseCreateForm(forms.ModelForm):
         model = Course
         fields = ('title',)
 
+    def clean_title(self):
+        new_title = self.cleaned_data['title'].capitalize()
+        return new_title
+
 
 class CourseEditForm(forms.ModelForm):
 
@@ -48,6 +52,9 @@ class CourseEditForm(forms.ModelForm):
         super(CourseEditForm, self).__init__(*args, **kwargs)
         self.fields['teachers'].queryset = Teacher.objects.filter(cathedras__title__contains=user.cathedra.title)
 
+    def clean_title(self):
+        new_title = self.cleaned_data['title'].capitalize()
+        return new_title
 
 class CathedraCreateEditForm(forms.ModelForm):
     info = forms.CharField(widget=forms.Textarea, required=True, label='Описание кафедры')
