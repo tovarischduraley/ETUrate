@@ -8,7 +8,9 @@
 {% endblock %}
 
 {% block content %}
-    <img width="100" height="100" src=" {{ teacher.avatar.url }}" alt="
+    <link rel="stylesheet" href="{% static 'navigation/css/teacher_detail.css' %}">
+    <br>
+    <img width="100"  src=" {{ teacher.avatar.url }}" alt="
     {{ teacher.last_name }}
     {{ teacher.first_name | first }}.
     {{ teacher.patronymic | first }}.">
@@ -30,8 +32,7 @@
     {% if teacher.birth_date %}
         <h4>Дата рождения: {{ teacher.birth_date }}</h4>
     {% endif %}
-
-    <hr>
+    <br>
     <h3>Оценки преподавателя:</h3>
     {% if teacher.is_lecturer %}
         <h4>Как лектор</h4>
@@ -51,4 +52,35 @@
             <li>Требовательность: {{ teacher.load_mark }} / 5</li>
         </ul>
     {% endif %}
+
+    <br>
+    <h3>Оцени препода:</h3>
+    <div class="reviews__container">
+        {% if teacher.is_lecturer %}
+            <div class="lecture__column">
+                <h4>Как лектор</h4>
+                <form action="">
+                    <label class="reveiw__option">Контакт с аудиторией: <input type="range" min="0" max="10" step="1" value="0"> </label>
+                    <label class="reveiw__option">Объективность оценивания: <input type="range" min="0" max="10" step="1" value="0"> </label>
+                    <label class="reveiw__option">Знание дисциплины: <input type="range" min="0" max="10" step="1" value="0"> </label>
+                    <label class="reveiw__option">Талант преподавания: <input type="range" min="0" max="10" step="1" value="0"> </label>
+                    <button type="submit" class="btn btn-success">Оценить</button>
+                </form>
+            </div>
+        {% endif %}
+
+
+        {% if teacher.is_practical %}
+            <div class="practice__column">
+                <h4>Как практик</h4>
+                <form action="">
+                    <label class="reveiw__option">Контакт с аудиторией: <input type="range" min="0" max="10" step="1" value="0"> </label>
+                    <label class="reveiw__option">Объективность оценивания: <input type="range" min="0" max="10" step="1" value="0"> </label>
+                    <label class="reveiw__option">Знание дисциплины: <input type="range" min="0" max="10" step="1" value="0"> </label>
+                    <label class="reveiw__option">Требовательность: <input type="range" min="0" max="10" step="1" value="0"> </label>
+                    <button type="submit" class="btn btn-success">Оценить</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}

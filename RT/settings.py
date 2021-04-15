@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'crispy_forms',
+    'admin_panel',
+    'cathedra_control',
     'accounts',
     'reviews',
     'navigation',
