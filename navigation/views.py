@@ -1,5 +1,7 @@
+from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
 
+from RT.settings import EMAIL_HOST_USER
 from .forms import *
 from .models import *
 from .decorators import *
@@ -29,8 +31,8 @@ def search(request):
     else:
         return redirect(request.META['HTTP_REFERER'])
 
-def faculties_list(request):
 
+def faculties_list(request):
     faculties = Faculty.objects.all()
     return render(request, 'navigation/faculties_list.html', context={'faculties': faculties})
 
@@ -216,8 +218,35 @@ def cathedra_edit(request, cathedra_slug=None):
 
 
 @staff_only
-def cathedra_delete(request,  cathedra_slug=None):
+def cathedra_delete(request, cathedra_slug=None):
     cathedra = get_object_or_404(Cathedra, slug=cathedra_slug)
     if request.method == "POST":
         cathedra.delete()
         return redirect('admin_panel_url')
+
+
+@staff_only
+def cathedra_head_register(request):
+    if request.method == 'POST':
+        form = CathedraHeadRegisterForm(request.POST)
+        if form.is_valid():
+            profile = Profile(
+                email=form.cleaned_data['email'],
+                last_name=form.cleaned_data['last_name'],
+                first_name=form.cleaned_data['first_name'],
+                patronymic=form.cleaned_data['patronymic'],
+                cathedra=form.cleaned_data['cathedra'],
+                is_student=False,
+                is_cathedra_head=True
+            )
+            password = Profile.objects.make_random_password()
+            profile.set_password(password)
+            massage = 'Доброго времени суток, ' + profile.__str__() + '!\n\nВаш пароль: ' + password + \
+                      '\n\nС уважением,\nадминистрация сайта ETUrate'
+            send_mail('Регистрация руководителя кафедры', massage, EMAIL_HOST_USER,
+                      [form.cleaned_data['email']], fail_silently=False)
+            profile.save()
+            return redirect('admin_panel_url')
+    else:
+        form = CathedraHeadRegisterForm()
+    return render(request, 'navigation/cathedra_head_register.html', context={'form': form})

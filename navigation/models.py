@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from .utils import add_slug
 
+
 class Faculty(models.Model):
     """Факультет"""
 

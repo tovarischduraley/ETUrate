@@ -26,9 +26,12 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        if self.is_student:
-            return f'{self.last_name} {self.first_name} {self.patronymic}'
-        return f'{self.email}'
+        if self.is_staff or self.is_superuser:
+            return f'{self.email}'
+        if not self.patronymic:
+            return f'{self.last_name} {self.first_name}'
+        return f'{self.last_name} {self.first_name} {self.patronymic}'
+
 
     class Meta:
         verbose_name = 'Профиль'

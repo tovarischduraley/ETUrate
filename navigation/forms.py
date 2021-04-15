@@ -1,5 +1,7 @@
 from django import forms
 from datetime import date
+
+from accounts.models import Profile
 from .models import *
 
 
@@ -29,6 +31,7 @@ class TeacherCreateEditForm(forms.ModelForm):
             raise forms.ValidationError("Введена недопустимая дата")
         return new_date
 
+
 class CourseCreateForm(forms.ModelForm):
     class Meta:
         model = Course
@@ -52,3 +55,11 @@ class CathedraCreateEditForm(forms.ModelForm):
     class Meta:
         model = Cathedra
         fields = ('title', 'info', 'image',)
+
+
+class CathedraHeadRegisterForm(forms.ModelForm):
+    cathedra = forms.ModelChoiceField(queryset=Cathedra.objects.all(), required=True, label='Кафедра')
+
+    class Meta:
+        model = Profile
+        fields = ('email', 'last_name', 'first_name', 'patronymic', 'cathedra')

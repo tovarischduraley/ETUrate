@@ -30,8 +30,6 @@
 </div>
 {% endfor %}
 <h2><a href="{% url 'faculty_create_url' %}">Добавить факультет</a></h2>
-
-<!--ВАРИАНТ 1-->
 <h1>Кафедры</h1>
 {% for cathedra in cathedras %}
 <div class="row">
@@ -52,4 +50,5 @@
     </form>
 </div>
 {% endfor %}
+<h2><a href="{% url 'cathedra_head_register_url' %}">Добавить руководителя кафедры</a></h2>
 {% endblock %}
