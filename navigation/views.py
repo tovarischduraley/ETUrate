@@ -255,7 +255,7 @@ def cathedra_head_register(request):
         form = CathedraHeadRegisterForm()
     return render(request, 'navigation/cathedra_head_register.html', context={'form': form})
 
-
+@cathedra_head_only
 def add_teacher_to_cathedra(request, teacher_id=None):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     if request.method == 'POST':
