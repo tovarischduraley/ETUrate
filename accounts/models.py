@@ -13,7 +13,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=50, unique=True, verbose_name='Email')
     is_staff = models.BooleanField(default=False, verbose_name='is_staff')
     is_active = models.BooleanField(default=True, verbose_name='is_active')
-    is_student = models.BooleanField(default=True, verbose_name='is_student')
+    is_student = models.BooleanField(default=False, verbose_name='is_student')
     is_cathedra_head = models.BooleanField(default=False, verbose_name='is_cathedra_head')
     username = models.CharField(max_length=30, blank=True)
 
@@ -26,12 +26,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        if self.is_staff or self.is_superuser:
-            return f'{self.email}'
-        if not self.patronymic:
-            return f'{self.last_name} {self.first_name}'
-        return f'{self.last_name} {self.first_name} {self.patronymic}'
-
+        return self.email
 
     class Meta:
         verbose_name = 'Профиль'

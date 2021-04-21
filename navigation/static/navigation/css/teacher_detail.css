@@ -1,10 +1,38 @@
-.reviews__container{
+.reviews__container {
     width: 700px;
-    display: flex;
-    justify-content: space-between;
 }
 
+#lecture__column {
+    display: inline-block;
+    max-width: 320px;
+}
 
-.reveiw__option{
+#practice__column {
+    display: inline-block;
+    max-width: 320px;
+}
+
+#lecture__review__choice {
+    display: inline-block;
+    margin-top: 25px;
+}
+
+#practice__review__choice {
+    display: inline;
+    margin-top: 20px;
+}
+
+.lecture__review__option {
+    display: block;
+    width: 90%;
+}
+
+.practice__review__option {
+    display: block;
+    width: 90%;
+}
+
+.but {
     display: block;
 }
+

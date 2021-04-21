@@ -3,12 +3,14 @@ from django.urls import path, include
 
 from RT import settings
 from .views import *
+from reviews import views as reviews_v
 
 urlpatterns = [
     path('', index, name='home'),
     path('cathedra-control/', include('cathedra_control.urls')),
     path('admin-panel/', include('admin_panel.urls')),
     path('search/', search, name='search_url'),
+    path('test-review/', reviews_v.create_review, name='test'),
     path('faculties/', faculties_list, name='faculties_list_url'),
     path('teachers/teacher_id=<int:teacher_id>/', teacher_detail, name='teacher_detail_url'),
     path('<str:faculty_slug>/', faculty_detail, name='faculty_detail_url'),

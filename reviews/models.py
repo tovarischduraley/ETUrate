@@ -5,27 +5,20 @@ from accounts.models import Profile
 
 from navigation.models import Teacher, Cathedra
 
+
 # Create your models here.
-
-MARK_CHOICES = (
-    (1, 'Ужасно'),
-    (2, 'Плохо'),
-    (3, 'Нормально'),
-    (4, 'Хорошо'),
-    (5, 'Отлично'),
-)
-
 
 class LectureReview(models.Model):
     """Оценка преподавателя как лектора"""
 
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Студент')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='lecture_reviews',
+                                verbose_name='Студент')
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Преподаватель')
 
-    objectivity_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Объективность оценивания')
-    knowledge_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Объём знаний по предмету')
-    communicability_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Связь с аудиторией')
-    teacher_talent_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Умение дать материал')
+    objectivity_mark = models.IntegerField(verbose_name='Объективность оценивания')
+    knowledge_mark = models.IntegerField(verbose_name='Объём знаний по предмету')
+    communicability_mark = models.IntegerField(verbose_name='Связь с аудиторией')
+    teacher_talent_mark = models.IntegerField(verbose_name='Умение дать материал')
 
     class Meta:
         verbose_name = 'Оценка преподавателя лектора'
@@ -35,13 +28,14 @@ class LectureReview(models.Model):
 class PracticeReview(models.Model):
     """Оценка преподавателя как практика"""
 
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Студент')
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='practice_reviews',
+                                verbose_name='Студент')
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Преподаватель')
 
-    objectivity_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Объективность оценивания')
-    knowledge_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Объём знаний по предмету')
-    communicability_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Связь с аудиторией')
-    load_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Требовательность')
+    objectivity_mark = models.IntegerField(verbose_name='Объективность оценивания')
+    knowledge_mark = models.IntegerField(verbose_name='Объём знаний по предмету')
+    communicability_mark = models.IntegerField(verbose_name='Связь с аудиторией')
+    load_mark = models.IntegerField(verbose_name='Требовательность')
 
     class Meta:
         verbose_name = 'Оценка преподавателя практики'
@@ -74,12 +68,13 @@ class Comment(models.Model):
 class CathedraReview(models.Model):
     """Оценка кафедры"""
 
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='cathedra_reviews',
+                                verbose_name='Студент')
     cathedra = models.ForeignKey(Cathedra, on_delete=models.CASCADE, verbose_name='Кафедра')
-    attitude_to_student_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Отношение к студентам')
-    relevance_of_material_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Современность материала')
-    availability_of_cathedra_internship_mark = models.IntegerField(choices=MARK_CHOICES,
-                                                                   verbose_name='Возможность стажировки на кафедре')
-    find_job_opportunity_mark = models.IntegerField(choices=MARK_CHOICES, verbose_name='Возможность найти работу')
+    attitude_to_student_mark = models.IntegerField(verbose_name='Отношение к студентам')
+    relevance_of_material_mark = models.IntegerField(verbose_name='Современность материала')
+    availability_of_cathedra_internship_mark = models.IntegerField(verbose_name='Возможность стажировки на кафедре')
+    find_job_opportunity_mark = models.IntegerField(verbose_name='Возможность найти работу')
 
     def __str__(self):
         return f'Оценка кафедры {self.cathedra.title}'

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_filters %}
 
 {% block title %}
     {{ teacher.last_name }}
@@ -10,7 +11,7 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'navigation/css/teacher_detail.css' %}">
     <br>
-    <img width="100"  src=" {{ teacher.avatar.url }}" alt="
+    <img width="200" src=" {{ teacher.avatar.url }}" alt="
     {{ teacher.last_name }}
     {{ teacher.first_name | first }}.
     {{ teacher.patronymic | first }}.">
@@ -53,34 +54,87 @@
         </ul>
     {% endif %}
 
+    {% if user.is_student %}
+        <hr>
+        <h3>Оцени препода:</h3>
+
+        <div class="reviews__container">
+            <form id="review__form" action="{% url 'test' %}" method="POST">
+                {% csrf_token %}
+                {% if teacher.is_lecturer %}
+                    {% if teacher not in reviews_of_lecture_teachers %}
+                        {#                        <div id="lecture__column">#}
+                        {#                            <h4>Как лектор</h4>#}
+                        {#                            {{ lform.as_p }}#}
+                        {#                        </div>#}
+                        <div id="lecture__column">
+                            <h4>Как лектор</h4>
+
+                            <label for="lecture__review__option"> Контакт с аудиторией: </label>
+                            <input class="lecture__review__option" type="range" min="0" max="10" step="1"
+                                   value="0">
+
+                            <label for="lecture__review__option"> Объективность оценивания: </label>
+                            <input class="lecture__review__option" type="range" min="0" max="10" step="1"
+                                   value="0">
+
+                            <label for="lecture__review__option"> Знание дисциплины: </label>
+                            <input class="lecture__review__option" type="range"
+                                   min="0" max="10" step="1"
+                                   value="0">
+
+                            <label for="lecture__review__option"> Талант преподавания: </label>
+                            <input class="lecture__review__option" type="range" min="0" max="10" step="1"
+                                   value="0">
+                            <label>
+                                <input type="checkbox" id="lecture__review__choice"> Преподаватель не ведет у меня лекции
+                            </label>
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if teacher.is_practical %}
+                    {% if teacher not in reviews_of_practice_teachers %}
+                        {#                        <div id="practice__column">#}
+                        {#                            <h4>Как практик</h4>#}
+                        {#                            {{ pform.as_p }}#}
+                        {#                        </div>#}
+                        <div id="practice__column">
+                            <h4>Как практик</h4>
+
+                            <label for="practice__review__option"> Контакт с аудиторией: </label>
+                            <input class="practice__review__option" type="range" min="0" max="10" step="1"
+                                   value="0">
+
+                            <label for="practice__review__option"> Объективность оценивания: </label>
+                            <input class="practice__review__option" type="range" min="0" max="10" step="1"
+                                   value="0">
+
+                            <label for="practice__review__option"> Знание дисциплины: </label>
+                            <input class="practice__review__option" type="range"
+                                   min="0" max="10" step="1"
+                                   value="0">
+
+                            <label for="practice__review__option"> Требовательность: </label>
+                            <input class="practice__review__option" type="range" min="0" max="10" step="1"
+                                   value="0">
+                            <label>
+                                <input type="checkbox" id="practice__review__choice"> Преподаватель не ведёт у меня
+                                практических занятий
+                            </label>
+                        </div>
+                    {% endif %}
+                {% endif %}
+                <hr>
+                <button class="btn btn-success but">Оценить</button>
+            </form>
+        </div>
+    {% endif %}
+
     <br>
-    <h3>Оцени препода:</h3>
-    <div class="reviews__container">
-        {% if teacher.is_lecturer %}
-            <div class="lecture__column">
-                <h4>Как лектор</h4>
-                <form action="">
-                    <label class="reveiw__option">Контакт с аудиторией: <input type="range" min="0" max="10" step="1" value="0"> </label>
-                    <label class="reveiw__option">Объективность оценивания: <input type="range" min="0" max="10" step="1" value="0"> </label>
-                    <label class="reveiw__option">Знание дисциплины: <input type="range" min="0" max="10" step="1" value="0"> </label>
-                    <label class="reveiw__option">Талант преподавания: <input type="range" min="0" max="10" step="1" value="0"> </label>
-                    <button type="submit" class="btn btn-success">Оценить</button>
-                </form>
-            </div>
-        {% endif %}
-
-
-        {% if teacher.is_practical %}
-            <div class="practice__column">
-                <h4>Как практик</h4>
-                <form action="">
-                    <label class="reveiw__option">Контакт с аудиторией: <input type="range" min="0" max="10" step="1" value="0"> </label>
-                    <label class="reveiw__option">Объективность оценивания: <input type="range" min="0" max="10" step="1" value="0"> </label>
-                    <label class="reveiw__option">Знание дисциплины: <input type="range" min="0" max="10" step="1" value="0"> </label>
-                    <label class="reveiw__option">Требовательность: <input type="range" min="0" max="10" step="1" value="0"> </label>
-                    <button type="submit" class="btn btn-success">Оценить</button>
-                </form>
-            </div>
-        {% endif %}
-    </div>
+    <hr>
+    <h6>А тут планируются комментарии... coming soon, так сказать</h6>
+    <script src="{% static 'navigation/js/teacher_detail.js' %}"></script>
 {% endblock %}
+
+{#JUST COMMENT#}
