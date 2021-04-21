@@ -59,75 +59,63 @@
         <h3>Оцени препода:</h3>
 
         <div class="reviews__container">
-            <form id="review__form" action="{% url 'test' %}" method="POST">
-                {% csrf_token %}
-                {% if teacher.is_lecturer %}
-                    {% if teacher not in reviews_of_lecture_teachers %}
-                        {#                        <div id="lecture__column">#}
-                        {#                            <h4>Как лектор</h4>#}
-                        {#                            {{ lform.as_p }}#}
-                        {#                        </div>#}
-                        <div id="lecture__column">
-                            <h4>Как лектор</h4>
+            {% csrf_token %}
+            {% if teacher.is_lecturer %}
+                {% if teacher not in reviews_of_lecture_teachers %}
 
-                            <label for="lecture__review__option"> Контакт с аудиторией: </label>
-                            <input class="lecture__review__option" type="range" min="0" max="10" step="1"
-                                   value="0">
-
-                            <label for="lecture__review__option"> Объективность оценивания: </label>
-                            <input class="lecture__review__option" type="range" min="0" max="10" step="1"
-                                   value="0">
-
-                            <label for="lecture__review__option"> Знание дисциплины: </label>
-                            <input class="lecture__review__option" type="range"
-                                   min="0" max="10" step="1"
-                                   value="0">
-
-                            <label for="lecture__review__option"> Талант преподавания: </label>
-                            <input class="lecture__review__option" type="range" min="0" max="10" step="1"
-                                   value="0">
-                            <label>
-                                <input type="checkbox" id="lecture__review__choice"> Преподаватель не ведет у меня лекции
-                            </label>
-                        </div>
-                    {% endif %}
+                    <h4>Как лектор</h4>
+                    <form action="">
+                        {% for field in lform %}
+                            <div class="tick-slider">
+                                {{ field.label }}
+                                <div class="tick-slider-value-container">
+                                    <div id="weightLabelMin" class="tick-slider-label">0</div>
+                                    <div id="weightLabelMax" class="tick-slider-label">10</div>
+                                    <div id="weightValue" class="tick-slider-value"></div>
+                                </div>
+                                <div class="tick-slider-background"></div>
+                                <div id="weightProgress" class="tick-slider-progress"></div>
+                                <div id="weightTicks" class="tick-slider-tick-container"></div>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        <br><br>
+                        <button class="btn btn-success but">Оценить</button>
+                    </form>
                 {% endif %}
+            {% endif %}
 
-                {% if teacher.is_practical %}
-                    {% if teacher not in reviews_of_practice_teachers %}
-                        {#                        <div id="practice__column">#}
-                        {#                            <h4>Как практик</h4>#}
-                        {#                            {{ pform.as_p }}#}
-                        {#                        </div>#}
-                        <div id="practice__column">
-                            <h4>Как практик</h4>
+            {% if teacher.is_practical %}
+                {% if teacher not in reviews_of_practice_teachers %}
 
-                            <label for="practice__review__option"> Контакт с аудиторией: </label>
-                            <input class="practice__review__option" type="range" min="0" max="10" step="1"
-                                   value="0">
+                    <div id="practice__column">
+                    <h4>Как практик</h4>
 
-                            <label for="practice__review__option"> Объективность оценивания: </label>
-                            <input class="practice__review__option" type="range" min="0" max="10" step="1"
-                                   value="0">
+                    <form action="">
+                        {% for field in pform %}
+                            <div class="tick-slider">
+                                <div class="tick-slider-header">
+                                    <h5><label for="weightSlider">{{ field.label }}</label></h5>
+                                </div>
+                                <div class="tick-slider-value-container">
+                                    <div id="weightLabelMin" class="tick-slider-label">0</div>
+                                    <div id="weightLabelMax" class="tick-slider-label">10</div>
+                                    <div id="weightValue" class="tick-slider-value"></div>
+                                </div>
+                                <div class="tick-slider-background"></div>
+                                <div id="weightProgress" class="tick-slider-progress"></div>
+                                <div id="weightTicks" class="tick-slider-tick-container"></div>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        <br><br>
+                        <button class="btn btn-success but">Оценить</button>
+                    </form>
 
-                            <label for="practice__review__option"> Знание дисциплины: </label>
-                            <input class="practice__review__option" type="range"
-                                   min="0" max="10" step="1"
-                                   value="0">
-
-                            <label for="practice__review__option"> Требовательность: </label>
-                            <input class="practice__review__option" type="range" min="0" max="10" step="1"
-                                   value="0">
-                            <label>
-                                <input type="checkbox" id="practice__review__choice"> Преподаватель не ведёт у меня
-                                практических занятий
-                            </label>
-                        </div>
-                    {% endif %}
                 {% endif %}
-                <hr>
-                <button class="btn btn-success but">Оценить</button>
-            </form>
+            {% endif %}
+            <hr>
+            </div>
         </div>
     {% endif %}
 

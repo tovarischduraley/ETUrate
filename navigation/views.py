@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
-from reviews.forms import TeacherReviewForm
+from reviews.forms import LectureReviewForm, PracticeReviewForm
 from django.db.models import Q
 
 
@@ -63,8 +63,8 @@ def teacher_detail(request, teacher_id):
             context.update({'reviews_of_lecture_teachers': reviews_of_lecture_teachers,
                             'reviews_of_practice_teachers': reviews_of_practice_teachers})
 
-            lecture_form = TeacherReviewForm(prefix='lform')
-            practice_form = TeacherReviewForm(prefix='pform')
+            lecture_form = LectureReviewForm()
+            practice_form = PracticeReviewForm()
             context.update({'lform': lecture_form, 'pform': practice_form})
 
-        return render(request, 'navigation/teacher_detail.html', context=context)
+    return render(request, 'navigation/teacher_detail.html', context=context)
