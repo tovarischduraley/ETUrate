@@ -28,6 +28,14 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
+    def get_full_name(self):
+        if self.is_staff or self.is_superuser:
+            return self.email
+        elif self.patronymic is None:
+            return self.last_name + ' ' + self.first_name
+        else:
+            return self.last_name + ' ' + self.first_name + ' ' + self.patronymic
+
     class Meta:
         verbose_name = 'Профиль'
         verbose_name_plural = 'Профили'

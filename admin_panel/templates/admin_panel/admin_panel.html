@@ -51,4 +51,26 @@
 </div>
 {% endfor %}
 <h2><a href="{% url 'cathedra_head_register_url' %}">Добавить руководителя кафедры</a></h2>
+
+<h3>Ожидают подтверждения</h3>
+{% for profile in profiles %}
+<div class="row">
+    <div class="col-4">
+        <h4>ФИО: {{ profile.get_full_name }}</h4>
+        <h4>Номер группы: {{ profile.group_number }}</h4>
+    </div>
+    <form method="post" class="form-group" action="{% url 'profile_verification_url' profile_id=profile.id %}">
+        {% csrf_token %}
+        <div class="form-group col-2">
+            <button type="submit" class="btn btn-outline-info" >Подтвердить</button>
+        </div>
+    </form>
+    <form method="post" class="form-group" action="{% url 'profile_delete_url' profile_id=profile.id %}">
+        {% csrf_token %}
+        <div class="form-group col">
+            <button type="submit" class="btn btn-outline-info" >Удалить профиль</button>
+        </div>
+    </form>
+</div>
+{% endfor %}
 {% endblock %}

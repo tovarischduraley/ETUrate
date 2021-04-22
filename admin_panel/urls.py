@@ -13,6 +13,8 @@ urlpatterns = [
     path('cathedra-edit/<str:cathedra_slug>/', cathedra_edit, name='cathedra_edit_url'),
     path('cathedra-delete/<str:cathedra_slug>/', cathedra_delete, name='cathedra_delete_url'),
     path('cathedra-head-register/', cathedra_head_register, name='cathedra_head_register_url'),
+    path('profile-verifiacation/<int:profile_id>', profile_verification, name='profile_verification_url'),
+    path('profile-delete/<int:profile_id>', profile_delete, name='profile_delete_url'),
 ]
 
 if settings.DEBUG:
