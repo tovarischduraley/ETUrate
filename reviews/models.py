@@ -24,6 +24,8 @@ class LectureReview(models.Model):
         verbose_name = 'Оценка преподавателя лектора'
         verbose_name_plural = 'Оценки преподавателей лекторов'
 
+    def __str__(self):
+        return f'FROM {self.profile.email} TO {self.teacher.last_name} {self.teacher.first_name} {self.teacher.patronymic}'
 
 class PracticeReview(models.Model):
     """Оценка преподавателя как практика"""
@@ -40,6 +42,9 @@ class PracticeReview(models.Model):
     class Meta:
         verbose_name = 'Оценка преподавателя практики'
         verbose_name_plural = 'Оценки преподавателей практики'
+
+    def __str__(self):
+        return f'FROM {self.profile.email} TO {self.teacher.last_name} {self.teacher.first_name} {self.teacher.patronymic}'
 
 
 class Comment(models.Model):
@@ -58,7 +63,7 @@ class Comment(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Comment by {self.profile.user.username}'
+        return f'FROM {self.profile.email} TO {self.teacher.last_name} {self.teacher.first_name} {self.teacher.patronymic}'
 
     class Meta:
         verbose_name = 'Комментарий'
@@ -77,7 +82,7 @@ class CathedraReview(models.Model):
     find_job_opportunity_mark = models.IntegerField(verbose_name='Возможность найти работу')
 
     def __str__(self):
-        return f'Оценка кафедры {self.cathedra.title}'
+        return f'FROM {self.profile.email} TO {self.cathedra.title}'
 
     class Meta:
         verbose_name = 'Оценка кафедры'

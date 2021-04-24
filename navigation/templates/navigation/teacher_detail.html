@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-    <link rel="stylesheet" href="{% static 'navigation/css/teacher_detail.css' %}">
+    <link rel="stylesheet" href="{% static 'navigation/css/review.css' %}">
     <br>
     <img width="200" src=" {{ teacher.avatar.url }}" alt="
     {{ teacher.last_name }}
@@ -18,7 +18,8 @@
     <h2>{{ teacher.last_name }}
         {{ teacher.first_name }}
         {{ teacher.patronymic }}</h2>
-    <h3>{{ teacher.speciality }}</h3>
+    <h4>{{ teacher.speciality }}</h4>
+    <hr>
     <h4>Кафедры</h4>
     {% for cathedra in cathedras %}
         <h5><a href="{{ cathedra.get_absolute_url }}">{{ cathedra.title }}</a></h5>
@@ -54,7 +55,7 @@
         </ul>
     {% endif %}
 
-    {% if user.is_student %}
+    {% if teacher not in reviews_of_lecture_teachers or teacher not in reviews_of_practice_teachers  %}
         <hr>
         <h3>Оцени препода:</h3>
 
@@ -62,60 +63,36 @@
             {% csrf_token %}
             {% if teacher.is_lecturer %}
                 {% if teacher not in reviews_of_lecture_teachers %}
-
-                    <h4>Как лектор</h4>
-                    <form action="">
-                        {% for field in lform %}
-                            <div class="tick-slider">
+                    <div class="review__column">
+                        <h4>Как лектор</h4>
+                        <form method="post" action="{% url 'create_lecture_review_url' teacher_id=teacher.id %}">
+                            {% csrf_token %}
+                            {% for field in lform %}
                                 {{ field.label }}
-                                <div class="tick-slider-value-container">
-                                    <div id="weightLabelMin" class="tick-slider-label">0</div>
-                                    <div id="weightLabelMax" class="tick-slider-label">10</div>
-                                    <div id="weightValue" class="tick-slider-value"></div>
-                                </div>
-                                <div class="tick-slider-background"></div>
-                                <div id="weightProgress" class="tick-slider-progress"></div>
-                                <div id="weightTicks" class="tick-slider-tick-container"></div>
                                 {{ field }}
-                            </div>
-                        {% endfor %}
-                        <br><br>
-                        <button class="btn btn-success but">Оценить</button>
-                    </form>
+                            {% endfor %}
+                            <button class="btn btn-success but">Оценить</button>
+                        </form>
+                    </div>
+
                 {% endif %}
             {% endif %}
-
             {% if teacher.is_practical %}
                 {% if teacher not in reviews_of_practice_teachers %}
-
-                    <div id="practice__column">
-                    <h4>Как практик</h4>
-
-                    <form action="">
-                        {% for field in pform %}
-                            <div class="tick-slider">
-                                <div class="tick-slider-header">
-                                    <h5><label for="weightSlider">{{ field.label }}</label></h5>
-                                </div>
-                                <div class="tick-slider-value-container">
-                                    <div id="weightLabelMin" class="tick-slider-label">0</div>
-                                    <div id="weightLabelMax" class="tick-slider-label">10</div>
-                                    <div id="weightValue" class="tick-slider-value"></div>
-                                </div>
-                                <div class="tick-slider-background"></div>
-                                <div id="weightProgress" class="tick-slider-progress"></div>
-                                <div id="weightTicks" class="tick-slider-tick-container"></div>
+                    <div class="review__column">
+                        <h4>Как практик</h4>
+                        <form method="post" action="{% url 'create_practice_review_url' teacher_id=teacher.id %}">
+                            {% csrf_token %}
+                            {% for field in pform %}
+                                {{ field.label }}
                                 {{ field }}
-                            </div>
-                        {% endfor %}
-                        <br><br>
-                        <button class="btn btn-success but">Оценить</button>
-                    </form>
-
+                            {% endfor %}
+                            <button class="btn btn-success but">Оценить</button>
+                        </form>
+                    </div>
                 {% endif %}
             {% endif %}
             <hr>
-            </div>
         </div>
     {% endif %}
 

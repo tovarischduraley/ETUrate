@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import *
-from reviews.forms import LectureReviewForm, PracticeReviewForm
+from reviews.forms import LectureReviewForm, PracticeReviewForm, CathedraReviewForm
 from django.db.models import Q
 
 
@@ -39,7 +39,16 @@ def faculty_detail(request, faculty_slug):
 
 def cathedra_detail(request, faculty_slug, cathedra_slug):
     cathedra = get_object_or_404(Cathedra, slug__iexact=cathedra_slug)
-    return render(request, 'navigation/cathedra_detail.html', context={'cathedra': cathedra})
+    context = {'cathedra': cathedra}
+    if request.user.is_student:
+        cathedra_reviews = []
+        for cathedra_review in request.user.cathedra_reviews.all():
+            cathedra_reviews.append(cathedra_review.cathedra)
+        context.update({'cathedra_reviews': cathedra_reviews})
+
+        form = CathedraReviewForm()
+        context.update({'form': form})
+    return render(request, 'navigation/cathedra_detail.html', context=context)
 
 
 def teacher_detail(request, teacher_id):
@@ -51,20 +60,17 @@ def teacher_detail(request, teacher_id):
         'cathedras': cathedras,
     }
     if request.user.is_student:
-        if request.method == 'POST':
-            return redirect(request.META['HTTP_REFERER'])
-        else:
-            reviews_of_lecture_teachers = []
-            reviews_of_practice_teachers = []
-            for lecture_review in request.user.lecture_reviews.all():
-                reviews_of_lecture_teachers.append(lecture_review.teacher)
-            for practice_review in request.user.practice_reviews.all():
-                reviews_of_practice_teachers.append(practice_review.teacher)
-            context.update({'reviews_of_lecture_teachers': reviews_of_lecture_teachers,
-                            'reviews_of_practice_teachers': reviews_of_practice_teachers})
+        reviews_of_lecture_teachers = []
+        reviews_of_practice_teachers = []
+        for lecture_review in request.user.lecture_reviews.all():
+            reviews_of_lecture_teachers.append(lecture_review.teacher)
+        for practice_review in request.user.practice_reviews.all():
+            reviews_of_practice_teachers.append(practice_review.teacher)
+        context.update({'reviews_of_lecture_teachers': reviews_of_lecture_teachers,
+                        'reviews_of_practice_teachers': reviews_of_practice_teachers})
 
-            lecture_form = LectureReviewForm()
-            practice_form = PracticeReviewForm()
-            context.update({'lform': lecture_form, 'pform': practice_form})
+        lecture_form = LectureReviewForm()
+        practice_form = PracticeReviewForm()
+        context.update({'lform': lecture_form, 'pform': practice_form})
 
     return render(request, 'navigation/teacher_detail.html', context=context)
