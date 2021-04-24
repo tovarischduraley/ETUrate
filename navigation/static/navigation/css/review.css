@@ -1,0 +1,17 @@
+
+.reviews__container {
+    width: 620px;
+    position: relative;
+}
+
+.review__column{
+    display: inline-block;
+    width: 300px;
+}
+
+.review__slider{
+    display: block;
+    width: 90%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
