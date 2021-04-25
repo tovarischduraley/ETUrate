@@ -1,9 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views import View
 
 from navigation.models import Teacher, Cathedra
 from .decorators import student_only
 from .forms import LectureReviewForm, PracticeReviewForm, CathedraReviewForm
 from .models import LectureReview, PracticeReview, CathedraReview
+from .utils import ReviewCreateMixin
+
+
+# @student_only
+# class CreateLectureReviewView(ReviewCreateMixin, View):
+#     model = LectureReview
+#     form_model = LectureReviewForm
 
 
 @student_only
@@ -39,13 +47,13 @@ def create_practice_review(request, teacher_id):
     return redirect(request.META['HTTP_REFERER'])
 
 
+
+
 @student_only
 def create_cathedra_review(request, cathedra_id):
     if request.method == 'POST':
-        print('1')
         form = CathedraReviewForm(request.POST, request.FILES)
         if form.is_valid():
-            print('2')
             cathedra = get_object_or_404(Cathedra, id=cathedra_id)
             CathedraReview.objects.create(
                 profile=request.user,
