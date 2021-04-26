@@ -30,6 +30,7 @@ def create_lecture_review(request, teacher_id):
             )
     return redirect(request.META['HTTP_REFERER'])
 
+
 @student_only
 def create_practice_review(request, teacher_id):
     if request.method == 'POST':
@@ -45,8 +46,6 @@ def create_practice_review(request, teacher_id):
                 load_mark=form.cleaned_data['special_mark'],
             )
     return redirect(request.META['HTTP_REFERER'])
-
-
 
 
 @student_only
