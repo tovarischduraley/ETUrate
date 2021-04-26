@@ -24,6 +24,12 @@
                         <button type="submit" class="btn btn-outline-info">Удалить с кафедры</button>
                     </div>
                 </form>
+                <form method="get" class="form-group" action="{% url 'add_course_to_teacher_url' teacher_id=teacher.id %}">
+                    {% csrf_token %}
+                    <div class="form-group col">
+                        <button type="submit" class="btn btn-outline-info">Добавить курс</button>
+                    </div>
+                </form>
             </div>
             {% endfor %}
             <h3><a href="{% url 'teacher_create_url' %}">Добавить преподавателя</a></h3>

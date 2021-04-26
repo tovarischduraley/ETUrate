@@ -3,6 +3,7 @@ from .decorators import *
 from navigation.models import *
 from .forms import *
 
+
 @cathedra_head_only
 def cathedra_control(request):
     teachers = request.user.cathedra.teachers.all()
@@ -103,3 +104,24 @@ def add_teacher_to_cathedra(request, teacher_id=None):
     if request.method == 'POST':
         request.user.cathedra.teachers.add(teacher)
         return redirect('cathedra_control_url')
+
+
+@cathedra_head_only
+def add_course_to_teacher(request, teacher_id=None):
+    teacher = get_object_or_404(Teacher, id=teacher_id)
+    courses = teacher.courses.all()
+    if request.method == 'POST':
+        form = CourseCreateForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            course = Course.objects.filter(title=title).first()
+            if course is None:
+                course = Course(title=title)
+                course.save()
+            teacher.courses.add(course)
+        return redirect('add_course_to_teacher_url', teacher_id)
+    else:
+        form = CourseCreateForm()
+    return render(request, 'cathedra_control/add_course_to_teacher.html', context={'form': form, 'courses': courses,
+                                                                                   'teacher': teacher})
+

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+Курсы преподавателя
+{% endblock %}
+
+{% block content %}
+<h2>{{ teacher.last_name }} {{ teacher.first_name }} {{ teacher.patronymic }}</h2>
+<div class="content=section">
+    <form method="post" enctype="multipart/form-data" class="form-group">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Добавить курс</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="btn btn-outline-info">Добавить</button>
+        </div>
+    </form>
+</div>
+    <h3>Курсы</h3>
+    {% for course in courses %}
+        <h4>{{ course.title }}</h4>
+    {% endfor %}
+{% endblock %}

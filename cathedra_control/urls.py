@@ -14,7 +14,7 @@ urlpatterns = [
     path('teacher-edit/teacher_id=<int:teacher_id>/', teacher_edit, name='teacher_edit_url'),
     path('teacher-delete/teacher_id=<int:teacher_id>/', teacher_delete, name='teacher_delete_url'),
     path('add-teacher/teacher_id=<int:teacher_id>/', add_teacher_to_cathedra, name='add_teacher_url'),
-
+    path('add-course-to-teacher/teacher_id=<int:teacher_id>/', add_course_to_teacher, name='add_course_to_teacher_url'),
 ]
 
 if settings.DEBUG:

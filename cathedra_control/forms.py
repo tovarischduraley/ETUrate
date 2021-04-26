@@ -8,7 +8,7 @@ class DateInput(forms.DateInput):
 
 
 class TeacherCreateEditForm(forms.ModelForm):
-    courses = forms.ModelMultipleChoiceField(queryset=Course.objects.all(), label='Курсы')
+    courses = forms.ModelMultipleChoiceField(queryset=Course.objects.all(), label='Курсы', required=False)
     birth_date = forms.DateField(widget=DateInput, label='Дата рождения', required=False)
 
     class Meta:
