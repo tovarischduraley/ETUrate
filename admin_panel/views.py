@@ -10,7 +10,8 @@ from .forms import *
 def admin_panel(request):
     faculties = Faculty.objects.all()
     cathedras = Cathedra.objects.all()
-    return render(request, 'admin_panel/admin_panel.html', context={'faculties': faculties, 'cathedras': cathedras})
+    profiles = Profile.objects.filter(is_active=False)
+    return render(request, 'admin_panel/admin_panel.html', context={'faculties': faculties, 'cathedras': cathedras, 'profiles': profiles})
 
 
 @staff_only
@@ -102,7 +103,7 @@ def cathedra_head_register(request):
             )
             password = Profile.objects.make_random_password()
             profile.set_password(password)
-            massage = 'Доброго времени суток, ' + profile.__str__() + '!\n\nВаш пароль: ' + password + \
+            massage = f'Доброго времени суток, {profile.get_full_name()}!\n\nВаш пароль: ' + password + \
                       '\n\nС уважением,\nадминистрация сайта ETUrate'
             send_mail('Регистрация руководителя кафедры', massage, EMAIL_HOST_USER,
                       [form.cleaned_data['email']], fail_silently=False)
@@ -111,3 +112,20 @@ def cathedra_head_register(request):
     else:
         form = CathedraHeadRegisterForm()
     return render(request, 'admin_panel/cathedra_head_register.html', context={'form': form})
+
+
+@staff_only
+def profile_verification(request, profile_id=None):
+    profile = get_object_or_404(Profile, id=profile_id)
+    if request.method == "POST":
+        profile.is_active = True
+        profile.save()
+        return redirect('admin_panel_url')
+
+
+@staff_only
+def profile_delete(request, profile_id=None):
+    profile = get_object_or_404(Profile, id=profile_id)
+    if request.method == "POST":
+        profile.delete()
+        return redirect('admin_panel_url')
