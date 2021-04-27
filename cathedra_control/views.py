@@ -1,15 +1,27 @@
+from datetime import timedelta
+
 from django.shortcuts import render, get_object_or_404
+
 from .decorators import *
-from navigation.models import *
 from .forms import *
+from .utils import create_report
 
 
 @cathedra_head_only
 def cathedra_control(request):
     teachers = request.user.cathedra.teachers.all()
     other_teachers = Teacher.objects.exclude(cathedras__id__contains=request.user.cathedra.id)
+    if request.method == 'POST':
+        form = ReportDatesForm(request.POST)
+        if form.is_valid():
+            create_report(request.user.cathedra,
+                          form.cleaned_data['date_1'],
+                          form.cleaned_data['date_2']+timedelta(days=1))
+            return redirect('cathedra_control_url')
+    else:
+        form = ReportDatesForm()
     return render(request, 'cathedra_control/cathedra_control.html',
-                  context={'teachers': teachers, 'other_teachers': other_teachers})
+                  context={'teachers': teachers, 'other_teachers': other_teachers, 'form': form})
 
 
 @cathedra_head_only

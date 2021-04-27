@@ -15,10 +15,11 @@ class LectureReview(models.Model):
                                 verbose_name='Студент')
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Преподаватель')
 
-    objectivity_mark = models.IntegerField(verbose_name='Объективность оценивания')
-    knowledge_mark = models.IntegerField(verbose_name='Объём знаний по предмету')
-    communicability_mark = models.IntegerField(verbose_name='Связь с аудиторией')
-    teacher_talent_mark = models.IntegerField(verbose_name='Умение дать материал')
+    objectivity_mark = models.IntegerField(default=0, verbose_name='Объективность оценивания')
+    knowledge_mark = models.IntegerField(default=0, verbose_name='Объём знаний по предмету')
+    communicability_mark = models.IntegerField(default=0, verbose_name='Связь с аудиторией')
+    teacher_talent_mark = models.IntegerField(default=0, verbose_name='Умение дать материал')
+    date = models.DateTimeField(auto_now_add=True, verbose_name='Дата оценки')
 
     class Meta:
         verbose_name = 'Оценка преподавателя лектора'
@@ -27,6 +28,7 @@ class LectureReview(models.Model):
     def __str__(self):
         return f'FROM {self.profile.email} TO {self.teacher.last_name} {self.teacher.first_name} {self.teacher.patronymic}'
 
+
 class PracticeReview(models.Model):
     """Оценка преподавателя как практика"""
 
@@ -34,10 +36,11 @@ class PracticeReview(models.Model):
                                 verbose_name='Студент')
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Преподаватель')
 
-    objectivity_mark = models.IntegerField(verbose_name='Объективность оценивания')
-    knowledge_mark = models.IntegerField(verbose_name='Объём знаний по предмету')
-    communicability_mark = models.IntegerField(verbose_name='Связь с аудиторией')
-    load_mark = models.IntegerField(verbose_name='Требовательность')
+    objectivity_mark = models.IntegerField(default=0, verbose_name='Объективность оценивания')
+    knowledge_mark = models.IntegerField(default=0, verbose_name='Объём знаний по предмету')
+    communicability_mark = models.IntegerField(default=0, verbose_name='Связь с аудиторией')
+    load_mark = models.IntegerField(default=0, verbose_name='Требовательность')
+    date = models.DateTimeField(auto_now_add=True, verbose_name='Дата оценки')
 
     class Meta:
         verbose_name = 'Оценка преподавателя практики'
@@ -76,10 +79,11 @@ class CathedraReview(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='cathedra_reviews',
                                 verbose_name='Студент')
     cathedra = models.ForeignKey(Cathedra, on_delete=models.CASCADE, verbose_name='Кафедра')
-    attitude_to_student_mark = models.IntegerField(verbose_name='Отношение к студентам')
-    relevance_of_material_mark = models.IntegerField(verbose_name='Современность материала')
-    availability_of_cathedra_internship_mark = models.IntegerField(verbose_name='Возможность стажировки на кафедре')
-    find_job_opportunity_mark = models.IntegerField(verbose_name='Возможность найти работу')
+    attitude_to_student_mark = models.IntegerField(default=0, verbose_name='Отношение к студентам')
+    relevance_of_material_mark = models.IntegerField(default=0, verbose_name='Современность материала')
+    availability_of_cathedra_internship_mark = models.IntegerField(default=0,
+                                                                   verbose_name='Возможность стажировки на кафедре')
+    find_job_opportunity_mark = models.IntegerField(default=0, verbose_name='Возможность найти работу')
 
     def __str__(self):
         return f'FROM {self.profile.email} TO {self.cathedra.title}'
