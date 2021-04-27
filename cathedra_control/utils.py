@@ -20,7 +20,7 @@ def create_report(cathedra, date_1, date_2):
         .order_by('last_name')
     df = pd.DataFrame()
     for teacher in teachers:
-        teacher_lecture_marks = LectureReview.objects.filter(teacher=teacher, date__gte=date_1, date__lte=date_2) \
+        teacher_lecture_marks = LectureReview.objects.filter(teacher=teacher, date__range=[date_1, date_2]) \
             .aggregate(objectivity_mark=Avg('objectivity_mark'),
                        knowledge_mark=Avg('knowledge_mark'),
                        communicability_mark=Avg('communicability_mark'),
@@ -30,7 +30,7 @@ def create_report(cathedra, date_1, date_2):
             teacher_lecture_marks['knowledge_mark'] = '-'
             teacher_lecture_marks['communicability_mark'] = '-'
             teacher_lecture_marks['teacher_talent_mark'] = '-'
-        teacher_practice_marks = PracticeReview.objects.filter(teacher=teacher, date__gte=date_1, date__lte=date_2) \
+        teacher_practice_marks = PracticeReview.objects.filter(teacher=teacher, date__range=[date_1, date_2]) \
             .aggregate(objectivity_mark=Avg('objectivity_mark'),
                        knowledge_mark=Avg('knowledge_mark'),
                        communicability_mark=Avg('communicability_mark'),
@@ -46,4 +46,6 @@ def create_report(cathedra, date_1, date_2):
         data += list(teacher_practice_marks.values())
         df = df.append([data], ignore_index=True)
     df.set_axis(columns, axis='columns', inplace=True)
-    df.to_excel('./report.xlsx')
+    file = f'./reports/{cathedra.title}_отчет.xlsx'
+    df.to_excel(file)
+    return file

@@ -127,3 +127,6 @@ dmypy.json
 requirements.txt
 .static_cdn/
 static_cdn/
+
+.reports/
+reports/
