@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from .models import *
-from reviews.forms import LectureReviewForm, PracticeReviewForm, CathedraReviewForm
+from reviews.forms import LectureReviewForm, PracticeReviewForm, CathedraReviewForm, CommentForm
 from django.db.models import Q
 
 
@@ -72,6 +72,7 @@ def teacher_detail(request, teacher_id):
 
         lecture_form = LectureReviewForm()
         practice_form = PracticeReviewForm()
-        context.update({'lform': lecture_form, 'pform': practice_form})
+        comment_form = CommentForm()
+        context.update({'lform': lecture_form, 'pform': practice_form, 'comment_form': comment_form})
 
     return render(request, 'navigation/teacher_detail.html', context=context)

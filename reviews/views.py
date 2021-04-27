@@ -5,8 +5,8 @@ from django.views import View
 
 from navigation.models import Teacher, Cathedra
 from .decorators import student_only
-from .forms import LectureReviewForm, PracticeReviewForm, CathedraReviewForm
-from .models import LectureReview, PracticeReview, CathedraReview
+from .forms import LectureReviewForm, PracticeReviewForm, CathedraReviewForm, CommentForm
+from .models import LectureReview, PracticeReview, CathedraReview, Comment
 from .utils import ReviewCreateMixin
 
 
@@ -68,4 +68,25 @@ def create_cathedra_review(request, cathedra_id):
     return redirect(request.META['HTTP_REFERER'])
 
 
-#
+@student_only
+def create_comment(request, teacher_id):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        teacher = get_object_or_404(Teacher, id=teacher_id)
+        print(1)
+        if form.is_valid():
+            comment = Comment(
+                profile=request.user,
+                student_group_number=request.user.group_number,
+                teacher=teacher,
+                text=form.cleaned_data['text']
+            )
+            comment.save()
+    return redirect(request.META['HTTP_REFERER'])
+
+
+def delete_comment(request, comment_id):
+    if request.method == 'POST':
+        comment = get_object_or_404(Comment, id=comment_id)
+        comment.delete()
+        return redirect(request.META['HTTP_REFERER'])

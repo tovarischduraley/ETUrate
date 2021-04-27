@@ -32,6 +32,12 @@ class PracticeReviewForm(TeacherReviewForm, forms.Form):
     special_mark = forms.IntegerField(min_value=0, max_value=10, widget=widget, label="Требовательность")
 
 
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+
+
 class CathedraReviewForm(forms.ModelForm):
     attitude_to_student_mark = forms.IntegerField(min_value=0, max_value=10, widget=widget,
                                                   label="Отношение к студентам")

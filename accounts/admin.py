@@ -11,7 +11,7 @@ class ProfileAdmin(UserAdmin):
     list_display = ('email', 'last_name', 'first_name', 'patronymic', 'is_staff')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Персональные данные', {'fields': ('last_name', 'first_name', 'patronymic', )}),
+        ('Персональные данные', {'fields': ('last_name', 'first_name', 'patronymic', 'group_number' )}),
         ('Права доступа', {'fields': ('is_staff', 'is_student', 'is_cathedra_head', 'cathedra')}),
     )
     add_fieldsets = (
