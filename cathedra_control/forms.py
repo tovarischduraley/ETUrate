@@ -46,3 +46,22 @@ class CourseEditForm(forms.ModelForm):
     def clean_title(self):
         new_title = self.cleaned_data['title'].capitalize()
         return new_title
+
+
+class ReportDatesForm(forms.Form):
+    date_1 = forms.DateField(widget=DateInput, label='')
+    date_2 = forms.DateField(widget=DateInput, label='')
+
+    def clean_date_1(self):
+        new_date = self.cleaned_data.get("date_1")
+
+        if new_date and new_date > date.today():
+            raise forms.ValidationError("Введена недопустимая дата")
+        return new_date
+
+    def clean_date_2(self):
+        new_date = self.cleaned_data.get("date_2")
+
+        if new_date and new_date > date.today():
+            raise forms.ValidationError("Введена недопустимая дата")
+        return new_date

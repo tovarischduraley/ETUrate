@@ -1,15 +1,39 @@
+from datetime import timedelta
+
+from django.core.mail import EmailMessage
 from django.shortcuts import render, get_object_or_404
+
+from RT.settings import EMAIL_HOST_USER
 from .decorators import *
-from navigation.models import *
 from .forms import *
+from .utils import create_report
 
 
 @cathedra_head_only
 def cathedra_control(request):
     teachers = request.user.cathedra.teachers.all()
     other_teachers = Teacher.objects.exclude(cathedras__id__contains=request.user.cathedra.id)
+    if request.method == 'POST':
+        form = ReportDatesForm(request.POST)
+        if form.is_valid():
+            date_1 = form.cleaned_data['date_1']
+            date_2 = form.cleaned_data['date_2']
+            file = create_report(request.user.cathedra,
+                                 date_1,
+                                 date_2 + timedelta(days=1))
+            email = EmailMessage('Отчет',
+                                 f'Доборого времени суток!\nСформирован отчет по кафедре {request.user.cathedra.title} '
+                                 f'за период с {date_1.strftime("%d.%m.%Y")} до {date_2.strftime("%d.%m.%Y")}'
+                                 f'\n\nС уважением,\nадминистрация сайта ETUrate',
+                                 EMAIL_HOST_USER,
+                                 [request.user.email])
+            email.attach_file(file)
+            email.send(fail_silently=False)
+            return redirect('cathedra_control_url')
+    else:
+        form = ReportDatesForm()
     return render(request, 'cathedra_control/cathedra_control.html',
-                  context={'teachers': teachers, 'other_teachers': other_teachers})
+                  context={'teachers': teachers, 'other_teachers': other_teachers, 'form': form})
 
 
 @cathedra_head_only
@@ -124,4 +148,3 @@ def add_course_to_teacher(request, teacher_id=None):
         form = CourseCreateForm()
     return render(request, 'cathedra_control/add_course_to_teacher.html', context={'form': form, 'courses': courses,
                                                                                    'teacher': teacher})
-
