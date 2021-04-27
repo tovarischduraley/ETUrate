@@ -61,10 +61,36 @@ def update_cathedras_marks():
                 CathedraReview.objects.filter(cathedra_id=cathedra.id).aggregate(Avg('relevance_of_material_mark'))[
                     'relevance_of_material_mark__avg']
             cathedra.availability_of_cathedra_internship_mark = \
-            CathedraReview.objects.filter(cathedra_id=cathedra.id).aggregate(
-                Avg('availability_of_cathedra_internship_mark'))['availability_of_cathedra_internship_mark__avg']
+                CathedraReview.objects.filter(cathedra_id=cathedra.id).aggregate(
+                    Avg('availability_of_cathedra_internship_mark'))['availability_of_cathedra_internship_mark__avg']
             cathedra.find_job_opportunity_mark = \
                 CathedraReview.objects.filter(cathedra_id=cathedra.id).aggregate(Avg('find_job_opportunity_mark'))[
                     'find_job_opportunity_mark__avg']
+
+        teachers = cathedra.teachers.all()
+
+        lecture_sum = 0
+        count_of_lecture_reviews = 0
+        for teacher in teachers:
+            if len(LectureReview.objects.filter(teacher_id=teacher.id)):
+                for review in LectureReview.objects.filter(teacher_id=teacher.id):
+                    lecture_sum += review.objectivity_mark + review.knowledge_mark + review.communicability_mark + review.teacher_talent_mark
+                    count_of_lecture_reviews += 1
+        lecture_sum /= 4
+
+        practice_sum = 0
+        count_of_practice_reviews = 0
+        for teacher in teachers:
+            if len(PracticeReview.objects.filter(teacher_id=teacher.id)):
+                for review in PracticeReview.objects.filter(teacher_id=teacher.id):
+                    practice_sum += review.objectivity_mark + review.knowledge_mark + review.communicability_mark + review.load_mark
+                    count_of_practice_reviews += 1
+        practice_sum /= 4
+
+        result_count = count_of_practice_reviews + count_of_lecture_reviews
+        if result_count:
+            cathedra.teachers_mark = (lecture_sum + practice_sum) / result_count
+        else:
+            cathedra.teachers_mark = 0
 
         cathedra.save()

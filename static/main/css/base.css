@@ -1,8 +1,16 @@
 @font-face {
     font-family: Montserrat;
     src: url(./fonts/Montserrat-Medium.ttf); /* Путь к файлу со шрифтом */
-   }
+}
 
+a {
+    text-decoration: none;
+}
+
+input, textarea {
+    outline: none;
+    border: none;
+}
 
 body {
     width: 100%;
@@ -39,6 +47,7 @@ body {
     display: flex;
     align-items: center;
 }
+
 .nav__bar__right {
     height: 100%;
     align-items: center;
@@ -54,7 +63,7 @@ body {
 
 /*SEARCH*/
 
-.search__bar{
+.search__bar {
     display: flex;
     height: 30px;
     width: 200px;
@@ -62,23 +71,26 @@ body {
     background-color: #fff;
     padding: 0 10px;
     align-items: center;
+
 }
 
-.search__input{
+.search__input {
     font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     color: #05336E;
     display: inline-block;
+
 }
 
-.search__submit{
+.search__submit {
     height: 25px;
     width: 25px;
-    margin-left: -20px;
+    margin-left: 10px;
+    /*margin-left: -20px;*/
     display: inline-block;
 }
 
-.search__submit__image{
+.search__submit__image {
     height: 25px;
     width: 25px;
 }
@@ -86,12 +98,12 @@ body {
 /*END SEARCH*/
 
 /*NAV BAR RIGHT*/
-.btns{
+.btns {
     display: flex;
     align-items: center;
 }
 
-.btns li{
+.btns li {
     font-family: 'Montserrat', sans-serif;
     color: white;
     margin-right: 10px;
@@ -100,15 +112,18 @@ body {
     border: #fff 2px solid;
     padding: 5px 15px;
 }
-.btns li a{
+
+.btns li a {
     display: block;
     color: #fff;
     font-size: 14px;
     font-weight: 400;
 }
-.btns li:last-child{
+
+.btns li:last-child {
     margin-right: 0;
 }
+
 /*END NAV BAR RIGHT*/
 
 

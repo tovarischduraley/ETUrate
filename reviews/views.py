@@ -1,3 +1,5 @@
+from django.db.models import Avg
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 
@@ -62,4 +64,8 @@ def create_cathedra_review(request, cathedra_id):
                 availability_of_cathedra_internship_mark=form.cleaned_data['availability_of_cathedra_internship_mark'],
                 find_job_opportunity_mark=form.cleaned_data['find_job_opportunity_mark'],
             )
+
     return redirect(request.META['HTTP_REFERER'])
+
+
+#
