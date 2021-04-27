@@ -53,9 +53,9 @@ class PracticeReview(models.Model):
 class Comment(models.Model):
     """Комментарий преподавателю"""
 
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Студент')
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Преподаватель')
-
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Студент', related_name='comments')
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Преподаватель',
+                                related_name='comments')
     student_group_number = models.IntegerField(blank=True, null=True, verbose_name='Номер группы студента')
     text = models.TextField(max_length=300, verbose_name='Текст комментария')
     post_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата отправки комментария')

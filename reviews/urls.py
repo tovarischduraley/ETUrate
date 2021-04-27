@@ -9,5 +9,8 @@ urlpatterns = [
          name='create_practice_review_url'),
     path('create/cathedra_review/cathedra_id<int:cathedra_id>', create_cathedra_review,
          name='create_cathedra_review_url'),
+    path('create/comment/teacher_id<int:teacher_id>', create_comment,
+         name='create_comment_url'),
+    path('delete/comment/comment_id<int:comment_id>/', delete_comment, name='delete_comment_url')
 
 ]
