@@ -120,6 +120,12 @@ def profile_verification(request, profile_id=None):
     if request.method == "POST":
         profile.is_active = True
         profile.save()
+        send_mail('Подтверждение аккаунта',
+                  'Доброго времени суток!\nВаш аккаунт подтвержден администратором. \n\nС уважением,'
+                  '\nадминистрация сайта ETUrate',
+                  EMAIL_HOST_USER,
+                  [profile.email],
+                  fail_silently=False)
         return redirect('admin_panel_url')
 
 
