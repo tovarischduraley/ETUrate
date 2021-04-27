@@ -7,7 +7,7 @@ class ReviewCreateMixin:
     form_model = None
 
     def post(self, request, teacher_id):
-        form = self.form_model(request.POST, request.FILES)
+        form = self.form_model(request.POST)
         if form.is_valid():
             teacher = get_object_or_404(Teacher, id=teacher_id)
             self.model.objects.create(
@@ -18,4 +18,4 @@ class ReviewCreateMixin:
                 form.cleaned_data['communicability_mark'],
                 form.cleaned_data['special_mark'],
             )
-        return redirect(request.META['HTTP_REFERER'])
+            return redirect(request.META['HTTP_REFERER'])

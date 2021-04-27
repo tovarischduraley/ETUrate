@@ -22,9 +22,6 @@ class TeacherReviewForm(forms.Form):
 
     class Meta:
         fields = ['objectivity_mark', 'knowledge_mark', 'communicability_mark', 'special_mark']
-        widgets = {
-            'objectivity_mark': {'class': 'form-group'}
-        }
 
 
 class LectureReviewForm(TeacherReviewForm, forms.Form):

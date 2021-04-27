@@ -3,7 +3,6 @@ from django.urls import path, include
 
 from RT import settings
 from .views import *
-from reviews import views as reviews_v
 
 urlpatterns = [
     path('', index, name='home'),

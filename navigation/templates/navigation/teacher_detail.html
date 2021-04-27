@@ -38,21 +38,17 @@
     <h3>Оценки преподавателя:</h3>
     {% if teacher.is_lecturer %}
         <h4>Как лектор</h4>
-        <ul class="lecture__marks__list">
-            <li>Контакт с аудиторией: {{ teacher.communicability_lecture_mark }} / 5</li>
-            <li>Объективность оценивания: {{ teacher.objectivity_lecture_mark }} / 5</li>
-            <li>Знание дисциплины: {{ teacher.knowledge_lecture_mark }} / 5</li>
-            <li>Талант преподавания: {{ teacher.teacher_talent_mark }} / 5</li>
-        </ul>
+            <li>Контакт с аудиторией: {{ teacher.communicability_lecture_mark }} / 10</li>
+            <li>Объективность оценивания: {{ teacher.objectivity_lecture_mark }} / 10</li>
+            <li>Знание дисциплины: {{ teacher.knowledge_lecture_mark }} / 10</li>
+            <li>Талант преподавания: {{ teacher.teacher_talent_mark }} / 10</li>
     {% endif %}
     {% if teacher.is_practical %}
         <h4>Как практик</h4>
-        <ul class="practice__marks__list">
-            <li>Контакт с аудиторией: {{ teacher.communicability_practice_mark }} / 5</li>
-            <li>Объективность оценивания: {{ teacher.objectivity_practice_mark }} / 5</li>
-            <li>Знание дисциплины: {{ teacher.knowledge_practice_mark }} / 5</li>
-            <li>Требовательность: {{ teacher.load_mark }} / 5</li>
-        </ul>
+            <li>Контакт с аудиторией: {{ teacher.communicability_practice_mark }} / 10</li>
+            <li>Объективность оценивания: {{ teacher.objectivity_practice_mark }} / 10</li>
+            <li>Знание дисциплины: {{ teacher.knowledge_practice_mark }} / 10</li>
+            <li>Требовательность: {{ teacher.load_mark }} / 10</li>
     {% endif %}
 
     {% if teacher not in reviews_of_lecture_teachers or teacher not in reviews_of_practice_teachers  %}

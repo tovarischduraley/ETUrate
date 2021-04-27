@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'crispy_forms',
+    'django_celery_beat',
+    'django_celery_results',
+
+
     'admin_panel',
     'cathedra_control',
     'accounts',
@@ -136,6 +140,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 STATIC_ROOT = os.path.join(BASE_DIR, "static_cdn", "static_root")
 MEDIA_ROOT = os.path.join(BASE_DIR, "static_cdn", "media_root")
 
+# Mailing
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -144,3 +149,9 @@ EMAIL_HOST_USER = 'eturateservice@gmail.com'
 EMAIL_HOST_PASSWORD = 'fmfwsjtwvznouydf'
 
 LOGIN_REDIRECT_URL = 'home'
+
+# Celery
+CELERY_TIMEZONE = "Europe/Moscow"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BROKER_URL = 'redis://localhost:6379/0'

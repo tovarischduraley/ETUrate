@@ -1,0 +1,145 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(./fonts/Montserrat-Medium.ttf); /* Путь к файлу со шрифтом */
+}
+
+a {
+    text-decoration: none;
+}
+
+input, textarea {
+    outline: none;
+    border: none;
+}
+
+body {
+    width: 100%;
+    min-width: 1420px;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 auto;
+}
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    max-width: 1420px;
+}
+
+.header {
+    background-color: #05336E;
+    height: 70px;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.nav__bar {
+    height: 100%;
+    justify-content: space-between;
+    display: flex;
+}
+
+.logo__and__search {
+    display: flex;
+    align-items: center;
+}
+
+.nav__bar__right {
+    height: 100%;
+    align-items: center;
+    display: inline-block;
+}
+
+
+.logo {
+    display: inline-block;
+    height: 50px;
+    margin-right: 10px;
+}
+
+/*SEARCH*/
+
+.search__bar {
+    display: flex;
+    height: 30px;
+    width: 200px;
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 0 10px;
+    align-items: center;
+
+}
+
+.search__input {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    color: #05336E;
+    display: inline-block;
+
+}
+
+.search__submit {
+    height: 25px;
+    width: 25px;
+    margin-left: 10px;
+    /*margin-left: -20px;*/
+    display: inline-block;
+}
+
+.search__submit__image {
+    height: 25px;
+    width: 25px;
+}
+
+/*END SEARCH*/
+
+/*NAV BAR RIGHT*/
+.btns {
+    display: flex;
+    align-items: center;
+}
+
+.btns li {
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    margin-right: 10px;
+    display: inline-block;
+    border-radius: 10px;
+    border: #fff 2px solid;
+    padding: 5px 15px;
+}
+
+.btns li a {
+    display: block;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.btns li:last-child {
+    margin-right: 0;
+}
+
+/*END NAV BAR RIGHT*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
