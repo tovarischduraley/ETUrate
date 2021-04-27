@@ -19,6 +19,7 @@ class LectureReview(models.Model):
     knowledge_mark = models.IntegerField(default=0, verbose_name='Объём знаний по предмету')
     communicability_mark = models.IntegerField(default=0, verbose_name='Связь с аудиторией')
     teacher_talent_mark = models.IntegerField(default=0, verbose_name='Умение дать материал')
+    date = models.DateTimeField(auto_now_add=True, verbose_name='Дата оценки')
 
     class Meta:
         verbose_name = 'Оценка преподавателя лектора'
@@ -39,6 +40,7 @@ class PracticeReview(models.Model):
     knowledge_mark = models.IntegerField(default=0, verbose_name='Объём знаний по предмету')
     communicability_mark = models.IntegerField(default=0, verbose_name='Связь с аудиторией')
     load_mark = models.IntegerField(default=0, verbose_name='Требовательность')
+    date = models.DateTimeField(auto_now_add=True, verbose_name='Дата оценки')
 
     class Meta:
         verbose_name = 'Оценка преподавателя практики'
