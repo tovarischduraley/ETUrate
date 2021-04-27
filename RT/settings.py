@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'crispy_forms',
+    'django_celery_beat',
+    'django_celery_results',
+
+
     'admin_panel',
     'cathedra_control',
     'accounts',
@@ -147,3 +151,7 @@ EMAIL_HOST_PASSWORD = 'fmfwsjtwvznouydf'
 LOGIN_REDIRECT_URL = 'home'
 
 # Celery
+CELERY_TIMEZONE = "Europe/Moscow"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
