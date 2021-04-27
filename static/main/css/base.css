@@ -85,8 +85,8 @@ body {
 .search__submit {
     height: 25px;
     width: 25px;
-    margin-left: 10px;
-    /*margin-left: -20px;*/
+    /*margin-left: 10px;*/
+    margin-left: -20px;
     display: inline-block;
 }
 

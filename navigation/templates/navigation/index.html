@@ -2,8 +2,11 @@
 {% load static %}
 
 {% block content %}
-    <link rel="stylesheet" href="{% static "navigation/css/style.css" %}">
-    <h1 style="font-size: 70px" class="hello">ОЦЕНИ СВОЕГО ПРЕПОДАВАТЕЛЯ!!! </h1>
-    <br>
-    <h3><a href="{% url 'faculties_list_url' %}">НУ ЧО, ГОУ ОЦЕНИВАТЬ!</a></h3>
+    <link rel="stylesheet" href="{% static "main/css/base.css" %}">
+    <link rel="stylesheet" href="{% static "navigation/css/index.css" %}">
+    <div class="welcome">
+        <div class="RATE">ОЦЕНИ</div>
+        <div class="your__teacher">своего преподавателя</div>
+        <div class="GO"><a href="{% url 'faculties_list_url' %}">Ну чо, ГО оценивать</a></div>
+    </div>
 {% endblock %}
