@@ -18,11 +18,14 @@ from django.urls import path, include
 from accounts import views as accounts_views
 from django.contrib.auth import views as auth_views
 
+from accounts.forms import UserLoginForm
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', accounts_views.my_profile, name='my_profile'),
     path('register/', accounts_views.register, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html'), name="login"),
+    path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html', authentication_form=UserLoginForm),
+         name="login"),
     path('logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name="logout"),
     path('password-reset/',
          auth_views.PasswordResetView.as_view(template_name='accounts/password_reset.html'),

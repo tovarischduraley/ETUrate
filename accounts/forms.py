@@ -1,15 +1,40 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField
 from .models import Profile
+from django.contrib.auth.forms import AuthenticationForm
+
+widget = forms.TextInput(attrs={
+    'class': 'input__text',
+})
+
+password_input = forms.PasswordInput(attrs={
+    'class': 'input__text',
+})
+
+
+class UserLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserLoginForm, self).__init__(*args, **kwargs)
+
+    username = forms.EmailField(widget=forms.TextInput(
+        attrs={'class': 'input__text', 'placeholder': '', 'id': 'hello'}))
+    password = forms.CharField(widget=forms.PasswordInput(
+        attrs={
+            'class': 'input__text',
+            'placeholder': '',
+            'id': 'hi',
+        }
+))
 
 
 class RegisterForm(UserCreationForm):
-    first_name = forms.CharField(required=True, label='Имя')
-    last_name = forms.CharField(required=True, label='Фамилия')
-    patronymic = forms.CharField(required=False, label='Отчество')
-    group_number = forms.IntegerField(max_value=9999, required=True, label='Номер группы')
-    password1 = forms.CharField(widget=forms.PasswordInput, label='Пароль')
-    password2 = forms.CharField(widget=forms.PasswordInput, label='Подтвердите пароль')
+    first_name = forms.CharField(widget=widget, required=True, label='Имя')
+    last_name = forms.CharField(widget=widget, required=True, label='Фамилия')
+    patronymic = forms.CharField(widget=widget, required=False, label='Отчество')
+    group_number = forms.IntegerField(widget=widget, max_value=9999, required=True, label='Номер группы')
+    email = forms.EmailField(widget=widget, label='Email')
+    password1 = forms.CharField(widget=password_input, label='Пароль')
+    password2 = forms.CharField(widget=password_input, label='Подтвердите пароль')
 
     class Meta:
         model = Profile
