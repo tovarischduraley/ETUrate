@@ -7,7 +7,8 @@
 {% block content %}
     <div class="form__container">
         <div class="form__title">Войти</div>
-        <form action="{% url 'register' %}">
+        <form method="post" action="{% url 'register' %}">
+            {% csrf_token %}
             {% for field in form %}
                 <div class="input__container">
                     <div class="input__label" for="input__text">{{ field.label }}</div>

@@ -41,14 +41,17 @@ def faculty_detail(request, faculty_slug):
 def cathedra_detail(request, faculty_slug, cathedra_slug):
     cathedra = get_object_or_404(Cathedra, slug__iexact=cathedra_slug)
     context = {'cathedra': cathedra}
-    if request.user.is_student:
-        cathedra_reviews = []
-        for cathedra_review in request.user.cathedra_reviews.all():
-            cathedra_reviews.append(cathedra_review.cathedra)
-        context.update({'cathedra_reviews': cathedra_reviews})
+    try:
+        if request.user.is_student:
+            cathedra_reviews = []
+            for cathedra_review in request.user.cathedra_reviews.all():
+                cathedra_reviews.append(cathedra_review.cathedra)
+            context.update({'cathedra_reviews': cathedra_reviews})
 
-        form = CathedraReviewForm()
-        context.update({'form': form})
+            form = CathedraReviewForm()
+            context.update({'form': form})
+    except AttributeError:
+        pass
     return render(request, 'navigation/cathedra_detail.html', context=context)
 
 
@@ -60,19 +63,21 @@ def teacher_detail(request, teacher_id):
         'teacher': teacher,
         'cathedras': cathedras,
     }
-    if request.user.is_student:
-        reviews_of_lecture_teachers = []
-        reviews_of_practice_teachers = []
-        for lecture_review in request.user.lecture_reviews.all():
-            reviews_of_lecture_teachers.append(lecture_review.teacher)
-        for practice_review in request.user.practice_reviews.all():
-            reviews_of_practice_teachers.append(practice_review.teacher)
-        context.update({'reviews_of_lecture_teachers': reviews_of_lecture_teachers,
-                        'reviews_of_practice_teachers': reviews_of_practice_teachers})
+    try:
+        if request.user.is_student:
+            reviews_of_lecture_teachers = []
+            reviews_of_practice_teachers = []
+            for lecture_review in request.user.lecture_reviews.all():
+                reviews_of_lecture_teachers.append(lecture_review.teacher)
+            for practice_review in request.user.practice_reviews.all():
+                reviews_of_practice_teachers.append(practice_review.teacher)
+            context.update({'reviews_of_lecture_teachers': reviews_of_lecture_teachers,
+                            'reviews_of_practice_teachers': reviews_of_practice_teachers})
 
-        lecture_form = LectureReviewForm()
-        practice_form = PracticeReviewForm()
-        comment_form = CommentForm()
-        context.update({'lform': lecture_form, 'pform': practice_form, 'comment_form': comment_form})
-
+            lecture_form = LectureReviewForm()
+            practice_form = PracticeReviewForm()
+            comment_form = CommentForm()
+            context.update({'lform': lecture_form, 'pform': practice_form, 'comment_form': comment_form})
+    except AttributeError:
+        pass
     return render(request, 'navigation/teacher_detail.html', context=context)

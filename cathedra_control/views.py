@@ -69,7 +69,7 @@ def teacher_edit(request, teacher_id=None):
             teacher.courses.through.objects.filter(teacher_id=teacher_id).delete()
             for course in form.cleaned_data['courses'].all():
                 teacher.courses.add(course)
-                form.save()
+            form.save()
             return redirect('cathedra_control_url')
     else:
         form = TeacherCreateEditForm(instance=teacher, initial={'courses': teacher.courses.all()})
