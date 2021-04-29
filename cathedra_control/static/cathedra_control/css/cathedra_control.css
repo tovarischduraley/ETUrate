@@ -1,0 +1,173 @@
+.cathedra__title {
+    font-size: 36px;
+    font-weight: 400;
+    color: #05336E;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.cathedra__title a {
+    color: inherit;
+}
+
+.cathedra__title a:hover {
+    text-decoration: underline;
+}
+
+.report__container {
+    width: 600px;
+    display: block;
+    padding: 10px 50px;
+    border-radius: 20px;
+    border: 2px #05336E solid;
+    background-color: #6985A8;
+    color: #fff;
+    font-weight: 400;
+    font-size: 24px;
+    justify-content: center;
+}
+
+.report__container h1 {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.report__container h2 {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.date__form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.date__field {
+
+}
+
+.submit__form {
+    display: block;
+    margin: 0 auto;
+}
+.teachers__container{
+    width: 1460px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.teacher__card {
+    width: 340px;
+    height: 200px;
+    background-color: #6985A8;
+    border: 2px #05336E solid;
+    border-radius: 20px;
+    overflow: hidden;
+    display: flex;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.card__image {
+    height: 200px;
+    max-width: 140px;
+    display: inline-block;
+}
+
+.teacher__info {
+    margin: 10px 20px;
+    font-size: 18px;
+    font-weight: 400;
+    color: #fff;
+    position: relative;
+    height: 100%;
+}
+
+.teacher__name {
+    display: block;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.teacher__name:hover {
+    text-decoration: underline;
+}
+
+.teacher__info .submit__form {
+    font-size: 20px;
+    margin: 0;
+}
+
+.delete__btn {
+    display: block;
+    padding: 5px 10px;
+    background-color: #fff;
+    color: #05336E;
+    border: 3px #05336E solid;
+    border-radius: 70px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    transition: .2s;
+    position: absolute;
+    bottom: 20px;
+}
+
+.delete__btn:hover{
+    border: 2px #d53624 solid;
+    background-color: #d53624;
+    color: #fff;
+    font-weight: 400;
+}
+
+.btns {
+    display: flex;
+}
+.btns form{
+    margin-right: 20px;
+}
+.search{
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.search .search__bar{
+    color: #05336E;
+    font-size: 20px;
+    font-weight: 400;
+    width: 300px;
+    height: 50px;
+    border: 2px #05336E solid;
+}
+.search .search__submit{
+    z-index: 10;
+    margin-left: 10px;
+    width: 40px;
+    height: 40px;
+}
+.add__to__cathedra{
+    display: block;
+    padding: 5px 10px;
+    background-color: #fff;
+    color: #05336E;
+    border: 3px #05336E solid;
+    border-radius: 70px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    transition: .2s;
+    position: absolute;
+    bottom: 20px;
+}
+
+.add__to__cathedra:hover{
+    border: 2px #05336E solid;
+    background-color: #05336E;
+    color: #fff;
+}

@@ -49,9 +49,11 @@ class CourseEditForm(forms.ModelForm):
         return new_title
 
 
+widget = forms.DateInput(attrs={'type': 'date', 'class': 'date__field}'})
+
 class ReportDatesForm(forms.Form):
-    date_1 = forms.DateField(widget=DateInput, label='')
-    date_2 = forms.DateField(widget=DateInput, label='')
+    date_1 = forms.DateField(widget=widget, label='С')
+    date_2 = forms.DateField(widget=widget, label='По')
 
     def clean_date_1(self):
         new_date = self.cleaned_data.get("date_1")

@@ -1,7 +1,10 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField
+from django.contrib.auth import password_validation
+from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashField, SetPasswordForm
+from transliterate.utils import _
+
 from .models import Profile
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 
 widget = forms.TextInput(attrs={
     'class': 'input__text',
@@ -22,14 +25,31 @@ class UserLoginForm(AuthenticationForm):
         super(UserLoginForm, self).__init__(*args, **kwargs)
 
     username = forms.EmailField(widget=forms.TextInput(
-        attrs={'class': 'input__text', 'placeholder': '', 'id': 'hello'}))
+        attrs={'class': 'input__text', 'placeholder': ''}))
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'class': 'input__text',
             'placeholder': '',
-            'id': 'hi',
         }
     ))
+
+
+class NewPasswordResetForm(PasswordResetForm):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'autocomplete': 'email', 'class': 'input__text'}))
+
+
+class NewSetPasswordForm(SetPasswordForm):
+    new_password1 = forms.CharField(
+        label="Новый пароль",
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'input__text'}),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    new_password2 = forms.CharField(
+        label="Подтвердите пароль",
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'input__text'}),
+    )
 
 
 class RegisterForm(UserCreationForm):

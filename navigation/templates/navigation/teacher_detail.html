@@ -1,132 +1,218 @@
 {% extends 'base.html' %}
 {% load static %}
-{% load crispy_forms_filters %}
 
 {% block title %}
     {{ teacher.last_name }}
     {{ teacher.first_name | first }}.
-    {{ teacher.patronymic | first }}.
+    {% if teacher.patronymic %}
+        {{ teacher.patronymic | first }}.
+    {% endif %}
 {% endblock %}
 
 {% block content %}
     <link rel="stylesheet" href="{% static 'navigation/css/review.css' %}">
-    <br>
-    <img width="200" src=" {{ teacher.avatar.url }}" alt="
-    {{ teacher.last_name }}
-    {{ teacher.first_name | first }}.
-    {{ teacher.patronymic | first }}.">
-    <h2>{{ teacher.last_name }}
-        {{ teacher.first_name }}
-        {{ teacher.patronymic }}</h2>
-    <h4>{{ teacher.speciality }}</h4>
-    <hr>
-    <h4>Кафедры</h4>
-    {% for cathedra in cathedras %}
-        <h5><a href="{{ cathedra.get_absolute_url }}">{{ cathedra.title }}</a></h5>
-    {% endfor %}
-    {% if teacher.courses.all %}
-        <h4>Преподаваемые курсы</h4>
-        {% for course in teacher.courses.all %}
-            <li>{{ course.title }}</li>
-        {% endfor %}
-    {% endif %}
-
-    {% if teacher.birth_date %}
-        <h4>Дата рождения: {{ teacher.birth_date }}</h4>
-    {% endif %}
-    <br>
-    <h3>Оценки преподавателя:</h3>
-    {% if teacher.is_lecturer %}
-        <h4>Как лектор</h4>
-        <li>Контакт с аудиторией: {{ teacher.communicability_lecture_mark }} / 10</li>
-        <li>Объективность оценивания: {{ teacher.objectivity_lecture_mark }} / 10</li>
-        <li>Знание дисциплины: {{ teacher.knowledge_lecture_mark }} / 10</li>
-        <li>Талант преподавания: {{ teacher.teacher_talent_mark }} / 10</li>
-    {% endif %}
-    {% if teacher.is_practical %}
-        <h4>Как практик</h4>
-        <li>Контакт с аудиторией: {{ teacher.communicability_practice_mark }} / 10</li>
-        <li>Объективность оценивания: {{ teacher.objectivity_practice_mark }} / 10</li>
-        <li>Знание дисциплины: {{ teacher.knowledge_practice_mark }} / 10</li>
-        <li>Требовательность: {{ teacher.load_mark }} / 10</li>
-    {% endif %}
-
-    {% if teacher not in reviews_of_lecture_teachers or teacher not in reviews_of_practice_teachers %}
-        <hr>
-        <h3>Оцени препода:</h3>
-
-        <div class="reviews__container">
-            {% csrf_token %}
-            {% if teacher.is_lecturer %}
-                {% if teacher not in reviews_of_lecture_teachers %}
-                    <div class="review__column">
-                        <h4>Как лектор</h4>
-                        <form method="post" action="{% url 'create_lecture_review_url' teacher_id=teacher.id %}">
-                            {% csrf_token %}
-                            {% for field in lform %}
-                                {{ field.label }}
-                                {{ field }}
-                            {% endfor %}
-                            <button class="btn btn-success but">Оценить</button>
-                        </form>
-                    </div>
-
-                {% endif %}
-            {% endif %}
-            {% if teacher.is_practical %}
-                {% if teacher not in reviews_of_practice_teachers %}
-                    <div class="review__column">
-                        <h4>Как практик</h4>
-                        <form method="post" action="{% url 'create_practice_review_url' teacher_id=teacher.id %}">
-                            {% csrf_token %}
-                            {% for field in pform %}
-                                {{ field.label }}
-                                {{ field }}
-                            {% endfor %}
-                            <button class="btn btn-success but">Оценить</button>
-                        </form>
-                    </div>
-                {% endif %}
-            {% endif %}
-            <hr>
-        </div>
-    {% endif %}
-
-    <br>
-    <hr>
-    <h3>Комментарии студентов</h3>
-    {% if teacher.comments.all %}
-        {% for comment in teacher.comments.all %}
-            <div style="background-color: #fff; padding: 10px">
-                <h4>Студент группы #{{ comment.student_group_number }}</h4>
-                <h5>Дата публикации: {{ comment.post_date }}</h5>
-                <h6>{{ comment.text }}</h6>
-                {% if user.id == comment.profile.id or user.is_staff %}
-                    <form action="{% url 'delete_comment_url' comment_id=comment.id %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit">Удалить</button>
-                    </form>
+    <link rel="stylesheet" href="{% static 'navigation/css/teacher_detail.css' %}">
+    <div class="teacher__card">
+        <img class="teacher__avatar" src=" {{ teacher.avatar.url }}" alt="teacher avatar">
+        <div class="teacher__info">
+            <div class="teacher__name">
+                {{ teacher.last_name }}
+                {{ teacher.first_name }}
+                {% if teacher.patronymic %}
+                {{ teacher.patronymic }}
                 {% endif %}
             </div>
-        {% endfor %}
-    {% else %}
-        <h4 style="margin-left: 10px">Тут пока нету комментов...</h4>
-    {% endif %}
-    <hr>
-    {% if user.is_student %}
-        <h3>Оставь свой комментарий</h3>
-        <form action="{% url 'create_comment_url' teacher_id=teacher.id %}" method="post">
-            {% csrf_token %}
-            {% for field in comment_form %}
-                <div style="font-size: 16px;" class="">{{ field }}</div>
+            {% for cathedra in cathedras %}
+                <a href="{{ cathedra.get_absolute_url }}">{{ cathedra.title }}</a>
             {% endfor %}
-            <button type="submit">Отправить</button>
-        </form>
+            {% if teacher.speciality %}
+                <div class="teacher__speciality">{{ teacher.speciality }}</div>
+            {% endif %}
+            {% if teacher.courses.all %}
+                <div class="courses__list__title">Преподаваемые курсы:</div>
+                <ul class="courses__list">
+                    {% for course in teacher.courses.all %}
+                        <li>{{ course.title }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
 
+            {% if teacher.birth_date %}
+                <div class="teacher__birth_date">
+                    Дата рождения: <p>{{ teacher.birth_date }}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="teacher__marks__container">
+        <div class="teacher__marks__title">Оценка студенов:</div>
+        <div class="teacher__marks">
+            {% if teacher.is_lecturer %}
+                <div class="marks__list">
+                    <h1>ЛЕКЦИИ</h1>
+                    <div class="mark__container">
+                        <h2>Контакт с аудиторией:</h2>
+                        <h2> {{ teacher.communicability_lecture_mark }} / 10</h2>
+                    </div>
+                    <div class="mark__container">
+                        <h2>Объективность оценивания:</h2>
+                        <h2>{{ teacher.objectivity_lecture_mark }} / 10</h2>
+                    </div>
+                    <div class="mark__container">
+                        <h2>Знание дисциплины:</h2>
+                        <h2>{{ teacher.knowledge_lecture_mark }} / 10</h2>
+                    </div>
+                    <div class="mark__container">
+                        <h2>Талант преподавания:</h2>
+                        <h2>{{ teacher.teacher_talent_mark }} / 10</h2>
+                    </div>
+                </div>
+            {% endif %}
+            {% if teacher.is_practical %}
+                <div class="marks__list">
+                    <h1>ПРАКТИКИ</h1>
+                    <div class="mark__container">
+                        <h2>Контакт с аудиторией:</h2>
+                        <h2> {{ teacher.communicability_practice_mark }} / 10</h2>
+                    </div>
+                    <div class="mark__container">
+                        <h2>Объективность оценивания:</h2>
+                        <h2>{{ teacher.objectivity_practice_mark }} / 10</h2>
+                    </div>
+                    <div class="mark__container">
+                        <h2>Знание дисциплины:</h2>
+                        <h2>{{ teacher.knowledge_practice_mark }} / 10</h2>
+                    </div>
+                    <div class="mark__container">
+                        <h2>Требовательность:</h2>
+                        <h2>{{ teacher.load_mark }} / 10</h2>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+
+    {% if teacher not in reviews_of_lecture_teachers or teacher not in reviews_of_practice_teachers %}
+
+        <div class="teacher__reviews__container">
+            <div class="teacher__reviews__title">Оцени преподавателя:</div>
+            <div class="teacher__reviews">
+
+
+                {% if teacher.is_lecturer %}
+                    {% if teacher not in reviews_of_lecture_teachers %}
+                        <div class="reviews__list">
+                            <h1>ЛЕКЦИИ</h1>
+                            <form method="post" action="{% url 'create_lecture_review_url' teacher_id=teacher.id %}">
+                                {% csrf_token %}
+                                {% for field in lform %}
+                                    <div class="review__container">
+                                        <h2>{{ field.label }}</h2>
+                                        <h2>
+                                            <div class="value">0</div>
+                                            / 10
+                                        </h2>
+                                    </div>
+                                    {{ field }}
+                                {% endfor %}
+                                <button class="submit__form">Оценить</button>
+                            </form>
+                        </div>
+
+                    {% endif %}
+                {% endif %}
+
+
+                {% if teacher.is_practical %}
+                    {% if teacher not in reviews_of_practice_teachers %}
+                        <div class="reviews__list">
+                            <h1>ПРАКТИКИ</h1>
+                            <form method="post" action="{% url 'create_practice_review_url' teacher_id=teacher.id %}">
+                                {% csrf_token %}
+                                {% for field in pform %}
+                                    <div class="review__container">
+                                        <h2>{{ field.label }}</h2>
+                                        <h2>
+                                            <div class="value">0</div>
+                                            / 10
+                                        </h2>
+                                    </div>
+                                    {{ field }}
+                                    <datalist id="tickmarks">
+                                        <option value="0"></option>
+                                        <option value="1"></option>
+                                        <option value="2"></option>
+                                        <option value="3"></option>
+                                        <option value="4"></option>
+                                        <option value="5"></option>
+                                        <option value="6"></option>
+                                        <option value="7"></option>
+                                        <option value="8"></option>
+                                        <option value="9"></option>
+                                        <option value="10"></option>
+                                    </datalist>
+                                {% endfor %}
+                                <button class="submit__form">Оценить</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
     {% endif %}
+    <div class="underline"></div>
+    <div class="teacher__comments__container">
+        <div class="teacher__comments__title">Комментарии студентов</div>
+            {% if user.is_student %}
+        <div class="comment__container">
+            <form action="{% url 'create_comment_url' teacher_id=teacher.id %}" method="post">
+                {% csrf_token %}
+                {% for field in comment_form %}
+                    {{ field }}
+                {% endfor %}
+                <button type="submit" class="submit__form">Отправить</button>
+            </form>
+        </div>
+        {% endif %}
 
 
-    <script src="{% static 'navigation/js/teacher_detail.js' %}"></script>
+        {% if teacher.comments.all %}
+            {% for comment in teacher.comments.all %}
+                <div class="comment__container">
+                    <div class="comment__header">
+                        <h1>Студент группы #{{ comment.student_group_number }}</h1>
+                        {% if user.id == comment.profile.id or user.is_staff %}
+                            <form action="{% url 'delete_comment_url' comment_id=comment.id %}" method="post">
+                                {% csrf_token %}
+                                <button class="submit__form" type="submit">Удалить</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                    <h2>Дата публикации: {{ comment.post_date }}</h2>
+                    <h1>{{ comment.text }}</h1>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no__comments">Без комментариев...</div>
+        {% endif %}
+    </div>
+    <div class="underline"></div>
+    <br>
+
+    <script>
+        const sliders = document.getElementsByClassName('review__slider')
+        const values = document.getElementsByClassName('value')
+        for (i = 0; i < sliders.length; i++) {
+            sliders[i].setAttribute('oninput', `setValue(${i})`)
+        }
+
+        function setValue(i) {
+            values[i].innerHTML = sliders[i].value
+        }
+    </script>
 {% endblock %}
 
 {#JUST COMMENT#}
