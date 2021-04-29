@@ -187,22 +187,25 @@
 }
 
 
-.review__slider{
+.review__slider {
     display: block;
     width: 100%;
     margin-bottom: 20px;
 }
 
-.value{
+.value {
     display: inline-block;
 }
 
-.submit__form{
+.reviews__list form .submit__form {
+    display: block;
+    text-align: center;
     margin: 0 auto;
 }
+
 /*END OF TEACHER REVIEWS*/
 
-.underline{
+.underline {
     display: block;
     background-color: #05336E;
     height: 2px;
@@ -220,7 +223,7 @@
     word-wrap: break-word
 }
 
-.teacher__comments__container h1{
+.teacher__comments__container h1 {
     font-size: 25px;
     font-weight: 400;
 }
@@ -234,7 +237,7 @@
     margin-bottom: 25px;
 }
 
-.comment__container{
+.comment__container {
     width: 100%;
     background-color: #F2F4F7;
     border-radius: 30px;
@@ -242,32 +245,34 @@
     margin-bottom: 20px;
 }
 
-.comment__header{
+.comment__header {
     display: flex;
     justify-content: space-between;
 }
-.comment__header h1{
+
+.comment__header h1 {
     display: block;
     font-size: 30px;
     font-weight: 600;
     margin-bottom: 5px;
 }
 
-.comment__header h2{
+.comment__header h2 {
     display: block;
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 10px;
 }
 
-.comment__container .submit__form{
+.comment__container .submit__form {
     margin: 0;
     margin-left: 20px;
     display: inline-block;
     padding: 3px 15px;
     font-size: 20px;
 }
-.submit__form:last-child{
+
+.submit__form:last-child {
     margin-left: 0;
 }
 
@@ -281,12 +286,14 @@
     color: #05336E;
     font-size: 20px;
 }
-.no__comments{
+
+.no__comments {
     width: 100%;
     text-align: center;
     color: #05336E;
     font-size: 30px;
     font-weight: 600;
 }
+
 /* END COMMENTS*/
 

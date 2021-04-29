@@ -49,11 +49,7 @@
     margin-bottom: 10px;
 }
 
-.date__field {
-
-}
-
-.submit__form {
+.btns.submit__form {
     display: block;
     margin: 0 auto;
 }
