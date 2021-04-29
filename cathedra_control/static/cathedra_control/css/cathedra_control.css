@@ -120,8 +120,8 @@
 }
 
 .delete__btn:hover{
-    border: 2px darkred solid;
-    background-color: darkred;
+    border: 2px #d53624 solid;
+    background-color: #d53624;
     color: #fff;
     font-weight: 400;
 }
@@ -151,8 +151,23 @@
     width: 40px;
     height: 40px;
 }
+.add__to__cathedra{
+    display: block;
+    padding: 5px 10px;
+    background-color: #fff;
+    color: #05336E;
+    border: 3px #05336E solid;
+    border-radius: 70px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    transition: .2s;
+    position: absolute;
+    bottom: 20px;
+}
 
-.teacher__info form .delete__btn:hover{
+.add__to__cathedra:hover{
     border: 2px #05336E solid;
     background-color: #05336E;
+    color: #fff;
 }
