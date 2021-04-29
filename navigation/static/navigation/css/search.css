@@ -9,7 +9,7 @@
 
 .search__container__title {
     padding-top: 10px;
-    padding-bottom: 15px;
+    padding-bottom: 25px;
     color: #05336E;
     font-size: 36px;
     font-family: "Montserrat", sans-serif;
@@ -45,6 +45,11 @@
 
 .faculty__card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+    transform: scale(1.05);
+}
+
+.faculty__card:hover .faculty__card__image {
+    filter: initial;
 }
 
 .faculty__card__image {
@@ -55,10 +60,6 @@
     filter: blur(3px);
     width:290px;
     height:290px;
-}
-
-.faculty__card__image:hover {
-    filter: initial;
 }
 
 .faculty__card__title{
@@ -93,6 +94,7 @@
 
 .cathedra__card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+    transform: scale(1.05);
 }
 
 .cathedra__card__title {
@@ -111,10 +113,11 @@
     background-color: #FFFFFF;
     height: 116px;
     width: 116px;
+    transition: 0.3s;
     filter: blur(3px);
 }
 
-.cathedra__card__image:hover {
+.cathedra__card:hover .cathedra__card__image {
     filter: initial;
 }
 
@@ -139,6 +142,7 @@
 
 .teacher__card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+    transform: scale(1.05);
 }
 
 .teacher__card__image {
@@ -164,6 +168,7 @@
     position: absolute;
     align-items: center;
     padding-left: 5px;
+    text-decoration: underline;
 }
 
 .teacher__card__name h1 {
@@ -172,6 +177,7 @@
 }
 
 .teacher__card__name h2 {
+    margin-top: 5px;
     font-weight: 500;
     font-size: 24px;
 }
@@ -185,7 +191,7 @@
 
 .teacher__card__disciplines h1 {
     font-size: 24px;
-    margin-left: 20px;
+    margin-left: 15px;
     text-shadow: 0 4px 4px rgba(0,0,0,0.25);
 }
 
