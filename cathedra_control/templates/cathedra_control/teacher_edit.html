@@ -1,22 +1,57 @@
 {% extends 'base.html' %}
-{% load crispy_forms_filters %}
+{% load static %}
 
 {% block title %}
-Изменить преподавателя
+    Изменить преподавателя
 {% endblock %}
 
 {% block content %}
-<div class="content=section">
-    <form method="post" enctype="multipart/form-data" class="form-group">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Изменить преподавателя</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button type="submit" class="btn btn-outline-info">Добавить изменения</button>
-        </div>
-    </form>
-
-</div>
+    <link rel="stylesheet" href="{% static 'cathedra_control/css/cathedra_control.css' %}">
+    <div class="form__container">
+        <div class="form__title">Добавить преподавателя</div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input__container">
+                <div class="input__label" for="input__text"> {{ form.last_name.label }}</div>
+                {{ form.last_name }}
+            </div>
+            <div class="input__container">
+                <div class="input__label" for="input__text"> {{ form.first_name.label }}</div>
+                {{ form.first_name }}
+            </div>
+            <div class="input__container">
+                <div class="input__label" for="input__text"> {{ form.patronymic.label }}</div>
+                {{ form.patronymic }}
+            </div>
+            <div class="many__to__many">
+                <div class="left">
+                    <div class="input__container">
+                        <div class="input__label" for="input__text"> {{ form.speciality.label }}</div>
+                        {{ form.speciality }}
+                    </div>
+                    <div id="check">
+                        {{ form.is_lecturer }}
+                        <div class="input__label" for="input__text"> {{ form.is_lecturer.label }}</div>
+                    </div>
+                    <div id="check">
+                        {{ form.is_practical }}
+                        <div class="input__label" for="input__text"> {{ form.is_practical.label }}</div>
+                    </div>
+                    <div id="birth">
+                        <div class="input__label" for="input__text"> {{ form.birth_date.label }}</div>
+                        {{ form.birth_date }}
+                    </div>
+                    <div >
+                        <div class="input__label" for="input__text"> {{ form.avatar.label }}</div>
+                        {{ form.avatar }}
+                    </div>
+                </div>
+                <div class="input__container">
+                    <div class="input__label" for="input__text"> {{ form.courses.label }}</div>
+                    {{ form.courses }}
+                </div>
+            </div>
+            <button class="submit__form" type="submit">Добавить</button>
+        </form>
+    </div>
 {% endblock %}

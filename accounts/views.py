@@ -1,6 +1,5 @@
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 
 from RT.settings import EMAIL_HOST_USER
 from .forms import RegisterForm
@@ -32,8 +31,3 @@ def register(request):
     else:
         form = RegisterForm()
     return render(request, 'accounts/register.html', context={'form': form})
-
-
-@login_required
-def my_profile(request):
-    return render(request, 'accounts/my_profile.html', context={'user': request.user})

@@ -1,7 +1,4 @@
 from django import forms
-from datetime import date
-
-from django.forms import NumberInput
 
 from .models import *
 

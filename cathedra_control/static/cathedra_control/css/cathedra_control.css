@@ -53,11 +53,13 @@
     display: block;
     margin: 0 auto;
 }
-.teachers__container{
+
+.teachers__container {
     width: 1460px;
     display: flex;
     flex-wrap: wrap;
 }
+
 .teacher__card {
     width: 340px;
     height: 200px;
@@ -115,7 +117,7 @@
     bottom: 20px;
 }
 
-.delete__btn:hover{
+.delete__btn:hover {
     border: 2px #d53624 solid;
     background-color: #d53624;
     color: #fff;
@@ -125,15 +127,18 @@
 .btns {
     display: flex;
 }
-.btns form{
+
+.btns form {
     margin-right: 20px;
 }
-.search{
+
+.search {
     display: flex;
     align-items: center;
     margin-bottom: 40px;
 }
-.search .search__bar{
+
+.search .search__bar {
     color: #05336E;
     font-size: 20px;
     font-weight: 400;
@@ -141,13 +146,15 @@
     height: 50px;
     border: 2px #05336E solid;
 }
-.search .search__submit{
+
+.search .search__submit {
     z-index: 10;
     margin-left: 10px;
     width: 40px;
     height: 40px;
 }
-.add__to__cathedra{
+
+.add__to__cathedra {
     display: block;
     padding: 5px 10px;
     background-color: #fff;
@@ -162,8 +169,61 @@
     bottom: 20px;
 }
 
-.add__to__cathedra:hover{
+.add__to__cathedra:hover {
     border: 2px #05336E solid;
     background-color: #05336E;
     color: #fff;
+}
+
+.many__to__many {
+    display: flex;
+    justify-content: space-between;
+}
+
+.many__to__many .input__text {
+    width: 90%;
+}
+
+.input__text__spec{
+    width: 320px;
+}
+
+#check{
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+}
+
+#check .input__label{
+    margin-left: 10px;
+}
+
+.submit__form{
+    margin: 0;
+}
+
+.left{
+    margin-bottom: 10px;
+}
+
+#birth{
+    margin-bottom: 10px;
+}
+
+.courses{
+    margin-top: 20px;
+    display: block;
+}
+
+.courses a:hover{
+    text-decoration: underline;
+}
+.course__container {
+    width: 700px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#course__left {
+    margin-right: 20px;
 }
