@@ -20,7 +20,7 @@
         <br>
         <li>Совокупная оценка преподавателей: {{ cathedra.teachers_mark }} / 10</li>
     </ul>
-    {% if not cathedra in cathedra_reviews %}
+    {% if not cathedra in cathedra_reviews and user.is_student %}
         <div class="review__column">
             <h4>Оцени эту кафедру</h4>
             <form method="post" action="{% url 'create_cathedra_review_url' cathedra_id=cathedra.id %}">
