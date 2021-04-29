@@ -11,19 +11,19 @@
     {% if not faculties and not teachers and not cathedras %}
         <h1 class="search__container__title">По вашему запросу ничего не найдено</h1>
     {% else %}
-<!--        {% if faculties %}-->
-<!--        <h1 class="search__container__title">Факультеты:</h1>-->
-<!--        <div class="search__list__container">-->
-<!--            {% for faculty in faculties %}-->
-<!--            <a href="{{ faculty.get_absolute_url }}">-->
-<!--                <div class="faculty__card">-->
-<!--                    <img src="{{ faculty.image.url }}" alt="Логотип" class="faculty__card__image">-->
-<!--                    <div class="faculty__card__title"><p>{{ faculty.title }}</p></div>-->
-<!--                </div>-->
-<!--            </a>-->
-<!--            {% endfor %}-->
-<!--        </div>-->
-<!--        {% endif %}-->
+        {% if faculties %}
+        <h1 class="search__container__title">Факультеты:</h1>
+        <div class="search__list__container">
+            {% for faculty in faculties %}
+            <a href="{{ faculty.get_absolute_url }}">
+                <div class="faculty__card">
+                    <img src="{{ faculty.image.url }}" alt="Логотип" class="faculty__card__image">
+                    <div class="faculty__card__title"><p>{{ faculty.title }}</p></div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% if cathedras %}
             <h1 class="search__container__title">Кафедры:</h1>
             <div class="search__list__container">
