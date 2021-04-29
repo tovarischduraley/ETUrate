@@ -9,11 +9,12 @@ class DateInput(forms.DateInput):
 
 class TeacherCreateEditForm(forms.ModelForm):
     courses = forms.ModelMultipleChoiceField(queryset=Course.objects.all(), label='Курсы', required=False)
-    birth_date = forms.DateField(widget=DateInput, label='Дата рождения', required=False)
+    birth_date = forms.DateField(widget=forms.DateInput, label='Дата рождения', required=False)
+    patronymic = forms.CharField(widget=forms.TextInput, label='Отчество', required=False)
 
     class Meta:
         model = Teacher
-        fields = ('first_name', 'last_name', 'patronymic', 'courses', 'speciality', 'is_lecturer', 'is_practical',
+        fields = ('last_name', 'first_name', 'patronymic', 'courses', 'speciality', 'is_lecturer', 'is_practical',
                   'birth_date', 'avatar',)
 
     def clean_birth_date(self):

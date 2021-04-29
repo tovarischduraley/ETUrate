@@ -31,6 +31,7 @@ class CathedraCreateEditForm(forms.ModelForm):
 
 class CathedraHeadRegisterForm(forms.ModelForm):
     cathedra = forms.ModelChoiceField(queryset=Cathedra.objects.all(), required=True, label='Кафедра')
+    patronymic = forms.CharField(widget=forms.TextInput, label='Отчество', required=False)
 
     class Meta:
         model = Profile

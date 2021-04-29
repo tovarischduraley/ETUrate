@@ -10,6 +10,11 @@ widget = forms.TextInput(attrs={
     'class': 'input__text',
 })
 
+group_widget = forms.TextInput(attrs={
+    'class': 'input__text',
+    'id': 'group_number',
+})
+
 password_input = forms.PasswordInput(attrs={
     'class': 'input__text',
 })
@@ -51,7 +56,8 @@ class RegisterForm(UserCreationForm):
     first_name = forms.CharField(widget=widget, required=True, label='Имя')
     last_name = forms.CharField(widget=widget, required=True, label='Фамилия')
     patronymic = forms.CharField(widget=widget, required=False, label='Отчество')
-    group_number = forms.IntegerField(widget=widget, max_value=9999, required=True, label='Номер группы')
+    group_number = forms.IntegerField(widget=group_widget, min_value=0, max_value=9999, required=True,
+                                      label='Номер группы')
     email = forms.EmailField(widget=widget, label='Email')
     password1 = forms.CharField(widget=password_input, label='Пароль')
     password2 = forms.CharField(widget=password_input, label='Подтвердите пароль')
