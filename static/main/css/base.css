@@ -141,7 +141,6 @@ body {
     max-width: 700px;
     margin: 0 auto;
     margin-top: 40px;
-
 }
 
 .form__title {
@@ -195,7 +194,6 @@ body {
 .submit__form:hover {
     background-color: #05336E;
     color: #fff;
-    font-weight: 500;
 }
 
 .addition__links {

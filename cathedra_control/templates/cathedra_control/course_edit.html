@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
-{% load crispy_forms_filters %}
+{% load static %}
 
 {% block title %}
-Изменить курс
+    Изменить курс
 {% endblock %}
 
 {% block content %}
-<div class="content=section row">
-    <form method="post" enctype="multipart/form-data" class="form-group">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Изменить курс</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button type="submit" class="btn btn-outline-info">Добавить изменения</button>
-        </div>
-    </form>
-    <form method="post" class="form-group" action="{% url 'course_delete_url' course_id=course.id %}">
-        {% csrf_token %}
-        <div class="form-group col">
-            <button type="submit" class="btn btn-outline-info" >Удалить</button>
-        </div>
-    </form>
-</div>
+    <link rel="stylesheet" href="{% static 'cathedra_control/css/cathedra_control.css' %}">
+    <div class="form__container">
+        <div class="form__title">Изменить курс</div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="course__container">
+                <div class="input__container" id="course__left">
+                    <div class="input__label" for="input__text"> {{ form.title.label }}</div>
+                    {{ form.title }}
+                </div>
+                <div class="input__container">
+                    <div class="input__label" for="input__text"> {{ form.teachers.label }}</div>
+                    {{ form.teachers }}
+                </div>
+            </div>
+            <button class="submit__form" type="submit">Добавить изменения</button>
+        </form>
+
+
+    </div>
+
 {% endblock %}

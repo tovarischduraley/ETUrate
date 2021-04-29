@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
-{% load crispy_forms_filters %}
+{% load static %}
 
 {% block title %}
-Курсы
+    Курсы
 {% endblock %}
 
 {% block content %}
-<div class="content=section">
-    <form method="post" enctype="multipart/form-data" class="form-group">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Добавить курс</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button type="submit" class="btn btn-outline-info">Добавить</button>
+    <link rel="stylesheet" href="{% static 'cathedra_control/css/cathedra_control.css' %}">
+    <div class="form__container">
+        <div class="form__title">Добавить курс</div>
+        <form class="form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="input__container">
+                    <div class="input__label" for="input__text">{{ field.label }}</div>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button class="submit__form" type="submit">Добавить</button>
+        </form>
+        <div class="courses">
+            {% for course in courses %}
+                <a href="{% url 'course_edit_url' course_id=course.id %}" class="input__label">{{ course.title }}</a>
+            {% endfor %}
         </div>
-    </form>
-    {% for course in courses %}
-        <h6><a href="{% url 'course_edit_url' course_id=course.id %}">{{ course.title }}</a></h6>
-    {% endfor %}
-</div>
+    </div>
 {% endblock %}

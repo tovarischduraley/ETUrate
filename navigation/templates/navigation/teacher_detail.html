@@ -101,14 +101,13 @@
             <div class="teacher__reviews__title">Оцени преподавателя:</div>
             <div class="teacher__reviews">
 
-
                 {% if teacher.is_lecturer %}
                     {% if teacher not in reviews_of_lecture_teachers %}
                         <div class="reviews__list">
                             <h1>ЛЕКЦИИ</h1>
                             <form method="post" action="{% url 'create_lecture_review_url' teacher_id=teacher.id %}">
                                 {% csrf_token %}
-                                {% for field in lform %}
+                                {% for field in pform %}
                                     <div class="review__container">
                                         <h2>{{ field.label }}</h2>
                                         <h2>
@@ -141,19 +140,6 @@
                                         </h2>
                                     </div>
                                     {{ field }}
-                                    <datalist id="tickmarks">
-                                        <option value="0"></option>
-                                        <option value="1"></option>
-                                        <option value="2"></option>
-                                        <option value="3"></option>
-                                        <option value="4"></option>
-                                        <option value="5"></option>
-                                        <option value="6"></option>
-                                        <option value="7"></option>
-                                        <option value="8"></option>
-                                        <option value="9"></option>
-                                        <option value="10"></option>
-                                    </datalist>
                                 {% endfor %}
                                 <button class="submit__form">Оценить</button>
                             </form>
@@ -166,16 +152,16 @@
     <div class="underline"></div>
     <div class="teacher__comments__container">
         <div class="teacher__comments__title">Комментарии студентов</div>
-            {% if user.is_student %}
-        <div class="comment__container">
-            <form action="{% url 'create_comment_url' teacher_id=teacher.id %}" method="post">
-                {% csrf_token %}
-                {% for field in comment_form %}
-                    {{ field }}
-                {% endfor %}
-                <button type="submit" class="submit__form">Отправить</button>
-            </form>
-        </div>
+        {% if user.is_student %}
+            <div class="comment__container">
+                <form action="{% url 'create_comment_url' teacher_id=teacher.id %}" method="post">
+                    {% csrf_token %}
+                    {% for field in comment_form %}
+                        {{ field }}
+                    {% endfor %}
+                    <button type="submit" class="submit__form">Отправить</button>
+                </form>
+            </div>
         {% endif %}
 
 

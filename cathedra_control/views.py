@@ -122,12 +122,12 @@ def course_edit(request, course_id=None):
     return render(request, 'cathedra_control/course_edit.html', context={'form': form, 'course': course})
 
 
-@cathedra_head_only
-def course_delete(request, course_id=None):
-    course = get_object_or_404(Course, id=course_id)
-    if request.method == 'POST':
-        course.delete()
-        return redirect('courses_url')
+# @cathedra_head_only
+# def course_delete(request, course_id=None):
+#     course = get_object_or_404(Course, id=course_id)
+#     if request.method == 'POST':
+#         course.delete()
+#         return redirect('courses_url')
 
 
 @cathedra_head_only

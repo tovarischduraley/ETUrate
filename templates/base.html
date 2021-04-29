@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'main/css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
     <title>
         {% block title %}
             ETUrate
@@ -40,7 +41,6 @@
                         <a href="{% url 'cathedra_control_url' %}">Управление
                             кафедрой</a>
                     {% endif %}
-                    <a href="{% url 'my_profile' %}">Мой профиль</a>
                     <a href="{% url 'logout' %}">Выйти</a>
                 {% else %}
                     <a href="{% url 'login' %}">Войти</a>
@@ -51,6 +51,19 @@
     </div>
 </header>
 <div class="container">
+    <datalist id="tickmarks">
+        <option value="0"></option>
+        <option value="1"></option>
+        <option value="2"></option>
+        <option value="3"></option>
+        <option value="4"></option>
+        <option value="5"></option>
+        <option value="6"></option>
+        <option value="7"></option>
+        <option value="8"></option>
+        <option value="9"></option>
+        <option value="10"></option>
+    </datalist>
     {% block content %}
 
     {% endblock %}
