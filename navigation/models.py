@@ -122,8 +122,8 @@ class Teacher(models.Model):
 class Course(models.Model):
     """Курс"""
 
-    teachers = models.ManyToManyField(Teacher, related_name='courses', verbose_name='Преподаватели курсов')
-    title = models.CharField(max_length=50, db_index=True, unique=True, verbose_name='Название курса')
+    teachers = models.ManyToManyField(Teacher, related_name='courses', verbose_name='Преподаватели')
+    title = models.CharField(max_length=50, db_index=True, unique=True, verbose_name='Название')
 
     def __str__(self):
         return self.title

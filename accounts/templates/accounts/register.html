@@ -12,10 +12,18 @@
             {% for field in form %}
                 <div class="input__container">
                     <div class="input__label" for="input__text">{{ field.label }}</div>
-                   {{ field }}
+                    {{ field }}
                 </div>
             {% endfor %}
             <button class="submit__form" type="submit">Зарегистрироваться</button>
         </form>
     </div>
+    <script src="https://unpkg.com/imask"></script>
+    <script>
+        var element = document.getElementById('group_number');
+        var maskOptions = {
+            mask: '0000',
+        }
+        var mask = new IMask(element, maskOptions)
+    </script>
 {% endblock %}
