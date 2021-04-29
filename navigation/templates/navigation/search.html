@@ -1,37 +1,75 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
-    Search results
+    Результаты поиска
 {% endblock %}
 
 {% block content %}
+    <link rel="stylesheet" href="{% static 'navigation/css/search.css' %}">
+    <h1 class="search__title">РЕЗУЛЬТАТЫ ПОИСКА</h1>
     {% if not faculties and not teachers and not cathedras %}
-        <h1>По вашему запросу ничего не найдено поиска</h1>
+        <h1 class="search__container__title">По вашему запросу ничего не найдено</h1>
     {% else %}
-        <h1>Результаты поиска</h1>
-        <div style="margin-left: 20px">
-            {% if faculties %}
-                <h2>Факультеты</h2>
-                {% for faculty in faculties %}
-                    <img src="{{ faculty.image.url }}" width="100" height="100" alt="">
-                    <h3><a href="{{ faculty.get_absolute_url }}">{{ faculty.title }}</a></h3>
-                {% endfor %}
-            {% endif %}
-            {% if cathedras %}
-                <h2>Кафедры</h2>
+        {% if faculties %}
+        <h1 class="search__container__title">Факультеты:</h1>
+        <div class="search__list__container">
+            {% for faculty in faculties %}
+            <a href="{{ faculty.get_absolute_url }}">
+                <div class="faculty__card">
+                    <img src="{{ faculty.image.url }}" alt="Логотип" class="faculty__card__image">
+                    <div class="faculty__card__title"><p>{{ faculty.title }}</p></div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% if cathedras %}
+            <h1 class="search__container__title">Кафедры:</h1>
+            <div class="search__list__container">
                 {% for cathedra in cathedras %}
-                    <img src="{{ cathedra.image.url }}" width="100" height="100" alt="">
-                    <h3><a href="{{ cathedra.get_absolute_url }}">{{ cathedra.title }}</a></h3>
+                <a href="{{ cathedra.get_absolute_url }}">
+                    <div class="cathedra__card">
+                        <img src="{{ cathedra.image.url }}" alt="Логотип" class="cathedra__card__image">
+                        <div class="cathedra__card__title"><p>{{ cathedra.title }}</p></div>
+                    </div>
+                </a>
                 {% endfor %}
-            {% endif %}
-            {% if teachers %}
-                <h2>Преподаватели</h2>
+            </div>
+        {% endif %}
+        {% if teachers %}
+            <h1 class="search__container__title">Преподаватели:</h1>
+            <div class="search__list__container">
                 {% for teacher in teachers %}
-                    <h3><a href="{{ teacher.get_absolute_url }}">{{ teacher }}</a></h3>
+                    <a href="{{ teacher.get_absolute_url }}">
+                        <div class="teacher__card">
+                            <div class="teacher__card__image__container">
+                                <img src="{{ teacher.avatar.url }}" alt="Аватар" class="teacher__card__image">
+                                <div class="teacher__card__name">
+                                    <div>
+                                        <h1>{{ teacher.last_name }}</h1>
+                                        <h2>{{ teacher.first_name }}</h2>
+                                        {% if teacher.patronymic %}
+                                            <h2>{{ teacher.patronymic }}</h2>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="teacher__card__disciplines">
+                                <h1>Дисциплины</h1>
+                                <br>
+                                <ul class="teacher__card__disciplines__list">
+                                    {% for course in teacher.courses.all %}
+                                    <li>{{ course.title }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </a>
                 {% endfor %}
-                <hr>
-            {% endif %}
+            </div>
+            <hr>
+        {% endif %}
         </div>
     {% endif %}
-
 {% endblock %}
