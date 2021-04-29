@@ -18,7 +18,7 @@ from django.urls import path, include
 from accounts import views as accounts_views
 from django.contrib.auth import views as auth_views
 
-from accounts.forms import UserLoginForm
+from accounts.forms import UserLoginForm, NewPasswordResetForm, NewSetPasswordForm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,9 +26,10 @@ urlpatterns = [
     path('register/', accounts_views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='accounts/login.html', authentication_form=UserLoginForm),
          name="login"),
-    path('logout/', auth_views.LogoutView.as_view(template_name='accounts/logout.html'), name="logout"),
+    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name="logout"),
     path('password-reset/',
-         auth_views.PasswordResetView.as_view(template_name='accounts/password_reset.html'),
+         auth_views.PasswordResetView.as_view(template_name='accounts/password_reset.html',
+                                              form_class=NewPasswordResetForm),
          name="password_reset"),
     path('password-reset/done/',
          auth_views.PasswordResetDoneView.as_view(template_name='accounts/password_reset_done.html'),

@@ -12,6 +12,7 @@ widget = forms.NumberInput(attrs={
     'max': '10',
     'step': '1',
     'value': '0',
+    'list': 'tickmarks'
 })
 
 
@@ -32,7 +33,15 @@ class PracticeReviewForm(TeacherReviewForm, forms.Form):
     special_mark = forms.IntegerField(min_value=0, max_value=10, widget=widget, label="Требовательность")
 
 
+comment_widget = forms.Textarea(attrs={
+    'class': 'comment__input',
+    'placeholder': 'Оставьте ваш комментарий...'
+})
+
+
 class CommentForm(forms.ModelForm):
+    text = forms.CharField(widget=comment_widget, max_length=500, required=True)
+
     class Meta:
         model = Comment
         fields = ['text']
