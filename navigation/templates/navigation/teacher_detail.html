@@ -51,19 +51,19 @@
                 <div class="marks__list">
                     <h1>ЛЕКЦИИ</h1>
                     <div class="mark__container">
-                        <h2>Контакт с аудиторией:</h2>
+                        <h2>Объективность оценивания:</h2>
                         <h2> {{ teacher.communicability_lecture_mark }} / 10</h2>
                     </div>
                     <div class="mark__container">
-                        <h2>Объективность оценивания:</h2>
+                        <h2>Знание предмета:</h2>
                         <h2>{{ teacher.objectivity_lecture_mark }} / 10</h2>
                     </div>
                     <div class="mark__container">
-                        <h2>Знание дисциплины:</h2>
+                        <h2>Контакт с аудиторией:</h2>
                         <h2>{{ teacher.knowledge_lecture_mark }} / 10</h2>
                     </div>
                     <div class="mark__container">
-                        <h2>Талант преподавания:</h2>
+                        <h2>Подача материала:</h2>
                         <h2>{{ teacher.teacher_talent_mark }} / 10</h2>
                     </div>
                 </div>
@@ -72,19 +72,19 @@
                 <div class="marks__list">
                     <h1>ПРАКТИКИ</h1>
                     <div class="mark__container">
-                        <h2>Контакт с аудиторией:</h2>
+                        <h2>Объективность оценивания:</h2>
                         <h2> {{ teacher.communicability_practice_mark }} / 10</h2>
                     </div>
                     <div class="mark__container">
-                        <h2>Объективность оценивания:</h2>
+                        <h2>Знание предмета:</h2>
                         <h2>{{ teacher.objectivity_practice_mark }} / 10</h2>
                     </div>
                     <div class="mark__container">
-                        <h2>Знание дисциплины:</h2>
+                        <h2>Контакт с аудиторией:</h2>
                         <h2>{{ teacher.knowledge_practice_mark }} / 10</h2>
                     </div>
                     <div class="mark__container">
-                        <h2>Требовательность:</h2>
+                        <h2>Подача материала:</h2>
                         <h2>{{ teacher.load_mark }} / 10</h2>
                     </div>
                 </div>
@@ -107,7 +107,7 @@
                             <h1>ЛЕКЦИИ</h1>
                             <form method="post" action="{% url 'create_lecture_review_url' teacher_id=teacher.id %}">
                                 {% csrf_token %}
-                                {% for field in pform %}
+                                {% for field in lform %}
                                     <div class="review__container">
                                         <h2>{{ field.label }}</h2>
                                         <h2>
