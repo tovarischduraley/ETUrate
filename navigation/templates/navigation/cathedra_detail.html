@@ -13,10 +13,11 @@
             <div class="cathedra__title">
                 <p>{{ cathedra.title }}</p>
             </div>
-            <a href="">{{ cathedra.faculty.title }}</a>
+            <a href="{{ cathedra.faculty.get_absolute_url }}">{{ cathedra.faculty.title }}</a>
             <h1>{{ cathedra.info }}</h1>
         </div>
     </div>
+    <div class="underline"></div>
     <div class="teacher__marks__container">
         <div class="cathedra__marks">
             <h1>Оценки кафедры</h1>
