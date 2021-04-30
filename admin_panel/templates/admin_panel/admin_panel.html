@@ -58,7 +58,14 @@
     {% for profile in profiles %}
         <div class="confirm__container">
             <div class="confirm__container__name">
-                <p>{{ profile.get_full_name }} {{ profile.group_number }}</p>
+                <p>
+                    {{ profile.last_name }}
+                    {{ profile.first_name | first }}.
+                    {% if profile.patronymic %}
+                        {{ profile.patronymic | first }}.
+                    {% endif %}
+                    {{ profile.group_number }}
+                </p>
             </div>
             <form method="post" action="{% url 'profile_verification_url' profile_id=profile.id %}">
                 {% csrf_token %}
