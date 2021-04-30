@@ -1,76 +1,74 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
-Панель администратора
+    Панель администратора
 {% endblock %}
 
 {% block content %}
-<h1>Факультеты</h1>
-{% for faculty in faculties %}
-<h4>{{ faculty }}</h4>
-<div class="row">
-    <form method="get" class="form-group" action="{% url 'faculty_edit_url' faculty_slug=faculty.slug %}" >
-        {% csrf_token %}
-        <div class="form-group col">
-            <button type="submit" class="btn btn-outline-info">Изменить</button>
-        </div>
-    </form>
-    <form method="post" class="form-group" action="{% url 'faculty_delete_url' faculty_slug=faculty.slug %}">
-        {% csrf_token %}
-        <div class="form-group col">
-            <button type="submit" class="btn btn-outline-info" >Удалить</button>
-        </div>
-    </form>
-    <form method="get" class="form-group" action="{% url 'cathedra_create_url' faculty_slug=faculty.slug %}">
-        {% csrf_token %}
-        <div class="form-group col">
-            <button type="submit" class="btn btn-outline-info" >Добавить кафедру</button>
-        </div>
-    </form>
-</div>
-{% endfor %}
-<h2><a href="{% url 'faculty_create_url' %}">Добавить факультет</a></h2>
-<h1>Кафедры</h1>
-{% for cathedra in cathedras %}
-<div class="row">
-    <div class="col-sm-2">
-        <h4>{{ cathedra }}</h4>
+    <link rel="stylesheet" href="{% static 'admin_panel/css/admin_panel.css' %}">
+    <div class="admin__panel__container">
+        <h1>ФАКУЛЬТЕТЫ</h1>
+        <a href="{% url 'faculty_create_url' %}" class="admin__panel__button">
+            <p>Добавить факультет</p>
+        </a>
     </div>
-    <form method="get" class="form-group" action="{% url 'cathedra_edit_url' cathedra_slug=cathedra.slug %}" >
-        {% csrf_token %}
-        <div class="form-group col">
-            <button type="submit" class="btn btn-outline-info">Изменить</button>
-        </div>
-    </form>
-    <form method="post" class="form-group" action="{% url 'cathedra_delete_url' cathedra_slug=cathedra.slug %}">
-        {% csrf_token %}
-        <div class="form-group col">
-            <button type="submit" class="btn btn-outline-info" >Удалить</button>
-        </div>
-    </form>
-</div>
-{% endfor %}
-<h2><a href="{% url 'cathedra_head_register_url' %}">Добавить руководителя кафедры</a></h2>
+    <div class="admin__list__container">
+        {% for faculty in faculties %}
+            <div class="faculty__card">
+                <h1>{{ faculty.title }}</h1>
+                <form method="get" action="{% url 'faculty_edit_url' faculty_slug=faculty.slug %}">
+                    {% csrf_token %}
+                    <button class=faculty__edit__button type="submit"><p>Изменить</p></button>
+                </form>
+                <form method="post" action="{% url 'faculty_delete_url' faculty_slug=faculty.slug %}">
+                    {% csrf_token %}
+                    <button class=faculty__delete__button type="submit"><p>Удалить</p></button>
+                </form>
+                <form method="get" action="{% url 'cathedra_create_url' faculty_slug=faculty.slug %}">
+                    {% csrf_token %}
+                    <button class=faculty__add__cathedra__button type="submit"><p>Добавить кафедру</p></button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="admin__panel__container">
+        <h1>КАФЕДРЫ</h1>
+        <a href="{% url 'cathedra_head_register_url' %}" class="admin__panel__button">
+            <p>Добавить руководителя кафедры</p>
+        </a>
+    </div>
+    <div class="admin__list__container">
+        {% for cathedra in cathedras %}
+            <div class="cathedra__card">
+                <h1>{{ cathedra.title }}</h1>
+                <form method="get" action="{% url 'cathedra_edit_url' cathedra_slug=cathedra.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="cathedra__edit__button "><p>Изменить</p></button>
+                </form>
+                <form method="post" action="{% url 'cathedra_delete_url' cathedra_slug=cathedra.slug %}">
+                    {% csrf_token %}
+                    <button type="submit" class="cathedra__delete__button"><p>Удалить</p></button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
 
-<h3>Ожидают подтверждения</h3>
-{% for profile in profiles %}
-<div class="row">
-    <div class="col-4">
-        <h4>ФИО: {{ profile.get_full_name }}</h4>
-        <h4>Номер группы: {{ profile.group_number }}</h4>
-    </div>
-    <form method="post" class="form-group" action="{% url 'profile_verification_url' profile_id=profile.id %}">
-        {% csrf_token %}
-        <div class="form-group col-2">
-            <button type="submit" class="btn btn-outline-info" >Подтвердить</button>
+    <h1 class="confirm__container__title">ОЖИДАЮТ ПОДТВЕРЖДЕНИЯ</h1>
+    {% for profile in profiles %}
+        <div class="confirm__container">
+            <div class="confirm__container__name">
+                <p>{{ profile.get_full_name }} {{ profile.group_number }}</p>
+            </div>
+            <form method="post" action="{% url 'profile_verification_url' profile_id=profile.id %}">
+                {% csrf_token %}
+                <button type="submit" class="confirm__profile__button"><p>Подтвердить</p></button>
+            </form>
+            <form method="post" action="{% url 'profile_delete_url' profile_id=profile.id %}">
+                {% csrf_token %}
+                <button type="submit" class="delete__profile__button"><p>Удалить</p></button>
+            </form>
         </div>
-    </form>
-    <form method="post" class="form-group" action="{% url 'profile_delete_url' profile_id=profile.id %}">
-        {% csrf_token %}
-        <div class="form-group col">
-            <button type="submit" class="btn btn-outline-info" >Удалить профиль</button>
-        </div>
-    </form>
-</div>
-{% endfor %}
+    {% endfor %}
+    <div class="underline"></div>
 {% endblock %}
