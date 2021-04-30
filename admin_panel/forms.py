@@ -14,6 +14,7 @@ ta_widget = forms.Textarea(attrs={
 class FacultyCreateEditForm(forms.ModelForm):
     title = forms.CharField(widget=widget, required=True, label='Название факультета')
     info = forms.CharField(widget=ta_widget, required=True, label='Описание факультета')
+
     class Meta:
         model = Faculty
         fields = ('title', 'info', 'image',)

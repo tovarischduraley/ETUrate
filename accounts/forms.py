@@ -25,13 +25,13 @@ class UserLoginForm(AuthenticationForm):
         super(UserLoginForm, self).__init__(*args, **kwargs)
 
     username = forms.EmailField(widget=forms.TextInput(
-        attrs={'class': 'input__text', 'placeholder': ''}))
+        attrs={'class': 'input__text', 'placeholder': ''}), label='Логин')
     password = forms.CharField(widget=forms.PasswordInput(
         attrs={
             'class': 'input__text',
             'placeholder': '',
         }
-    ))
+    ), label='Пароль')
 
 
 class NewPasswordResetForm(PasswordResetForm):

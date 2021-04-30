@@ -19,7 +19,7 @@
                 <div class="input__label" for="input__text">{{ form.info.label }}</div>
                 {{ form.info }}
             </div>
-            <div class="input__container">
+            <div>
                 <div class="input__label" for="input__text">{{ form.image.label }}</div>
                 {{ form.image }}
             </div>
@@ -29,6 +29,7 @@
 
     <!--ВАРИАНТ 2-->
     <div class="row">
+    {% if faculty.cathedras.all %}
         <h1 class="cathedras__list__container__title">Кафедры {{ faculty.title }}</h1>
         <div class="cathedras__list__container">
             {% for cathedra in faculty.cathedras.all %}
@@ -55,6 +56,6 @@
                 </a>
             {% endfor %}
         </div>
-
+    {% endif %}
     </div>
 {% endblock %}

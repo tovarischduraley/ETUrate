@@ -11,10 +11,10 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     patronymic = models.CharField(max_length=50, null=True, blank=True, verbose_name='Отчество')
     group_number = models.IntegerField(blank=True, null=True, verbose_name='Номер группы')
     email = models.EmailField(max_length=50, unique=True, verbose_name='Email')
-    is_staff = models.BooleanField(default=False, verbose_name='is_staff')
-    is_active = models.BooleanField(default=True, verbose_name='is_active')
-    is_student = models.BooleanField(default=False, verbose_name='is_student')
-    is_cathedra_head = models.BooleanField(default=False, verbose_name='is_cathedra_head')
+    is_staff = models.BooleanField(default=False, verbose_name='Админ')
+    is_active = models.BooleanField(default=True, verbose_name='Активный пользователь')
+    is_student = models.BooleanField(default=False, verbose_name='Студент')
+    is_cathedra_head = models.BooleanField(default=False, verbose_name='Руководитель кафедры')
     username = models.CharField(max_length=30, blank=True)
 
     cathedra = models.ForeignKey(Cathedra, blank=True, null=True, default=None, on_delete=models.CASCADE,

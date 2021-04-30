@@ -80,8 +80,8 @@ class Teacher(models.Model):
     speciality = models.CharField(max_length=50, db_index=True, verbose_name='Специальность')
     avatar = models.ImageField(default='avatar.png', blank=True, upload_to='teachers_avatars/',
                                verbose_name='Фотография преподавателя')
-    is_lecturer = models.BooleanField(default=True)
-    is_practical = models.BooleanField(default=True)
+    is_lecturer = models.BooleanField(default=True, verbose_name='Лектор')
+    is_practical = models.BooleanField(default=True, verbose_name='Практик')
     birth_date = models.DateField(blank=True, null=True, verbose_name='Дата рождения')
 
     cathedras = models.ManyToManyField(Cathedra, related_name='teachers', verbose_name='Кафедры преподавателей')
