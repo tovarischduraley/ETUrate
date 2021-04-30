@@ -8,7 +8,7 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'cathedra_control/css/cathedra_control.css' %}">
     <div class="form__container">
-        <div class="form__title">Добавить преподавателя</div>
+        <div class="form__title">Изменить преподавателя</div>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="input__container">
@@ -51,7 +51,7 @@
                     {{ form.courses }}
                 </div>
             </div>
-            <button class="submit__form" type="submit">Добавить</button>
+            <button class="submit__form" type="submit">Изменить</button>
         </form>
     </div>
 {% endblock %}
