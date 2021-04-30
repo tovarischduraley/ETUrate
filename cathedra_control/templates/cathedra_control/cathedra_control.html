@@ -67,10 +67,7 @@
                 <img class="card__image" src="{{ teacher.avatar.url }}" alt="Аватар">
                 <div class="teacher__info">
                     <a class="teacher__name" href="{{ teacher.get_absolute_url }}">{{ teacher }}</a>
-                    <form method="get" action="{% url 'teacher_edit_url' teacher_id=teacher.id %}">
-                        {% csrf_token %}
-                        <button type="submit" class="submit__form">Изменить</button>
-                    </form>
+
                     <form method="post" action="{% url 'add_teacher_url' teacher_id=teacher.id %}">
                         {% csrf_token %}
                         <button type="submit" class="add__to__cathedra">Добавить на кафедру</button>

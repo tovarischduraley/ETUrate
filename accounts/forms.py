@@ -46,7 +46,7 @@ class NewSetPasswordForm(SetPasswordForm):
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
-        label="Подтвердите пароль",
+        label="Подтвердите овый пароль",
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'input__text'}),
     )
