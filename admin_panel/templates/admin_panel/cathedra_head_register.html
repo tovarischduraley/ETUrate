@@ -1,23 +1,23 @@
 {% extends 'base.html' %}
-{% load crispy_forms_filters %}
+{% load static %}
 
 {% block title %}
-Регистрация руководителя кафедры
+    Регистрация руководителя кафедры
 {% endblock %}
 
-{% load crispy_forms_tags %}
-
 {% block content %}
-<div class="content=section">
-    <form method="post" class="form-group">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Зарегестрировать руководителя кафедры</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button type="submit" class="btn btn-outline-info">Зарегистрировать</button>
-        </div>
-    </form>
-</div>
+    <link rel="stylesheet" href="{% static 'admin_panel/css/admin_panel_forms.css' %}">
+    <div class="form__container">
+        <div class="form__title">Зарегистрировать руководителя кафедры</div>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="input__container">
+                    <div class="input__label" for="input__text">{{ field.label }}</div>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button class="submit__form" type="submit">Зарегистрировать</button>
+        </form>
+    </div>
 {% endblock %}
