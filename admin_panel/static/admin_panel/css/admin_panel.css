@@ -1,0 +1,328 @@
+.admin__panel__container {
+    width: 100%;
+    margin-top: 50px;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    text-decoration: none;
+}
+
+.admin__panel__container h1 {
+    width: 230px;
+    font-size: 36px;
+    font-weight: 500;
+    margin-right: 130px;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    color: #05336E;
+}
+
+.admin__panel__button {
+    height: 50px;
+    border: 3px #05336E solid;
+    border-radius: 70px;
+    font-size: 24px;
+    font-weight: 500;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    color: #05336E;
+}
+
+.admin__panel__button p {
+    margin: 0 20px 0 20px;
+}
+
+.admin__panel__button:hover {
+    background-color: #05336E;
+    color: #FFFFFF;
+}
+
+.admin__list__container {
+    width: 1440px;
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.faculty__card {
+    overflow: hidden;
+    width: 340px;
+    height: 160px;
+    display: flex;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: center;
+    border: 4px #05336E solid;
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 5;
+    background-color: rgba(5, 51, 110, 0.6);
+}
+
+.faculty__card h1 {
+    top: 0px;
+    position: absolute;
+    font-weight: 800;
+    font-size: 48px;
+}
+
+.faculty__edit__button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    bottom: 50px;
+    width: 50%;
+    height: 50px;
+    background-color: #FFFFFF;
+    border-top: 4px #05336E solid;
+    border-right: 2px #05336E solid;
+    border-bottom: 2px #05336E solid;
+    color: #05336E;
+}
+
+.faculty__edit__button p {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.faculty__delete__button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0;
+    bottom: 50px;
+    width: 50%;
+    height: 50px;
+    border-top: 4px #05336E solid;
+    border-left: 2px #05336E solid;
+    border-bottom: 2px #05336E solid;
+    background-color: #FFFFFF;
+    color: #05336E;
+}
+
+.faculty__delete__button p {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.faculty__add__cathedra__button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    border-top: 2px #05336E solid;
+    background-color: #FFFFFF;
+    color: #05336E;
+}
+
+.faculty__add__cathedra__button p {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.faculty__edit__button:hover {
+    background-color: #05336E;
+    color: #FFFFFF;
+}
+
+.faculty__add__cathedra__button:hover {
+    background-color: #05336E;
+    color: #FFFFFF;
+}
+
+.faculty__delete__button:hover {
+    background-color: #FF5858;
+    color: #FFFFFF;
+}
+
+.cathedra__card {
+    overflow: hidden;
+    width: 340px;
+    height: 160px;
+    display: flex;
+    margin-right: 20px;
+    margin-bottom: 30px;
+    align-items: center;
+    justify-content: center;
+    border: 4px #05336E solid;
+    border-radius: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 5;
+    background-color: rgba(5, 51, 110, 0.6);
+}
+
+.cathedra__card h1 {
+    top: 0px;
+    position: absolute;
+    font-weight: 800;
+    font-size: 48px;
+}
+
+.cathedra__delete__button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    border-top: 2px #05336E solid;
+    background-color: #FFFFFF;
+    color: #05336E;
+}
+
+.cathedra__delete__button p {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cathedra__edit__button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 50px;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    border-top: 4px #05336E solid;
+    border-bottom: 2px #05336E solid;
+    background-color: #FFFFFF;
+    color: #05336E;
+}
+
+.cathedra__edit__button p {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cathedra__edit__button:hover {
+    background-color: #05336E;
+    color: #FFFFFF;
+}
+
+.cathedra__delete__button:hover {
+    background-color: #FF5858;
+    color: #FFFFFF;
+}
+
+.confirm__container {
+    margin-top: 30px;
+    width: 1000px;
+    height: 50px;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    text-decoration: none;
+    align-items: center;
+    border: 3px #05336E solid;
+    border-radius: 20px;
+    background-color: rgba(5, 51, 110, 0.6);
+}
+
+.confirm__container__title {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 65px ;
+    font-size: 36px;
+    font-weight: 500;
+    margin-right: 130px;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    color: #05336E;
+}
+
+.confirm__profile__button {
+    width: 200px;
+    right: 200px;
+    height: 100%;
+    border-left: 4px #05336E solid;;
+    border-right: 2px #05336E solid;;
+    background-color: #FFFFFF;
+    position: absolute;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    color: #05336E;
+}
+
+.delete__profile__button {
+    width: 200px;
+    right: 0;
+    height: 100%;
+    border-left: 2px #05336E solid;
+    background-color: #FFFFFF;
+    position: absolute;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    color: #05336E;
+}
+
+.confirm__profile__button p {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.confirm__profile__button:hover {
+    background-color: #05336E;
+    color: #FFFFFF;
+}
+
+.delete__profile__button p {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.delete__profile__button:hover {
+    background-color: #FF5858;
+    color: #FFFFFF;
+}
+
+.confirm__container__name {
+    left: 0;
+    width: 600px;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    color: #FFFFFF;
+}
+
+.confirm__container__name p {
+    font-size: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.underline {
+    display: block;
+    margin-top: 100px;
+}
