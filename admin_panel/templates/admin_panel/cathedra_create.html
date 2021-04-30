@@ -9,7 +9,7 @@
 <<link rel="stylesheet" href="{% static 'admin_panel/css/admin_panel_forms.css' %}">
     <div class="form__container">
         <div class="form__title">Добавить кафедру</div>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="input__container">
                 <div class="input__label" for="input__text">{{ form.title.label }}</div>
