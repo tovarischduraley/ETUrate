@@ -16,9 +16,9 @@ class LectureReview(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Преподаватель')
 
     objectivity_mark = models.IntegerField(default=0, verbose_name='Объективность оценивания')
-    knowledge_mark = models.IntegerField(default=0, verbose_name='Объём знаний по предмету')
-    communicability_mark = models.IntegerField(default=0, verbose_name='Связь с аудиторией')
-    teacher_talent_mark = models.IntegerField(default=0, verbose_name='Умение дать материал')
+    knowledge_mark = models.IntegerField(default=0, verbose_name='Знание предмета')
+    communicability_mark = models.IntegerField(default=0, verbose_name='Контакт с аудиторией')
+    teacher_talent_mark = models.IntegerField(default=0, verbose_name='Подача материала')
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата оценки')
 
     class Meta:
@@ -37,9 +37,9 @@ class PracticeReview(models.Model):
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Преподаватель')
 
     objectivity_mark = models.IntegerField(default=0, verbose_name='Объективность оценивания')
-    knowledge_mark = models.IntegerField(default=0, verbose_name='Объём знаний по предмету')
-    communicability_mark = models.IntegerField(default=0, verbose_name='Связь с аудиторией')
-    load_mark = models.IntegerField(default=0, verbose_name='Требовательность')
+    knowledge_mark = models.IntegerField(default=0, verbose_name='Знание предмета')
+    communicability_mark = models.IntegerField(default=0, verbose_name='Контакт с аудиторией')
+    load_mark = models.IntegerField(default=0, verbose_name='Подача материала')
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата оценки')
 
     class Meta:
@@ -79,11 +79,11 @@ class CathedraReview(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='cathedra_reviews',
                                 verbose_name='Студент')
     cathedra = models.ForeignKey(Cathedra, on_delete=models.CASCADE, verbose_name='Кафедра')
-    attitude_to_student_mark = models.IntegerField(default=0, verbose_name='Отношение к студентам')
-    relevance_of_material_mark = models.IntegerField(default=0, verbose_name='Современность материала')
+    attitude_to_student_mark = models.IntegerField(default=0, verbose_name='Качество образования')
+    relevance_of_material_mark = models.IntegerField(default=0, verbose_name='Актуальность направлений')
     availability_of_cathedra_internship_mark = models.IntegerField(default=0,
-                                                                   verbose_name='Возможность стажировки на кафедре')
-    find_job_opportunity_mark = models.IntegerField(default=0, verbose_name='Возможность найти работу')
+                                                                   verbose_name='Актуальность учебных планов')
+    find_job_opportunity_mark = models.IntegerField(default=0, verbose_name='Возможности для трудоустройств')
 
     def __str__(self):
         return f'FROM {self.profile.email} TO {self.cathedra.title}'
