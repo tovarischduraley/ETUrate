@@ -1,0 +1,171 @@
+.select{
+    display: block;
+    color: #05336E;
+    font-size: 20px;
+    font-weight: 400;
+    width: 100%;
+    padding: 8px 20px;
+    border: 1px #05336E solid;
+    border-radius: 10px;
+    background-color: #DAE1E9;
+}
+
+.text__area{
+    display: block;
+    width: 100%;
+    min-height: 150px;
+    margin-bottom: 10px;
+    background-color: #DAE1E9;
+    border: 1px #05336E solid;
+    border-radius: 10px;
+    padding: 10px;
+    color: #05336E;
+    font-size: 20px;
+}
+
+#info__ta{
+    margin-bottom: 200px;
+}
+
+/*faculty edit*/
+
+.faculty__info__container {
+    width: 100%;
+    position: relative;
+    margin-top: 50px;
+    display: flex;
+}
+
+.faculty__image {
+    width: 220px;
+    height: 220px;
+}
+
+.faculty__info {
+    display: inline-block;
+    margin-left: 20px;
+    font-family: "Montserrat", sans-serif;
+    text-shadow: 0 4px 4px rgba(0,0,0,0.25);
+    color: #05336E;
+}
+
+.faculty__info h1 {
+    font-weight: 700;
+    font-size: 36px;
+    margin-top: 10px;
+}
+
+.faculty__info p {
+    font-weight: 500;
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.underline{
+    display: block;
+    background-color: #05336E;
+    height: 2px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.cathedras__list__container__title {
+    font-weight: 700;
+    font-size: 36px;
+    margin-top: 40px;
+    margin-bottom: 35px;
+    text-shadow: 0 4px 4px rgba(0,0,0,0.25);
+    color: #05336E;
+}
+
+.cathedras__list__container {
+    display:flex;
+    margin: 0 auto;
+    width: 1440px;
+    flex-wrap: wrap;
+}
+
+.cathedras__list__card {
+    overflow: hidden;
+    border: 3px #05336E solid;
+    background-color: rgba(5, 51, 110, 0.6);
+    width: 460px;
+    height: 100px;
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    transition: 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    color: #FFFFFF;
+    text-decoration: none;
+    display: flex;
+    position: relative;
+}
+
+.cathedras__list__card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+    transform: scale(1.05);
+}
+
+.cathedras__list__card__title {
+    font-size: 36px;
+    word-break: break-all;
+    font-weight: 600;
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 0 4px 4px rgba(0,0,0,0.25);
+}
+
+.cathedras__list__card__image {
+    display: inline-block;
+    height: 94px;
+    width: 94px;
+    transition: 0.3s;
+    filter: blur(3px);
+}
+
+.cathedras__list__card:hover .cathedras__list__card__image {
+    filter: initial;
+}
+
+/*end faculty edit*/
+
+.card__btns{
+    height: 100%;
+}
+.card__btns .submit__form{
+    position: absolute;
+    right: 5px;
+    top:5px;
+    margin: 0;
+    width: 170px;
+    margin-bottom: 10px;
+}
+.delete__form{
+    display: block;
+    padding: 5px 20px;
+    background-color: #fff;
+    color: #05336E;
+    border: 3px #05336E solid;
+    border-radius: 70px;
+    font-size: 24px;
+    font-weight: 400;
+    width: 170px;
+    text-align: center;
+    transition: .2s;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.delete__form:hover {
+    background-color: #d53624;
+    color: #fff;
+}
+
+.card__btns .submit__form:last-child{
+    margin-top: 0;
+}
