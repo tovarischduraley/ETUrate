@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, ReadOnlyPasswordHashFiel
 from transliterate.utils import _
 
 from .models import Profile
-from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, PasswordChangeForm
 
 widget = forms.TextInput(attrs={
     'class': 'input__text',
@@ -46,7 +46,26 @@ class NewSetPasswordForm(SetPasswordForm):
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
-        label="Подтвердите овый пароль",
+        label="Подтвердите новый пароль",
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'input__text'}),
+    )
+
+
+class NewPasswordChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(
+        label="Старый пароль",
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'input__text'}),
+        strip=False,
+        help_text=password_validation.password_validators_help_text_html(),
+    )
+    new_password1 = forms.CharField(
+        label="Новый пароль",
+        strip=False,
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'input__text'}),
+    )
+    new_password2 = forms.CharField(
+        label="Подтвердите новый пароль",
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'input__text'}),
     )

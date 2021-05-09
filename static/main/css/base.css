@@ -48,6 +48,7 @@ body {
     margin-right: 10px;
     transition: .2s;
 }
+
 .logo:hover {
     opacity: 0.8;
 }
@@ -71,6 +72,7 @@ body {
 .search__bar:hover {
     opacity: 1;
 }
+
 .search__bar:focus {
     opacity: 1;
 }
@@ -90,7 +92,7 @@ body {
     transition: .2s;
 }
 
-.search__submit:hover{
+.search__submit:hover {
     opacity: 0.8;
 }
 
