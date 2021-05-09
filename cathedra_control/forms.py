@@ -21,8 +21,8 @@ class TeacherCreateEditForm(forms.ModelForm):
     courses = forms.ModelMultipleChoiceField(queryset=Course.objects.all(), widget=s_widget, label='Курсы',
                                              required=False)
     birth_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}), label='Дата рождения', required=False)
-    last_name = forms.CharField(widget=widget, label='Фамилия', required=False)
-    first_name = forms.CharField(widget=widget, label='Имя', required=False)
+    last_name = forms.CharField(widget=widget, label='Фамилия', required=True)
+    first_name = forms.CharField(widget=widget, label='Имя', required=True)
     patronymic = forms.CharField(widget=widget, label='Отчество', required=False)
     speciality = forms.CharField(widget=widget, label='Специальность', required=False)
 
@@ -71,8 +71,8 @@ widget1 = forms.DateInput(attrs={'type': 'date', 'class': 'date__field}'})
 
 
 class ReportDatesForm(forms.Form):
-    date_1 = forms.DateField(widget=widget1, label='С')
-    date_2 = forms.DateField(widget=widget1, label='По')
+    date_1 = forms.DateField(widget=widget1, label='С ')
+    date_2 = forms.DateField(widget=widget1, label='По ')
 
     def clean_date_1(self):
         new_date = self.cleaned_data.get("date_1")

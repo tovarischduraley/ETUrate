@@ -18,6 +18,8 @@
                 </div>
                 <div class="input__container">
                     <div class="input__label" for="input__text"> {{ form.teachers.label }}</div>
+                    <input type="text" id="teacher_name" class="input__text">
+                    <br>
                     {{ form.teachers }}
                 </div>
             </div>
@@ -26,5 +28,25 @@
 
 
     </div>
-
+    <script>
+        document.querySelector("#teacher_name").oninput = function() {
+            let val = this.value.trim().toLowerCase();
+            let elasticItems = document.querySelectorAll("#id_teachers li label");
+            if (val != "") {
+                elasticItems.forEach(function(elem) {
+                    if (elem.innerText.toLowerCase().search(val) == -1) {
+                        elem.style.display = "none";
+                    }
+                    else {
+                        elem.style.display = 'block';
+                    }
+                });
+            }
+            else {
+                elasticItems.forEach(function(elem) {
+                    elem.style.display = 'block'
+                });
+            }
+        }
+    </script>
 {% endblock %}

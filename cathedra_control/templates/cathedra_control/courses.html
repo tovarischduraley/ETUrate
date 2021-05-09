@@ -19,10 +19,35 @@
             {% endfor %}
             <button class="submit__form" type="submit">Добавить</button>
         </form>
+        <br>
+        <div class="input__label" for="input__text">Поиск по курсам</div>
+        <input type="text" id="elastic" class="input__text">
         <div class="courses">
             {% for course in courses %}
                 <a href="{% url 'course_edit_url' course_id=course.id %}" class="input__label">{{ course.title }}</a>
             {% endfor %}
         </div>
     </div>
+
+    <script>
+        document.querySelector("#elastic").oninput = function() {
+            let val = this.value.trim().toLowerCase();
+            let elasticItems = document.querySelectorAll(".courses a");
+            if (val != "") {
+                elasticItems.forEach(function(elem) {
+                    if (elem.innerText.toLowerCase().search(val) == -1) {
+                        elem.style.display = "none";
+                    }
+                    else {
+                        elem.style.display = 'block';
+                    }
+                });
+            }
+            else {
+                elasticItems.forEach(function(elem) {
+                    elem.style.display = 'block'
+                });
+            }
+        }
+    </script>
 {% endblock %}
