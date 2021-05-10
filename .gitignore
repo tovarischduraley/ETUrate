@@ -132,6 +132,7 @@ static_cdn/
 
 .reports/
 reports/
+
 celerybeat-schedule.bak
 celerybeat-schedule.dat
 celerybeat-schedule.dir
