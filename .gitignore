@@ -1,7 +1,9 @@
 # Editors
 .vscode/
 ../../RT/.idea/
-
+.env.dev
+.env.prod
+.env.prod.db
 # Vagrant
 .vagrant/
 .idea
@@ -130,3 +132,6 @@ static_cdn/
 
 .reports/
 reports/
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
