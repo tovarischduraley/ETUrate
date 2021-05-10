@@ -1,7 +1,9 @@
 # Editors
 .vscode/
 ../../RT/.idea/
-
+.env.dev
+.env.prod
+.env.prod.db
 # Vagrant
 .vagrant/
 .idea
