@@ -9,8 +9,8 @@ services:
     expose:
       - 8000
     volumes:
-      - static_volume:/home/app/web/static
-      - media_volume:/home/app/web/media
+      - static_volume:/home/app/web/static_cdn/static
+      - media_volume:/home/app/web/static_cdn/media
     env_file:
       - ./.env.prod
     depends_on:
@@ -30,8 +30,8 @@ services:
     ports:
     - 80:80
     volumes:
-      - static_volume:/home/app/web/static
-      - media_volume:/home/app/web/media
+      - static_volume:/home/app/web/static_cdn/static
+      - media_volume:/home/app/web/static_cdn/media
     depends_on:
       - web
   celery:
