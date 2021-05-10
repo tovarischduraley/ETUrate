@@ -9,8 +9,6 @@ services:
     expose:
       - 8000
     volumes:
-#      - ./static_cdn/static/:/home/app/web/static
-#      - ./static_cdn/media/:/home/app/web/media
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
     env_file:
@@ -30,10 +28,8 @@ services:
   nginx:
     build: ./nginx
     ports:
-    - 1337:80
+    - 80:80
     volumes:
-#      - ./static_cdn/static/:/static
-#      - ./static_cdn/media/:/media
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
     depends_on:
