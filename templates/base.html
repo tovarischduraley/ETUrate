@@ -41,8 +41,22 @@
                         <a href="{% url 'cathedra_control_url' %}">Управление
                             кафедрой</a>
                     {% endif %}
-                    <a href="{% url 'password_change' %}">Изменить пароль</a>
-                    <a href="{% url 'logout' %}">Выйти</a>
+                    <div class="menu">
+                        {{ user.get_initials }}
+                        <div class="sub__menu">
+                            {% if user.is_superuser %}
+                                <p>Суперпользователь</p>
+                            {% elif user.is_staff %}
+                                <p>Администратор</p>
+                            {% elif user.is_cathedra_head %}
+                                <p>Руководитель кафедры {{ user.cathedra.title }}</p>
+                            {% else %}
+                                <p>Студент</p>
+                            {% endif %}
+                            <a href="{% url 'password_change' %}">Изменить пароль</a>
+                            <a href="{% url 'logout' %}">Выйти</a>
+                        </div>
+                    </div>
                 {% else %}
                     <a href="{% url 'login' %}">Войти</a>
                 {% endif %}

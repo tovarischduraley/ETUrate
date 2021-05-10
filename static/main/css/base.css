@@ -22,6 +22,7 @@ body {
     top: 0;
     right: 0;
     left: 0;
+    z-index: 0;
 }
 
 .nav__bar {
@@ -129,11 +130,6 @@ body {
 
 }
 
-
-.btns a:last-child {
-    margin-right: 0;
-}
-
 /*END NAV BAR RIGHT*/
 
 /*FORMS*/
@@ -224,11 +220,63 @@ body {
     margin-bottom: 5px;
 }
 
+.menu {
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    position: relative;
+    cursor: pointer;
+    min-width: 180px;
+    display: inline-block;
+    border-radius: 10px;
+    border: #fff 2px solid;
+    padding: 5px 15px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #fff;
+    transition: .2s;
+    z-index: 1;
+}
 
+.menu:hover {
+    color: #05336e;
+    background-color: #fff;
+}
 
+.menu:hover .sub__menu {
+    display: block;
+}
 
+.sub__menu {
+    display: none;
+    top: 26px;
+    left:0;
+    border-radius: 10px;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    background-color: rgba(5, 51, 110, 0.3);
+    backdrop-filter: blur(4px);
+    box-shadow: #000000 ;
+    z-index: -1;
+    word-break: break-word;
+}
 
+.sub__menu a{
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+}
 
+.sub__menu p {
+    color: #FFFFFF;
+    pointer-events: none;
+    text-align: center;
+    margin: 5px;
+    font-size: 14px;
+}
 
 
 

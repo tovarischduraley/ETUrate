@@ -39,6 +39,8 @@ class Profile(AbstractBaseUser, PermissionsMixin):
     def get_initials(self):
         if self.is_staff or self.is_superuser:
             return self.email
+        elif self.last_name is None or self.first_name is None:
+            return self.email
         elif self.patronymic is None:
             return self.last_name + ' ' + self.first_name[0] + '.'
         else:
