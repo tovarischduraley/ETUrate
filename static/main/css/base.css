@@ -217,8 +217,12 @@ body {
 
 /*END FORMS*/
 
-
-
+.errorlist {
+    z-index: initial;
+    color: #d53624;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
 
 

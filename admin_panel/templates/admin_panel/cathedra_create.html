@@ -23,6 +23,13 @@
                 <div class="input__label" for="input__text">{{ form.image.label }}</div>
                 {{ form.image }}
             </div>
+            {% for field, errors in form.errors.items %}
+                <ul class="errorlist">
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
             <button class="submit__form" type="submit">Добавить</button>
         </form>
     </div>
