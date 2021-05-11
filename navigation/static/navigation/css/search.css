@@ -27,7 +27,7 @@
 .faculty__card {
     overflow: hidden;
     border: 5px #05336E solid;
-    background-color: #FFFFFF;
+    background-image: url("../img/title_bcg.png");
     width: 340px;
     height: 450px;
     margin-right: 20px;
@@ -64,14 +64,12 @@
 
 .faculty__card__title {
     width: 330px;
-    height: 135px;
+    height: 100px;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     bottom: 0px;
-    background-color: rgba(5, 51, 110, 0.6);
-    clip-path: polygon(0% 0%, 50% 20%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .cathedra__card {

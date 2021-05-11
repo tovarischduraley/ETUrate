@@ -20,8 +20,8 @@ body {
     background-color: #05336E;
     height: 70px;
     top: 0;
-    right: 0;
-    left: 0;
+    width: 100%;
+    min-width: 1420px;
     z-index: 0;
 }
 

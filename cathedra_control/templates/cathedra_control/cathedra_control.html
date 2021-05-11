@@ -17,10 +17,10 @@
             <form method="post">
                 {% csrf_token %}
                 <div class="date__form">
-                    {% for field in form %}
-                        <p>{{ field.label }}</p>
-                        {{ field }}
-                    {% endfor %}
+                    <p style="margin-right: 10px">{{ form.date_1.label }}</p>
+                    {{ form.date_1 }}
+                    <p style="margin: 10px">{{ form.date_2.label }}</p>
+                    {{ form.date_2 }}
                 </div>
 
                 <button type="submit" class="submit__form">Сформировать отчет</button>
