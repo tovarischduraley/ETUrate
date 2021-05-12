@@ -126,7 +126,6 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-requirements.txt
 .static_cdn/
 static_cdn/
 
