@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Добавить кафедру
+{% endblock %}
+
+{% block content %}
+<<link rel="stylesheet" href="{% static 'admin_panel/css/admin_panel_forms.css' %}">
+    <div class="form__container">
+        <div class="form__title">Добавить кафедру</div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input__container">
+                <div class="input__label" for="input__text">{{ form.title.label }}</div>
+                {{ form.title }}
+            </div>
+            <div class="input__container" id="info__ta">
+                <div class="input__label" for="input__text">{{ form.info.label }}</div>
+                {{ form.info }}
+            </div>
+            <div class="input__container">
+                <div class="input__label" for="input__text">{{ form.image.label }}</div>
+                {{ form.image }}
+            </div>
+            {% for field, errors in form.errors.items %}
+                <ul class="errorlist">
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+            <button class="submit__form" type="submit">Добавить</button>
+        </form>
+    </div>
+{% endblock %}

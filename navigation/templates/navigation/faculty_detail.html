@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ faculty.title }}
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'navigation/css/faculty_detail.css' %}">
+    <div class="faculty__info__container">
+        <img src="{{ faculty.image.url }}" alt="Логотип" class="faculty__image">
+        <div class="faculty__info">
+            <h1>{{ faculty.title }}</h1>
+            <p>{{ faculty.info }}</p>
+        </div>
+    </div>
+    <div class="underline"></div>
+    {% if faculty.cathedras.all %}
+        <h1 class="cathedras__list__container__title">Кафедры {{ faculty.title }}</h1>
+        <div class="cathedras__list__container">
+            {% for cathedra in faculty.cathedras.all %}
+                <a href="{{ cathedra.get_absolute_url }}">
+                    <div class="cathedras__list__card">
+                        <img src="{{ cathedra.image.url }}" alt="Логотип" class="cathedras__list__card__image">
+                        <div class="cathedras__list__card__title"><p>{{ cathedra.title }}</p></div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}

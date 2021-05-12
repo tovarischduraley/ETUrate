@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Изменить факультет
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'admin_panel/css/admin_panel_forms.css' %}">
+    <div class="form__container">
+        <div class="form__title">Изменить факультет</div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input__container">
+                <div class="input__label" for="input__text">{{ form.title.label }}</div>
+                {{ form.title }}
+            </div>
+            <div class="input__container" id="info__ta">
+                <div class="input__label" for="input__text">{{ form.info.label }}</div>
+                {{ form.info }}
+            </div>
+            <div>
+                <div class="input__label" for="input__text">{{ form.image.label }}</div>
+                {{ form.image }}
+            </div>
+            {% for field, errors in form.errors.items %}
+                <ul class="errorlist">
+                    {% for error in errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+            <button class="submit__form" type="submit">Добавить изменения</button>
+        </form>
+    </div>
+
+    <!--ВАРИАНТ 2-->
+    <div class="row">
+    {% if faculty.cathedras.all %}
+        <h1 class="cathedras__list__container__title">Кафедры {{ faculty.title }}</h1>
+        <div class="cathedras__list__container">
+            {% for cathedra in faculty.cathedras.all %}
+                <a href="{{ cathedra.get_absolute_url }}">
+                    <div class="cathedras__list__card">
+                        <img src="{{ cathedra.image.url }}" alt="Логотип" class="cathedras__list__card__image">
+                        <div class="cathedras__list__card__title"><p>{{ cathedra.title }}</p></div>
+                        <div class="card__btns">
+                            <form method="get" action="{% url 'cathedra_edit_url' cathedra_slug=cathedra.slug %}">
+                                {% csrf_token %}
+                                <div class="form-group col">
+                                    <button type="submit" class="submit__form">Изменить</button>
+                                </div>
+                            </form>
+                            <form method="post"
+                                  action="{% url 'cathedra_delete_url' cathedra_slug=cathedra.slug %}">
+                                {% csrf_token %}
+                                <div class="form-group col">
+                                    <button type="submit" class="delete__form">Удалить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

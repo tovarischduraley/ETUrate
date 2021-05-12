@@ -1,0 +1,239 @@
+.cathedra__card {
+    display: flex;
+    width: 100%;
+    border-radius: 20px;
+    margin-top: 50px;
+    color: #05336E;
+    overflow: hidden;
+    padding-right: 250px;
+}
+
+.cathedra__image {
+    height: 220px;
+    width: 220px;
+}
+
+.cathedra__info {
+    margin: 10px 20px;
+    width: 100%;
+    word-wrap: break-word;
+}
+
+.cathedra__title {
+    font-size: 36px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cathedra__info a {
+    font-size: 20px;
+    color: #05336E;
+}
+
+.cathedra__info a:hover {
+    text-decoration: underline;
+}
+
+.cathedra__info h1 {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #05336E;
+}
+
+/*-------------------------------------------------------------------*/
+
+.teacher__marks__container {
+    width: 100%;
+    color: #05336E;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.cathedra__marks {
+    display: inline-block;
+    width: 100%;
+    max-width: 650px;
+}
+
+.marks__list {
+    width: 100%;
+    max-width: 650px;
+    display: inline-block;
+}
+
+.marks__list h1 {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.mark__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.mark__container:last-child {
+    margin-top: 78px;
+}
+.mark__container:last-child h2 {
+        font-weight: 700;
+}
+
+.mark__container h2 {
+    color: #05336E;
+    font-size: 24px;
+    font-weight: 400;
+    display: inline-block;
+}
+
+.cathedra__marks h1 {
+    font-weight: 600;
+    font-size: 30px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.review__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.review__container h2 {
+    color: #05336E;
+    font-size: 24px;
+    font-weight: 400;
+    display: inline-block;
+    margin: 0;
+}
+
+
+.review__slider{
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.value{
+    display: inline-block;
+}
+
+.submit__form{
+    margin: 0 auto;
+}
+
+.underline{
+    display: block;
+    background-color: #05336E;
+    height: 2px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+/*---------------------------------------------------------------------------*/
+.cathedra__teachers{
+    margin-top: 40px;
+    flex-wrap: wrap;
+    display: flex;
+    width: 1440px;
+}
+
+.cathedra__teachers h1{
+    font-size: 30px;
+    font-weight: 600;
+    color: #05336E;
+}
+
+/*DIMAS*/
+.teacher__card {
+    overflow: hidden;
+    border: 2px #05336E solid;
+    background-color: rgba(5, 51, 110, 0.6);
+    width: 460px;
+    height: 300px;
+    border-radius: 20px;
+    margin-right: 20px;
+    margin-bottom: 35px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    transition: 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    color: #FFFFFF;
+    display: flex;
+    flex-wrap: wrap;
+    text-decoration: none;
+    position: relative;
+}
+
+.teacher__card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+    transform: scale(1.05);
+}
+
+.teacher__card__image {
+    width: 220px;
+    height: 296px;
+    position: absolute;
+}
+
+.teacher__card__image__container {
+    width: 220px;
+    height: 296px;
+    display: inline-block;
+    background-color: #FFFFFF;
+    position: relative;
+}
+
+.teacher__card__name {
+    bottom: 30px;
+    background-color: rgba(5, 51, 110, 0.6);
+    height: 90px;
+    width: 100%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    padding-left: 5px;
+    text-decoration: underline;
+}
+
+.teacher__card__name h1 {
+    font-weight: 700;
+    font-size: 24px;
+    color: #fff;
+}
+
+.teacher__card__name h2 {
+    margin-top: 5px;
+    font-weight: 500;
+    font-size: 24px;
+}
+
+.teacher__card__disciplines {
+    word-break: break-word;
+    margin-top: 15px;
+    font-weight: 500;
+    position: relative;
+}
+
+.teacher__card__disciplines h1 {
+    font-size: 24px;
+    margin-left: 15px;
+    color: #FFFFFF;
+    text-shadow: 0 4px 4px rgba(0,0,0,0.25);
+}
+
+.teacher__card__disciplines__list {
+    font-size: 18px;
+    width: 230px;
+    position: absolute;
+}
+
+.teacher__card__disciplines__list li {
+    margin-top: 10px;
+    margin-left: 15px;
+}

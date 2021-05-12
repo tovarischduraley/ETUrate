@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Факультеты
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'navigation/css/faculties_list.css' %}">
+    <h1 class="faculties__list__title">ФАКУЛЬТЕТЫ</h1>
+    <div class="faculties__list__container">
+        {% for faculty in faculties %}
+            <a href="{{ faculty.get_absolute_url }}">
+                <div class="faculties__list__card">
+                    <img src="{{ faculty.image.url }}" alt="Логотип" class="faculties__list__card__image">
+                    <div class="faculties__list__card__title"><p>{{ faculty.title }}</p></div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Кафедра {{ cathedra.title }}
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'navigation/css/cathedra_detail.css' %}">
+    <div class="cathedra__card">
+        <img class="cathedra__image" src="{{ cathedra.image.url }}" alt="Логотип кафедры">
+        <div class="cathedra__info">
+            <div class="cathedra__title">
+                <p>{{ cathedra.title }}</p>
+            </div>
+            <a href="{{ cathedra.faculty.get_absolute_url }}">{{ cathedra.faculty.title }}</a>
+            <h1>{{ cathedra.info }}</h1>
+        </div>
+    </div>
+    <div class="underline"></div>
+    <div class="teacher__marks__container">
+        <div class="cathedra__marks">
+            <h1>Оценки кафедры</h1>
+            <div class="marks__list">
+                <div class="mark__container">
+                    <h2>Качество образования: </h2>
+                    <h2>{{ cathedra.attitude_to_student_mark }} / 10</h2>
+                </div>
+                <div class="mark__container">
+                    <h2>Актуальность направлений: </h2>
+                    <h2>{{ cathedra.relevance_of_material_mark }} / 10</h2>
+                </div>
+                <div class="mark__container">
+                    <h2>Актуальность учебных планов: </h2>
+                    <h2>{{ cathedra.availability_of_cathedra_internship_mark }} / 10</h2>
+                </div>
+                <div class="mark__container">
+                    <h2>Возможности для трудоустройств: </h2>
+                    <h2>{{ cathedra.find_job_opportunity_mark }} / 10</h2>
+                </div>
+                <div class="mark__container">
+                    <h2>Совокупная оценка преподавателей: </h2>
+                    <h2>{{ cathedra.teachers_mark }} / 10</h2>
+                </div>
+            </div>
+        </div>
+        <div class="cathedra__marks">
+            {% if not cathedra in cathedra_reviews and user.is_student %}
+                <div class="cathedra__marks">
+                    <h1>Оцени кафедру</h1>
+                    <form method="post" action="{% url 'create_cathedra_review_url' cathedra_id=cathedra.id %}">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <div class="review__container">
+                                <h2>{{ field.label }}</h2>
+                                <h2>
+                                    <div class="value">0</div>
+                                    / 10
+                                </h2>
+                            </div>
+                            {{ field }}
+                        {% endfor %}
+                        <button class="submit__form">Оценить</button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="underline"></div>
+
+
+    <div class="cathedra__teachers">
+        {% if cathedra.teachers.all %}
+            {% for teacher in cathedra.teachers.all %}
+                <a href="{{ teacher.get_absolute_url }}">
+                    <div class="teacher__card">
+                        <div class="teacher__card__image__container">
+                            <img src="{{ teacher.avatar.url }}" alt="Аватар" class="teacher__card__image">
+                            <div class="teacher__card__name">
+                                <div>
+                                    <h1>{{ teacher.last_name }}</h1>
+                                    <h2>{{ teacher.first_name }}</h2>
+                                    {% if teacher.patronymic %}
+                                        <h2>{{ teacher.patronymic }}</h2>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="teacher__card__disciplines">
+                            <h1>Дисциплины</h1>
+                            <br>
+                            <ul class="teacher__card__disciplines__list">
+                                {% for course in teacher.courses.all %}
+                                    <li>{{ course.title }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <hr>
+
+    <script>
+        const sliders = document.getElementsByClassName('review__slider')
+        const values = document.getElementsByClassName('value')
+        for (i = 0; i < sliders.length; i++) {
+            sliders[i].setAttribute('oninput', `setValue(${i})`)
+        }
+
+        function setValue(i) {
+            values[i].innerHTML = sliders[i].value
+        }
+    </script>
+{% endblock %}

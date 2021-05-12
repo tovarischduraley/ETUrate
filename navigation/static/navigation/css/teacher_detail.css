@@ -1,0 +1,302 @@
+/*TEACHER CARD*/
+.teacher__card {
+    margin-top: 40px;
+    width: 100%;
+    height: 450px;
+    border: 2px #05336E solid;
+    border-radius: 30px;
+    background-color: #6985A8;
+    padding: 20px;
+    display: flex;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.teacher__avatar {
+    display: inline-block;
+    height: 100%;
+    max-width: 310px;
+    margin: auto 0;
+    margin-right: 20px;
+}
+
+.teacher__info {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+}
+
+.teacher__info a {
+    color: #fff;
+    font-size: 30px;
+    font-weight: 400;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.teacher__info a:hover {
+    text-decoration: underline;
+}
+
+.teacher__name, .teacher__speciality, .courses__list__title, .courses__list, .teacher__birth_date {
+    vertical-align: top;
+    display: block;
+    font-weight: 400;
+}
+
+.teacher__name {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.teacher__speciality {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.courses__list__title {
+    display: block;
+    font-size: 30px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.courses__list {
+    margin-left: 25px;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.teacher__birth_date {
+    font-size: 25px;
+    display: inline-block;
+}
+
+.teacher__birth_date p {
+    font-weight: 600;
+    font-size: 25px;
+    display: inline-block;
+}
+
+.courses__list li::before {
+    display: inline-block;
+    background-color: #fff;
+    width: 3px;
+    height: 3px;
+    border-radius: 30px;
+}
+
+/*END OF TEACHER CARD*/
+
+/*TEACHER MARKS*/
+
+.teacher__marks__container {
+    width: 100%;
+    color: #05336E;
+}
+
+.teacher__marks__title {
+    font-weight: 600;
+    font-size: 30px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.teacher__marks {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.marks__list {
+    width: 100%;
+    max-width: 650px;
+    display: inline-block;
+}
+
+.marks__list h1 {
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.mark__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.mark__container h2 {
+    color: #05336E;
+    font-size: 24px;
+    font-weight: 400;
+    display: inline-block;
+}
+
+/*END OF TEACHER MARKS*/
+
+/*TEACHER REVIEWS*/
+
+.teacher__reviews__container {
+    width: 100%;
+    color: #05336E;
+    margin-top: 40px;
+}
+
+.teacher__reviews__title {
+    font-weight: 600;
+    font-size: 30px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.teacher__reviews {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.reviews__list {
+    width: 100%;
+    max-width: 650px;
+    display: inline-block;
+}
+
+.reviews__list h1 {
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.review__container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.review__container h2 {
+    color: #05336E;
+    font-size: 24px;
+    font-weight: 400;
+    display: inline-block;
+    margin: 0;
+}
+
+
+.review__slider {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.value {
+    display: inline-block;
+}
+
+.reviews__list form .submit__form {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/*END OF TEACHER REVIEWS*/
+
+.underline {
+    display: block;
+    background-color: #05336E;
+    height: 2px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+/* COMMENTS*/
+
+.teacher__comments__container {
+    width: 100%;
+    color: #05336E;
+    margin-top: 40px;
+    margin-bottom: 70px;
+    word-wrap: break-word
+}
+
+.teacher__comments__container h1 {
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.teacher__comments__title {
+    font-weight: 600;
+    font-size: 30px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.comment__container {
+    width: 100%;
+    background-color: #F2F4F7;
+    border-radius: 30px;
+    padding: 20px 120px;
+    margin-bottom: 20px;
+}
+
+.comment__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment__header h1 {
+    display: block;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.comment__header h2 {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.comment__container .submit__form {
+    margin: 0;
+    margin-left: 20px;
+    display: inline-block;
+    padding: 3px 15px;
+    font-size: 20px;
+}
+
+.submit__form:last-child {
+    margin-left: 0;
+}
+
+.comment__input {
+    width: 100%;
+    height: 150px;
+    margin-bottom: 10px;
+    border: 2px #05336E solid;
+    border-radius: 10px;
+    padding: 10px;
+    color: #05336E;
+    font-size: 20px;
+}
+
+.no__comments {
+    width: 100%;
+    text-align: center;
+    color: #05336E;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+/* END COMMENTS*/
+
+.teacher__info a{
+    margin-right: 5px;
+}

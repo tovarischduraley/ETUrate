@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Управление кафедрой
+{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'cathedra_control/css/cathedra_control.css' %}">
+
+    <div class="cathedra__title">Кафедра: <a href="{{ user.cathedra.get_absolute_url }}">{{ user.cathedra.title }}</a>
+    </div>
+    {% if teachers.all %}
+        <div class="report__container">
+            <h1>Выберите период для формирования отчета об успехах преподавателей!</h1>
+            <h2>Введите даты</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="date__form">
+                    <p style="margin-right: 10px">{{ form.date_1.label }}</p>
+                    {{ form.date_1 }}
+                    <p style="margin: 10px">{{ form.date_2.label }}</p>
+                    {{ form.date_2 }}
+                </div>
+
+                <button type="submit" class="submit__form">Сформировать отчет</button>
+            </form>
+        </div>
+    {% endif %}
+    <div class="cathedra__title">Преподаватели:</div>
+    <div class="teachers__container">
+        {% for teacher in teachers %}
+            <div class="teacher__card">
+                <img class="card__image" src="{{ teacher.avatar.url }}" alt="Аватар">
+                <div class="teacher__info">
+                    <a class="teacher__name" href="{{ teacher.get_absolute_url }}">{{ teacher }}</a>
+                    <form method="get" action="{% url 'teacher_edit_url' teacher_id=teacher.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="submit__form">Изменить</button>
+                    </form>
+                    <form method="post" action="{% url 'teacher_delete_url' teacher_id=teacher.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="delete__btn">Удалить с кафедры</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="btns">
+        <form action="{% url 'teacher_create_url' %}">
+
+            <button class="submit__form">Добавить преподавателя</button>
+        </form>
+        <form action="{% url 'courses_url' %}">
+            <button class="submit__form">Курсы</button>
+        </form>
+    </div>
+
+    <div class="cathedra__title">Преподаватели с других кафедр:</div>
+    <form class="search" action="{% url 'cathedra_control_url' %}">
+        <input class="search__bar" placeholder="Поиск" type="text" name="search">
+        <input type="image" class="search__submit" src="{% static 'main/img/Button_Search.png' %}">
+    </form>
+    <div class="teachers__container">
+        {% for teacher in other_teachers %}
+            <div class="teacher__card">
+                <img class="card__image" src="{{ teacher.avatar.url }}" alt="Аватар">
+                <div class="teacher__info">
+                    <a class="teacher__name" href="{{ teacher.get_absolute_url }}">{{ teacher }}</a>
+
+                    <form method="post" action="{% url 'add_teacher_url' teacher_id=teacher.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="add__to__cathedra">Добавить на кафедру</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

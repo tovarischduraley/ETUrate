@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+          rel="stylesheet">
+    <title>
+        {% block title %}
+            ETUrate
+        {% endblock %}
+    </title>
+
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <div class="nav__bar">
+            <div class="logo__and__search">
+                <a href="{% url 'home' %}">
+                    <img class="logo" src="{% static 'main/img/Logo.png' %}" alt="">
+                </a>
+                <form class="search__bar" action="{% url 'search_url' %}">
+                    <input class="search__input" placeholder="Поиск" type="text" name="search">
+                    <input type="image" class="search__submit" src="{% static 'main/img/Button_Search.png' %}">
+                </form>
+            </div>
+            <div class="btns">
+                <a href="{% url 'faculties_list_url' %}">Факультеты</a>
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                        <a href="/admin">Панель администратора</a>
+                    {% elif user.is_staff %}
+                        <a href="{% url 'admin_panel_url' %}">Панель
+                            администратора</a>
+                    {% elif user.is_cathedra_head %}
+                        <a href="{% url 'cathedra_control_url' %}">Управление
+                            кафедрой</a>
+                    {% endif %}
+                    <div class="menu">
+                        {{ user.get_initials }}
+                        <div class="sub__menu">
+                            {% if user.is_superuser %}
+                                <p>Суперпользователь</p>
+                            {% elif user.is_staff %}
+                                <p>Администратор</p>
+                            {% elif user.is_cathedra_head %}
+                                <p>Руководитель кафедры {{ user.cathedra.title }}</p>
+                            {% else %}
+                                <p>Студент</p>
+                            {% endif %}
+                            <a href="{% url 'password_change' %}">Изменить пароль</a>
+                            <a href="{% url 'logout' %}">Выйти</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}">Войти</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <datalist id="tickmarks">
+        <option value="0"></option>
+        <option value="1"></option>
+        <option value="2"></option>
+        <option value="3"></option>
+        <option value="4"></option>
+        <option value="5"></option>
+        <option value="6"></option>
+        <option value="7"></option>
+        <option value="8"></option>
+        <option value="9"></option>
+        <option value="10"></option>
+    </datalist>
+    {% block content %}
+
+    {% endblock %}
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+</body>
+</html>
