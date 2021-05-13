@@ -16,6 +16,7 @@
     display: inline-block;
     height: 100%;
     max-width: 310px;
+    min-width: 250px;
     margin: auto 0;
     margin-right: 20px;
 }
@@ -32,6 +33,7 @@
     font-weight: 400;
     vertical-align: top;
     display: inline-block;
+    margin: 5px 0;
 }
 
 .teacher__info a:hover {
@@ -119,6 +121,7 @@
 .marks__list h1 {
     font-size: 30px;
     font-weight: 400;
+    margin-bottom: 10px;
 }
 
 .mark__container {
@@ -169,7 +172,7 @@
 .reviews__list h1 {
     font-size: 30px;
     font-weight: 400;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .review__container {
@@ -226,6 +229,10 @@
 .teacher__comments__container h1 {
     font-size: 25px;
     font-weight: 400;
+}
+
+.teacher__comments__container h2 {
+    margin-bottom: 15px;
 }
 
 .teacher__comments__title {

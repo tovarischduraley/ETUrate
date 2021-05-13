@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
           rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'main/img/favicon.ico' %}">
     <title>
         {% block title %}
             ETUrate
@@ -24,8 +25,8 @@
                 <a href="{% url 'home' %}">
                     <img class="logo" src="{% static 'main/img/Logo.png' %}" alt="">
                 </a>
-                <form class="search__bar" action="{% url 'search_url' %}">
-                    <input class="search__input" placeholder="Поиск" type="text" name="search">
+                <form class="search__form" action="{% url 'search_url' %}">
+                    <input class="search__bar" placeholder="Поиск" type="text" name="search">
                     <input type="image" class="search__submit" src="{% static 'main/img/Button_Search.png' %}">
                 </form>
             </div>

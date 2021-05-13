@@ -1,1 +1,4 @@
 venv
+/static_cdn/media/*/
+/static_cdn/static/*/
+__pycache__/
