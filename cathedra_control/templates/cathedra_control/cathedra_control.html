@@ -22,7 +22,13 @@
                     <p style="margin: 10px">{{ form.date_2.label }}</p>
                     {{ form.date_2 }}
                 </div>
-
+                {% for field, errors in form.errors.items %}
+                    <ul class="errorlist">
+                        {% for error in errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endfor %}
                 <button type="submit" class="submit__form">Сформировать отчет</button>
             </form>
         </div>

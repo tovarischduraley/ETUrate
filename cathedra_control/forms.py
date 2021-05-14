@@ -95,11 +95,13 @@ class ReportDatesForm(forms.Form):
 
         if new_date and new_date > date.today():
             raise forms.ValidationError("Введена недопустимая дата")
-        return new_date
+        else:
+            return new_date
 
     def clean_date_2(self):
         new_date = self.cleaned_data.get("date_2")
 
         if new_date and new_date > date.today():
             raise forms.ValidationError("Введена недопустимая дата")
-        return new_date
+        else:
+            return new_date
