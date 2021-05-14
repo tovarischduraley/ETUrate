@@ -61,7 +61,9 @@ class CourseCreateForm(forms.ModelForm):
 
 class CourseEditForm(forms.ModelForm):
     title = forms.CharField(widget=widget, max_length=50, label='Название курса')
-    teachers = forms.ModelMultipleChoiceField(queryset=Teacher.objects.all(),widget=s_widget, label='Преподаватели', required=False)
+    teachers = forms.ModelMultipleChoiceField(queryset=Teacher.objects.all(), widget=s_widget, label='Преподаватели',
+                                              required=False)
+
     class Meta:
         model = Course
         fields = ('title', 'teachers',)
@@ -94,18 +96,16 @@ class ReportDatesForm(forms.Form):
     date_1 = forms.DateField(widget=widget1, label='С ')
     date_2 = forms.DateField(widget=widget1, label='По ')
 
-    def clean_date_1(self):
-        new_date = self.cleaned_data.get("date_1")
+    def clean(self):
+        cleaned_data = super().clean()
 
-        if new_date and new_date > date.today():
-            raise forms.ValidationError("Введена недопустимая дата")
-        else:
-            return new_date
+        date1 = cleaned_data.get('date_1')
+        if date1 and date1 > date.today():
+            raise forms.ValidationError("Введена недопустимая дата1")
 
-    def clean_date_2(self):
-        new_date = self.cleaned_data.get("date_2")
+        date2 = cleaned_data.get('date_2')
+        if date2 and date2 > date.today():
+            raise forms.ValidationError("Введена недопустимая дата2")
 
-        if new_date and new_date > date.today():
-            raise forms.ValidationError("Введена недопустимая дата")
-        else:
-            return new_date
+        if date1 > date2:
+            raise forms.ValidationError("Введен некорректный временной отрезок(дата1 > дата2)")
