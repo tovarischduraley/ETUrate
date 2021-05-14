@@ -29,22 +29,22 @@ class Profile(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def get_full_name(self):
-        if self.is_staff or self.is_superuser:
+        try:
+            if self.patronymic is None:
+                return self.last_name + ' ' + self.first_name
+            else:
+                return self.last_name + ' ' + self.first_name + ' ' + self.patronymic
+        except TypeError:
             return self.email
-        elif self.patronymic is None:
-            return self.last_name + ' ' + self.first_name
-        else:
-            return self.last_name + ' ' + self.first_name + ' ' + self.patronymic
 
     def get_initials(self):
-        if self.is_staff or self.is_superuser:
+        try:
+            if self.patronymic is None:
+                return self.last_name + ' ' + self.first_name[0] + '.'
+            else:
+                return self.last_name + ' ' + self.first_name[0] + '. ' + self.patronymic[0] + '.'
+        except TypeError:
             return self.email
-        elif self.last_name is None or self.first_name is None:
-            return self.email
-        elif self.patronymic is None:
-            return self.last_name + ' ' + self.first_name[0] + '.'
-        else:
-            return self.last_name + ' ' + self.first_name[0] + '. ' + self.patronymic[0] + '.'
 
     class Meta:
         verbose_name = 'Профиль'
