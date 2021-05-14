@@ -82,6 +82,10 @@ class CourseEditForm(forms.ModelForm):
         else:
             return self.cleaned_data['title']
 
+    def full_clean(self):
+        if self.date_1 > self.date_2:
+            raise forms.ValidationError("Первая дата должна быть меньше второй")
+
 
 widget1 = forms.DateInput(attrs={'type': 'date', 'class': 'date__field}'})
 
@@ -95,11 +99,13 @@ class ReportDatesForm(forms.Form):
 
         if new_date and new_date > date.today():
             raise forms.ValidationError("Введена недопустимая дата")
-        return new_date
+        else:
+            return new_date
 
     def clean_date_2(self):
         new_date = self.cleaned_data.get("date_2")
 
         if new_date and new_date > date.today():
             raise forms.ValidationError("Введена недопустимая дата")
-        return new_date
+        else:
+            return new_date
