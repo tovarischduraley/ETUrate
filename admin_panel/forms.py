@@ -22,9 +22,13 @@ class FacultyCreateEditForm(forms.ModelForm):
 
     def clean_title(self):
         faculties = Faculty.objects.all()
+        slugs = []
         for faculty in faculties:
-            if add_slug(self.cleaned_data['title']) == faculty.slug:
-                raise forms.ValidationError("Факультет с таким названием существует")
+            slugs.append(faculty.slug)
+        if self.instance.title == self.cleaned_data['title'] or self.instance.slug == add_slug(self.cleaned_data['title']):
+            return self.cleaned_data['title']
+        if add_slug(self.cleaned_data['title']) in slugs:
+            raise forms.ValidationError("Факультет с таким названием существует")
         return self.cleaned_data['title']
 
 
@@ -38,10 +42,15 @@ class CathedraCreateEditForm(forms.ModelForm):
 
     def clean_title(self):
         cathedras = Cathedra.objects.all()
+        slugs = []
         for cathedra in cathedras:
-            if add_slug(self.cleaned_data['title']) == cathedra.slug:
-                raise forms.ValidationError("Кафедра с таким названием существует")
+            slugs.append(cathedra.slug)
+        if self.instance.title == self.cleaned_data['title'] or self.instance.slug == add_slug(self.cleaned_data['title']):
+            return self.cleaned_data['title']
+        if add_slug(self.cleaned_data['title']) in slugs:
+            raise forms.ValidationError("Кафедра с таким названием существует")
         return self.cleaned_data['title']
+
 
 
 c_widget = forms.Select(attrs={'class': 'select'})
