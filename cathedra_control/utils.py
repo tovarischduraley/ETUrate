@@ -41,10 +41,8 @@ def create_report(cathedra, date_1, date_2):
             teacher_practice_marks['communicability_mark'] = '-'
             teacher_practice_marks['load_mark'] = '-'
         if teacher.patronymic == "":
-            print(teacher.patronymic)
             data = [f'{teacher.last_name} {teacher.first_name[0]}.']
         else:
-            print(2, teacher.patronymic)
             data = [f'{teacher.last_name} {teacher.first_name[0]}. {teacher.patronymic[0]}.']
         data += list(teacher_lecture_marks.values())
         data += list(teacher_practice_marks.values())

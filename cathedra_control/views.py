@@ -36,8 +36,8 @@ def cathedra_control(request):
                 email.attach_file(file)
                 email.send(fail_silently=False)
                 return redirect('cathedra_control_url')
-            # else:
-            #     raise forms.ValidationError("Первая дата должна быть меньше второй")
+            else:
+                raise forms.ValidationError("Первая дата должна быть меньше второй")
     else:
         form = ReportDatesForm()
     return render(request, 'cathedra_control/cathedra_control.html',
