@@ -1,3 +1,9 @@
 venv
+/static_cdn/static
 /static_cdn/static/*/
+reports
+reports/
+.reports/
+__pycache__
 __pycache__/
+*.pyc
