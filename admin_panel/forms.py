@@ -11,6 +11,7 @@ ta_widget = forms.Textarea(attrs={
     'class':'text__area'
 })
 
+
 class FacultyCreateEditForm(forms.ModelForm):
     title = forms.CharField(widget=widget, required=True, label='Название факультета')
     info = forms.CharField(widget=ta_widget, required=True, label='Описание факультета')
@@ -19,15 +20,12 @@ class FacultyCreateEditForm(forms.ModelForm):
         model = Faculty
         fields = ('title', 'info', 'image',)
 
-
-class CourseCreateForm(forms.ModelForm):
-    class Meta:
-        model = Course
-        fields = ('title',)
-
     def clean_title(self):
-        new_title = self.cleaned_data['title'].capitalize()
-        return new_title
+        faculties = Faculty.objects.all()
+        for faculty in faculties:
+            if add_slug(self.cleaned_data['title']) == faculty.slug:
+                raise forms.ValidationError("Факультет с таким названием существует")
+        return self.cleaned_data['title']
 
 
 class CathedraCreateEditForm(forms.ModelForm):
@@ -37,6 +35,13 @@ class CathedraCreateEditForm(forms.ModelForm):
     class Meta:
         model = Cathedra
         fields = ('title', 'info', 'image',)
+
+    def clean_title(self):
+        cathedras = Cathedra.objects.all()
+        for cathedra in cathedras:
+            if add_slug(self.cleaned_data['title']) == cathedra.slug:
+                raise forms.ValidationError("Кафедра с таким названием существует")
+        return self.cleaned_data['title']
 
 
 c_widget = forms.Select(attrs={'class': 'select'})

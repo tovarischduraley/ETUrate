@@ -47,8 +47,16 @@ class CourseCreateForm(forms.ModelForm):
         fields = ('title',)
 
     def clean_title(self):
-        new_title = self.cleaned_data['title'].capitalize()
-        return new_title
+        courses = Course.objects.all()
+        titles = []
+        for course in courses:
+            titles.append(course.title.lower())
+        title = self.cleaned_data['title']
+        title = title.lower()
+        if title in titles:
+            raise forms.ValidationError("Курс с таким названием уже существует")
+        else:
+            return self.cleaned_data['title']
 
 
 class CourseEditForm(forms.ModelForm):
@@ -63,8 +71,16 @@ class CourseEditForm(forms.ModelForm):
         self.fields['teachers'].queryset = Teacher.objects.filter(cathedras__title__contains=user.cathedra.title)
 
     def clean_title(self):
-        new_title = self.cleaned_data['title'].capitalize()
-        return new_title
+        courses = Course.objects.all()
+        titles = []
+        for course in courses:
+            titles.append(course.title.lower())
+        title = self.cleaned_data['title']
+        title = title.lower()
+        if title in titles:
+            raise forms.ValidationError("Курс с таким названием уже существует")
+        else:
+            return self.cleaned_data['title']
 
 
 widget1 = forms.DateInput(attrs={'type': 'date', 'class': 'date__field}'})
