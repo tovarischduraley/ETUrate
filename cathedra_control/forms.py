@@ -82,6 +82,10 @@ class CourseEditForm(forms.ModelForm):
         else:
             return self.cleaned_data['title']
 
+    def full_clean(self):
+        if self.date_1 > self.date_2:
+            raise forms.ValidationError("Первая дата должна быть меньше второй")
+
 
 widget1 = forms.DateInput(attrs={'type': 'date', 'class': 'date__field}'})
 
