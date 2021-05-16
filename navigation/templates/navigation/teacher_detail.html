@@ -12,7 +12,9 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'navigation/css/teacher_detail.css' %}">
     <div class="teacher__card">
+    <div class="avatar__container">
         <img class="teacher__avatar" src=" {{ teacher.avatar.url }}" alt="teacher avatar">
+    </div>
         <div class="teacher__info">
             <div class="teacher__name">
                 {{ teacher.last_name }}
