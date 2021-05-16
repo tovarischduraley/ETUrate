@@ -23,21 +23,18 @@ def cathedra_control(request):
         if form.is_valid():
             date_1 = form.cleaned_data['date_1']
             date_2 = form.cleaned_data['date_2']
-            if date_1 < date_2:
-                file = create_report(request.user.cathedra,
-                                     date_1,
-                                     date_2 + timedelta(days=1))
-                email = EmailMessage('Отчет',
-                                     f'Доборого времени суток!\nСформирован отчет по кафедре {request.user.cathedra.title} '
-                                     f'за период с {date_1.strftime("%d.%m.%Y")} до {date_2.strftime("%d.%m.%Y")}'
-                                     f'\n\nС уважением,\nадминистрация сайта ETUrate',
-                                     EMAIL_HOST_USER,
-                                     [request.user.email])
-                email.attach_file(file)
-                email.send(fail_silently=False)
-                return redirect('cathedra_control_url')
-            else:
-                raise forms.ValidationError("Первая дата должна быть меньше второй")
+            file = create_report(request.user.cathedra,
+                                 date_1,
+                                 date_2 + timedelta(days=1))
+            email = EmailMessage('Отчет',
+                                 f'Доборого времени суток!\nСформирован отчет по кафедре {request.user.cathedra.title} '
+                                 f'за период с {date_1.strftime("%d.%m.%Y")} до {date_2.strftime("%d.%m.%Y")}'
+                                 f'\n\nС уважением,\nадминистрация сайта ETUrate',
+                                 EMAIL_HOST_USER,
+                                 [request.user.email])
+            email.attach_file(file)
+            email.send(fail_silently=False)
+            return redirect('cathedra_control_url')
     else:
         form = ReportDatesForm()
     return render(request, 'cathedra_control/cathedra_control.html',
