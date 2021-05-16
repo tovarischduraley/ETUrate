@@ -18,9 +18,9 @@ services:
   db:
     image: postgres:12.0-alpine
     volumes:
-      - pg_data:/var/lib/postgresql/data/
+      - pg_data:/var/lib/postgresql/data
     env_file:
-      - ./.env.prod.db
+      - ./.env.prod
   redis:
     image: redis
     ports:
@@ -37,6 +37,7 @@ services:
   celery:
     build: .
     command: celery -A RT worker -l INFO --pool=solo
+    restart: always
     volumes:
       - .:/usr/src/app
     env_file:
@@ -48,6 +49,7 @@ services:
   celery-beat:
     build: .
     command: celery -A RT beat
+    restart: always
     volumes:
       - .:/usr/src/app
     env_file:
