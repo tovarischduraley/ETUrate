@@ -79,10 +79,12 @@ class CourseEditForm(forms.ModelForm):
             titles.append(course.title.lower())
         title = self.cleaned_data['title']
         title = title.lower()
+
+        if self.instance.title == self.cleaned_data['title']:
+            return self.cleaned_data['title']
         if title in titles:
             raise forms.ValidationError("Курс с таким названием уже существует")
-        else:
-            return self.cleaned_data['title']
+        return self.cleaned_data['title']
 
 
 widget1 = forms.DateInput(attrs={'type': 'date', 'class': 'date__field}'})
