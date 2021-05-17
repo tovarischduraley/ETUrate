@@ -80,7 +80,7 @@ class CourseEditForm(forms.ModelForm):
         title = self.cleaned_data['title']
         title = title.lower()
 
-        if self.instance.title == self.cleaned_data['title']:
+        if self.instance.title.lower() == title:
             return self.cleaned_data['title']
         if title in titles:
             raise forms.ValidationError("Курс с таким названием уже существует")
