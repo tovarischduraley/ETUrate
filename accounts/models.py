@@ -30,7 +30,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         try:
-            if self.patronymic is None:
+            if self.patronymic == "":
                 return self.last_name + ' ' + self.first_name
             else:
                 return self.last_name + ' ' + self.first_name + ' ' + self.patronymic
@@ -39,7 +39,7 @@ class Profile(AbstractBaseUser, PermissionsMixin):
 
     def get_initials(self):
         try:
-            if self.patronymic is None:
+            if self.patronymic == "":
                 return self.last_name + ' ' + self.first_name[0] + '.'
             else:
                 return self.last_name + ' ' + self.first_name[0] + '. ' + self.patronymic[0] + '.'
