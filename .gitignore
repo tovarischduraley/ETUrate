@@ -1,5 +1,6 @@
 # Editors
 .vscode/
+config.py
 ../../RT/.idea/
 .env.dev
 .env.prod
