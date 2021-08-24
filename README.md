@@ -1,5 +1,3 @@
-![Logo](/static/main/img/Logo.png?raw=true)
-
 # ETUrate #
 University teachers rating system. 
 Teacher can be rated by his own students!
