@@ -2,6 +2,7 @@ import string
 from django.utils.text import slugify
 from transliterate import slugify as t_slugify
 
+
 def add_slug(title):
     flag = 0
     alph = list(string.ascii_letters)
